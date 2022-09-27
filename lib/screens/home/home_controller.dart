@@ -18,92 +18,92 @@ class InitDataModel {
       required this.thisTransactions});
 }
 
-final thisDayTransactionsProvider = Provider((ref) {
-  List<TransactionsModel> transactions =
-      TransactionService.instance.getAllToday();
+// final thisDayTransactionsProvider = Provider((ref) {
+//   List<TransactionsModel> transactions =
+//       TransactionService.instance.getAllToday();
 
-  return transactions;
-});
+//   return transactions;
+// });
 
-final thisWeekDataProvider = Provider((ref) {
-  final txnData = TransactionService.instance.getAllWithDateRange(
-      startDate: firstDayOfWeek(), endtDate: lastDayOfWeek());
-  double income = 0.00;
-  double expenditure = 0.00;
+// final thisWeekDataProvider = Provider((ref) {
+//   final txnData = TransactionService.instance.getAllWithDateRange(
+//       startDate: firstDayOfWeek(), endtDate: lastDayOfWeek());
+//   double income = 0.00;
+//   double expenditure = 0.00;
 
-  for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
-  }
+//   for (var txn in txnData) {
+//     if (txn.crAmount != 0) income += txn.crAmount;
+//     if (txn.drAmount != 0) expenditure += txn.drAmount;
+//   }
 
-  Map<String, dynamic> data = {
-    'title': "Weekly",
-    'income': income,
-    'expenditure': expenditure
-  };
+//   Map<String, dynamic> data = {
+//     'title': "Weekly",
+//     'income': income,
+//     'expenditure': expenditure
+//   };
 
-  return data;
-});
+//   return data;
+// });
 
-final thisMonthDataProvider = Provider((ref) {
-  final txnData = TransactionService.instance.getAllWithDateRange(
-      startDate: firstDayOfMonth(), endtDate: lastDayOfMonth());
+// final thisMonthDataProvider = Provider((ref) {
+//   final txnData = TransactionService.instance.getAllWithDateRange(
+//       startDate: firstDayOfMonth(), endtDate: lastDayOfMonth());
 
-  double income = 0.00;
-  double expenditure = 0.00;
+//   double income = 0.00;
+//   double expenditure = 0.00;
 
-  for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
-  }
+//   for (var txn in txnData) {
+//     if (txn.crAmount != 0) income += txn.crAmount;
+//     if (txn.drAmount != 0) expenditure += txn.drAmount;
+//   }
 
-  Map<String, dynamic> data = {
-    'title': "Monthly",
-    'income': income,
-    'expenditure': expenditure
-  };
+//   Map<String, dynamic> data = {
+//     'title': "Monthly",
+//     'income': income,
+//     'expenditure': expenditure
+//   };
 
-  return data;
-});
+//   return data;
+// });
 
-final thisYearDataProvider = Provider((ref) {
-  final txnData = TransactionService.instance.getAllWithDateRange(
-      startDate: firstDayOfYear(), endtDate: lastDayOfYear());
+// final thisYearDataProvider = Provider((ref) {
+//   final txnData = TransactionService.instance.getAllWithDateRange(
+//       startDate: firstDayOfYear(), endtDate: lastDayOfYear());
 
-  double income = 0.00;
-  double expenditure = 0.00;
+//   double income = 0.00;
+//   double expenditure = 0.00;
 
-  for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
-  }
+//   for (var txn in txnData) {
+//     if (txn.crAmount != 0) income += txn.crAmount;
+//     if (txn.drAmount != 0) expenditure += txn.drAmount;
+//   }
 
-  Map<String, dynamic> data = {
-    'title': "Yearly",
-    'income': income,
-    'expenditure': expenditure
-  };
+//   Map<String, dynamic> data = {
+//     'title': "Yearly",
+//     'income': income,
+//     'expenditure': expenditure
+//   };
 
-  return data;
-});
+//   return data;
+// });
 
-final thisDayDataProvider = Provider((ref) {
-  final txnData = TransactionService.instance.getAllToday();
-  double income = 0.00;
-  double expenditure = 0.00;
-  for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
-  }
+// final thisDayDataProvider = Provider((ref) {
+//   final txnData = TransactionService.instance.getAllToday();
+//   double income = 0.00;
+//   double expenditure = 0.00;
+//   for (var txn in txnData) {
+//     if (txn.crAmount != 0) income += txn.crAmount;
+//     if (txn.drAmount != 0) expenditure += txn.drAmount;
+//   }
 
-  Map<String, dynamic> data = {
-    'title': "Todays' Summary",
-    'income': income,
-    'expenditure': expenditure
-  };
+//   Map<String, dynamic> data = {
+//     'title': "Todays' Summary",
+//     'income': income,
+//     'expenditure': expenditure
+//   };
 
-  return data;
-});
+//   return data;
+// });
 
 //======================================================================
 final homeDataProvider =
@@ -120,13 +120,100 @@ class HomeNotifier extends StateNotifier<AsyncValue<InitDataModel>> {
 
   void loadData() {
     final alldata = InitDataModel(
-      thisDay: ref.watch(thisDayDataProvider),
-      thisWeek: ref.watch(thisWeekDataProvider),
-      thisMonth: ref.watch(thisMonthDataProvider),
-      thisYear: ref.watch(thisYearDataProvider),
-      thisTransactions: ref.watch(thisDayTransactionsProvider),
+      thisDay: thisDayDataProvider(),
+      thisWeek: thisWeekDataProvider(),
+      thisMonth: thisMonthDataProvider(),
+      thisYear: thisYearDataProvider(),
+      thisTransactions: getDailyTransactions(),
     );
 
     state = AsyncValue<InitDataModel>.data(alldata);
+  }
+
+  getDailyTransactions() {
+    List<TransactionsModel> transactions =
+        TransactionService.instance.getAllToday();
+
+    return transactions;
+  }
+
+  thisDayDataProvider() {
+    final txnData = TransactionService.instance.getAllToday();
+    double income = 0.00;
+    double expenditure = 0.00;
+    for (var txn in txnData) {
+      if (txn.crAmount != 0) income += txn.crAmount;
+      if (txn.drAmount != 0) expenditure += txn.drAmount;
+    }
+
+    Map<String, dynamic> data = {
+      'title': "Todays' Summary",
+      'income': income,
+      'expenditure': expenditure
+    };
+
+    return data;
+  }
+
+  thisYearDataProvider() {
+    final txnData = TransactionService.instance.getAllWithDateRange(
+        startDate: firstDayOfYear(), endtDate: lastDayOfYear());
+
+    double income = 0.00;
+    double expenditure = 0.00;
+
+    for (var txn in txnData) {
+      if (txn.crAmount != 0) income += txn.crAmount;
+      if (txn.drAmount != 0) expenditure += txn.drAmount;
+    }
+
+    Map<String, dynamic> data = {
+      'title': "Yearly",
+      'income': income,
+      'expenditure': expenditure
+    };
+
+    return data;
+  }
+
+  thisMonthDataProvider() {
+    final txnData = TransactionService.instance.getAllWithDateRange(
+        startDate: firstDayOfMonth(), endtDate: lastDayOfMonth());
+
+    double income = 0.00;
+    double expenditure = 0.00;
+
+    for (var txn in txnData) {
+      if (txn.crAmount != 0) income += txn.crAmount;
+      if (txn.drAmount != 0) expenditure += txn.drAmount;
+    }
+
+    Map<String, dynamic> data = {
+      'title': "Monthly",
+      'income': income,
+      'expenditure': expenditure
+    };
+
+    return data;
+  }
+
+  thisWeekDataProvider() {
+    final txnData = TransactionService.instance.getAllWithDateRange(
+        startDate: firstDayOfWeek(), endtDate: lastDayOfWeek());
+    double income = 0.00;
+    double expenditure = 0.00;
+
+    for (var txn in txnData) {
+      if (txn.crAmount != 0) income += txn.crAmount;
+      if (txn.drAmount != 0) expenditure += txn.drAmount;
+    }
+
+    Map<String, dynamic> data = {
+      'title': "Weekly",
+      'income': income,
+      'expenditure': expenditure
+    };
+
+    return data;
   }
 }

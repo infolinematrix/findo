@@ -383,519 +383,18 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                 //---------------
                 MainMenuWidget(services: _services),
                 //----------------
-                SliverToBoxAdapter(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 8.0.sp, vertical: 8.0.sp),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Map<String, dynamic> para = {
-                              'title': data.thisWeek['title'],
-                              'startDate': firstDayOfWeek(),
-                              'endDate': lastDayOfWeek()
-                            };
-                            Navigator.pushNamed(context, "/transactions",
-                                arguments: para);
-                          },
-                          child: SizedBox(
-                            height: 90.h,
-                            child: Card(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16.sp, vertical: 8.sp),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              data.thisWeek['title'],
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.blueAccent),
-                                            ),
-                                            UIHelper.horizontalSpaceSmall(),
-                                            const Icon(IcoFontIcons.thinRight),
-                                          ],
-                                        ),
-                                        Text(
-                                          "View All",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle1!
-                                              .copyWith(color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                    UIHelper.verticalSpaceSmall(),
-                                    IntrinsicHeight(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: Wrap(
-                                              direction: Axis.vertical,
-                                              children: [
-                                                Text(
-                                                  "Income",
-                                                  style: const TextStyle()
-                                                      .copyWith(
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                ),
-                                                UIHelper
-                                                    .verticalSpaceExtraSmall(),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Icon(
-                                                      currencySymbol(),
-                                                      size: 14.0.sp,
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                    ),
-                                                    Text(
-                                                      formatCurrency(data
-                                                          .thisDay['income']),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                    ),
-                                                    UIHelper
-                                                        .horizontalSpaceSmall(),
-                                                    const Icon(
-                                                      IcoFontIcons.bubbleDown,
-                                                      color: Colors.red,
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: VerticalDivider(
-                                              thickness: 0.8,
-                                              color: Colors.grey.shade300,
-                                            ),
-                                          ),
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: Wrap(
-                                              direction: Axis.vertical,
-                                              children: [
-                                                Text(
-                                                  "Expenditure",
-                                                  style: const TextStyle()
-                                                      .copyWith(
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                ),
-                                                UIHelper
-                                                    .verticalSpaceExtraSmall(),
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      currencySymbol(),
-                                                      size: 14.0.sp,
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                    ),
-                                                    Text(
-                                                      formatCurrency(
-                                                          data.thisDay[
-                                                              'expenditure']),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Map<String, dynamic> para = {
-                              'title': data.thisMonth['title'],
-                              'startDate': firstDayOfMonth(),
-                              'endDate': lastDayOfMonth()
-                            };
-                            Navigator.pushNamed(context, "/transactions",
-                                arguments: para);
-                          },
-                          child: SizedBox(
-                            height: 90.h,
-                            child: Card(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16.sp, vertical: 8.sp),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              data.thisMonth['title'],
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.blueAccent),
-                                            ),
-                                            UIHelper.horizontalSpaceSmall(),
-                                            const Icon(IcoFontIcons.thinRight),
-                                          ],
-                                        ),
-                                        Text(
-                                          "View All",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle1!
-                                              .copyWith(color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                    UIHelper.verticalSpaceSmall(),
-                                    IntrinsicHeight(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: Wrap(
-                                              direction: Axis.vertical,
-                                              children: [
-                                                Text(
-                                                  "Income",
-                                                  style: const TextStyle()
-                                                      .copyWith(
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                ),
-                                                UIHelper
-                                                    .verticalSpaceExtraSmall(),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Icon(
-                                                      currencySymbol(),
-                                                      size: 14.0.sp,
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                    ),
-                                                    Text(
-                                                      formatCurrency(data
-                                                          .thisMonth['income']),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                    ),
-                                                    UIHelper
-                                                        .horizontalSpaceSmall(),
-                                                    const Icon(
-                                                      IcoFontIcons.bubbleDown,
-                                                      color: Colors.red,
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: VerticalDivider(
-                                              thickness: 0.8,
-                                              color: Colors.grey.shade300,
-                                            ),
-                                          ),
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: Wrap(
-                                              direction: Axis.vertical,
-                                              children: [
-                                                Text(
-                                                  "Expenditure",
-                                                  style: const TextStyle()
-                                                      .copyWith(
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                ),
-                                                UIHelper
-                                                    .verticalSpaceExtraSmall(),
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      currencySymbol(),
-                                                      size: 14.0.sp,
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                    ),
-                                                    Text(
-                                                      formatCurrency(
-                                                          data.thisMonth[
-                                                              'expenditure']),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Map<String, dynamic> para = {
-                              'title': data.thisYear['title'],
-                              'startDate': firstDayOfMonth(),
-                              'endDate': lastDayOfMonth()
-                            };
-                            Navigator.pushNamed(context, "/transactions",
-                                arguments: para);
-                          },
-                          child: SizedBox(
-                            height: 90.h,
-                            child: Card(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16.sp, vertical: 8.sp),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              data.thisYear['title'],
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6!
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.blueAccent),
-                                            ),
-                                            UIHelper.horizontalSpaceSmall(),
-                                            const Icon(IcoFontIcons.thinRight),
-                                          ],
-                                        ),
-                                        Text(
-                                          "View All",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle1!
-                                              .copyWith(color: Colors.black),
-                                        ),
-                                      ],
-                                    ),
-                                    UIHelper.verticalSpaceSmall(),
-                                    IntrinsicHeight(
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: Wrap(
-                                              direction: Axis.vertical,
-                                              children: [
-                                                Text(
-                                                  "Income",
-                                                  style: const TextStyle()
-                                                      .copyWith(
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                ),
-                                                UIHelper
-                                                    .verticalSpaceExtraSmall(),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Icon(
-                                                      currencySymbol(),
-                                                      size: 14.0.sp,
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                    ),
-                                                    Text(
-                                                      formatCurrency(data
-                                                          .thisYear['income']),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                    ),
-                                                    UIHelper
-                                                        .horizontalSpaceSmall(),
-                                                    const Icon(
-                                                      IcoFontIcons.bubbleDown,
-                                                      color: Colors.red,
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: VerticalDivider(
-                                              thickness: 0.8,
-                                              color: Colors.grey.shade300,
-                                            ),
-                                          ),
-                                          Flexible(
-                                            fit: FlexFit.tight,
-                                            child: Wrap(
-                                              direction: Axis.vertical,
-                                              children: [
-                                                Text(
-                                                  "Expenditure",
-                                                  style: const TextStyle()
-                                                      .copyWith(
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                ),
-                                                UIHelper
-                                                    .verticalSpaceExtraSmall(),
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      currencySymbol(),
-                                                      size: 14.0.sp,
-                                                      color:
-                                                          Colors.grey.shade500,
-                                                    ),
-                                                    Text(
-                                                      formatCurrency(
-                                                          data.thisYear[
-                                                              'expenditure']),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline5!
-                                                          .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // SliverToBoxAdapter(
+                //   child: Container(
+                //     padding: EdgeInsets.all(8.0.sp),
+                //     child: const BarChartWidget(),
+                //   ),
+                // ),
+                //----------------
+
+                OverViewWidget(data: data),
                 //---------------
 
-                SliverToBoxAdapter(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 8.0.sp, vertical: 8.0.sp),
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Todays' Transactions",
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                        ListView.builder(
-                          itemCount: data.thisTransactions.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            TransactionsModel txn =
-                                data.thisTransactions[index];
-                            return TransactionItemWidget(
-                              transaction: txn,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                TodaysTransactionsWidget(data: data),
               ],
             );
           },
@@ -906,6 +405,483 @@ class _HomePageState extends ConsumerState<HomeScreen> {
 
   void _handleMenuButtonPressed() {
     _advancedDrawerController.showDrawer();
+  }
+}
+
+class TodaysTransactionsWidget extends StatelessWidget {
+  final InitDataModel data;
+  const TodaysTransactionsWidget({Key? key, required this.data})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 8.0.sp, vertical: 8.0.sp),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              "Todays' Transactions",
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+            ListView.builder(
+              itemCount: data.thisTransactions.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                TransactionsModel txn = data.thisTransactions[index];
+                return TransactionItemWidget(
+                  transaction: txn,
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class OverViewWidget extends StatelessWidget {
+  final InitDataModel data;
+
+  const OverViewWidget({Key? key, required this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 8.0.sp, vertical: 8.0.sp),
+        width: double.infinity,
+        child: Column(
+          children: [
+            InkWell(
+              onTap: () {
+                Map<String, dynamic> para = {
+                  'title': data.thisWeek['title'],
+                  'startDate': firstDayOfWeek(),
+                  'endDate': lastDayOfWeek()
+                };
+                Navigator.pushNamed(context, "/transactions", arguments: para);
+              },
+              child: SizedBox(
+                height: 90.h,
+                child: Card(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  data.thisWeek['title'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blueAccent),
+                                ),
+                                UIHelper.horizontalSpaceSmall(),
+                                const Icon(IcoFontIcons.thinRight),
+                              ],
+                            ),
+                            Text(
+                              "View All",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        UIHelper.verticalSpaceSmall(),
+                        IntrinsicHeight(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      "Income",
+                                      style: const TextStyle().copyWith(
+                                          color: Colors.grey.shade500),
+                                    ),
+                                    UIHelper.verticalSpaceExtraSmall(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Icon(
+                                          currencySymbol(),
+                                          size: 14.0.sp,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Text(
+                                          formatCurrency(
+                                              data.thisDay['income']),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        UIHelper.horizontalSpaceSmall(),
+                                        const Icon(
+                                          IcoFontIcons.bubbleDown,
+                                          color: Colors.red,
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: VerticalDivider(
+                                  thickness: 0.8,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      "Expenditure",
+                                      style: const TextStyle().copyWith(
+                                          color: Colors.grey.shade500),
+                                    ),
+                                    UIHelper.verticalSpaceExtraSmall(),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          currencySymbol(),
+                                          size: 14.0.sp,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Text(
+                                          formatCurrency(
+                                              data.thisDay['expenditure']),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Map<String, dynamic> para = {
+                  'title': data.thisMonth['title'],
+                  'startDate': firstDayOfMonth(),
+                  'endDate': lastDayOfMonth()
+                };
+                Navigator.pushNamed(context, "/transactions", arguments: para);
+              },
+              child: SizedBox(
+                height: 90.h,
+                child: Card(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  data.thisMonth['title'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blueAccent),
+                                ),
+                                UIHelper.horizontalSpaceSmall(),
+                                const Icon(IcoFontIcons.thinRight),
+                              ],
+                            ),
+                            Text(
+                              "View All",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        UIHelper.verticalSpaceSmall(),
+                        IntrinsicHeight(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      "Income",
+                                      style: const TextStyle().copyWith(
+                                          color: Colors.grey.shade500),
+                                    ),
+                                    UIHelper.verticalSpaceExtraSmall(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Icon(
+                                          currencySymbol(),
+                                          size: 14.0.sp,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Text(
+                                          formatCurrency(
+                                              data.thisMonth['income']),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        UIHelper.horizontalSpaceSmall(),
+                                        const Icon(
+                                          IcoFontIcons.bubbleDown,
+                                          color: Colors.red,
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: VerticalDivider(
+                                  thickness: 0.8,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      "Expenditure",
+                                      style: const TextStyle().copyWith(
+                                          color: Colors.grey.shade500),
+                                    ),
+                                    UIHelper.verticalSpaceExtraSmall(),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          currencySymbol(),
+                                          size: 14.0.sp,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Text(
+                                          formatCurrency(
+                                              data.thisMonth['expenditure']),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Map<String, dynamic> para = {
+                  'title': data.thisYear['title'],
+                  'startDate': firstDayOfMonth(),
+                  'endDate': lastDayOfMonth()
+                };
+                Navigator.pushNamed(context, "/transactions", arguments: para);
+              },
+              child: SizedBox(
+                height: 90.h,
+                child: Card(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  data.thisYear['title'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blueAccent),
+                                ),
+                                UIHelper.horizontalSpaceSmall(),
+                                const Icon(IcoFontIcons.thinRight),
+                              ],
+                            ),
+                            Text(
+                              "View All",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        UIHelper.verticalSpaceSmall(),
+                        IntrinsicHeight(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      "Income",
+                                      style: const TextStyle().copyWith(
+                                          color: Colors.grey.shade500),
+                                    ),
+                                    UIHelper.verticalSpaceExtraSmall(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Icon(
+                                          currencySymbol(),
+                                          size: 14.0.sp,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Text(
+                                          formatCurrency(
+                                              data.thisYear['income']),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        UIHelper.horizontalSpaceSmall(),
+                                        const Icon(
+                                          IcoFontIcons.bubbleDown,
+                                          color: Colors.red,
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: VerticalDivider(
+                                  thickness: 0.8,
+                                  color: Colors.grey.shade300,
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.tight,
+                                child: Wrap(
+                                  direction: Axis.vertical,
+                                  children: [
+                                    Text(
+                                      "Expenditure",
+                                      style: const TextStyle().copyWith(
+                                          color: Colors.grey.shade500),
+                                    ),
+                                    UIHelper.verticalSpaceExtraSmall(),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          currencySymbol(),
+                                          size: 14.0.sp,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        Text(
+                                          formatCurrency(
+                                              data.thisYear['expenditure']),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline5!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

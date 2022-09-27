@@ -6,6 +6,7 @@ import 'package:finsoft2/screens/transactions/payment_screen.dart';
 import 'package:finsoft2/screens/transactions/transactions_screen.dart';
 import 'package:flutter/cupertino.dart';
 import '../screens/accounts/account_create_screen.dart';
+import '../screens/accounts/account_edit_screen.dart';
 import '../screens/onboard/onboard_screen.dart';
 
 part 'app_routes.dart';
@@ -32,6 +33,11 @@ class AppPages {
 
           case Routes.accountCreate:
             return const AccountCreateScreen();
+
+          case Routes.accountEdit:
+            return AccountEditScreen(
+              id: settings.arguments as int,
+            );
 
           case Routes.accountTransactions:
             return AccountTransactions(

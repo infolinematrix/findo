@@ -1,6 +1,7 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/data/source/objectstore.dart';
 import 'package:finsoft2/objectbox.g.dart';
+import 'package:finsoft2/services/account_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final accountsBox = objBox!.store.box<AccountsModel>();
@@ -23,6 +24,12 @@ final allAccountsProvider =
   }
 });
 
+// -- GET ACCOUNT
+final getAccountProvider = FutureProvider.family
+    .autoDispose<AccountsModel, int>((ref, int accountId) async {
+  final accountsData = AccountService.instance.getAccount(accountId: accountId);
+  return accountsData;
+});
 //-------------------------------------------------------------
 
 final accountsProvider =
@@ -57,6 +64,10 @@ class AccountsState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
       final data = AccountsModel(
         name: formData['name'],
         isActive: formData['isActive'],
+        isVisible: formData['isVisible'],
+        isTemporary: formData['isTemporary'],
+        budget: formData['budget'],
+        description: formData['description'],
         isSystem: false,
       );
 
@@ -69,5 +80,26 @@ class AccountsState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
     } catch (e) {
       rethrow;
     }
+  }
+
+  //--Update Account
+  Future<bool> update(
+      {required int id, required Map<String, dynamic> formData}) async {
+    AccountsModel accountsData =
+        AccountService.instance.getAccount(accountId: id);
+
+    accountsData.name = formData['name'].toString().trim();
+    accountsData.isActive = formData['isActive'];
+    accountsData.isVisible = formData['isVisible'];
+    accountsData.isTemporary = formData['isTemporary'];
+    accountsData.description = formData['description'].toString().trim();
+
+    accountsData.budget =
+        double.parse(formData['budget'].toString()).toDouble();
+
+    accountsBox.put(accountsData);
+    objBox!.store.awaitAsyncSubmitted();
+    getAccounts();
+    return true;
   }
 }

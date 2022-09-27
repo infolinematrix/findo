@@ -24,6 +24,6 @@ class AccountService {
   getAccount({required int accountId}) {
     final account = accountsBox.get(accountId);
 
-    return account;
+    return account!;
   }
 }

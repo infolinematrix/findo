@@ -100,6 +100,7 @@ class TransactionsScreen extends ConsumerWidget {
                                     ),
                                   ],
                                 ),
+                                
                                 child: TransactionItemWidget(transaction: txn),
                               ),
                             ),

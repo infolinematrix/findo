@@ -5,6 +5,7 @@ import 'package:finsoft2/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
 
 import '../../routes/app_pages.dart';
@@ -70,61 +71,145 @@ class AccountsScreen extends ConsumerWidget {
                                   context, Routes.accountTransactions,
                                   arguments: account);
                             },
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 12.0.sp,
-                                  bottom: 12.0.sp,
-                                  left: 8.0.sp,
-                                  right: 16.0.sp),
-                              margin: EdgeInsets.only(
-                                  bottom: 8.0.sp,
-                                  left: 16.0.sp,
-                                  right: 16.0.sp),
-                              decoration: BoxDecoration(
-                                color: i % 2 == 0
-                                    ? const Color(0xFFF7F7F9)
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(10.sp),
-                              ),
-                              child: Row(
+                            child: Slidable(
+                              key: ValueKey(index),
+                              endActionPane: ActionPane(
+                                extentRatio: .40.sp,
+                                dragDismissible: true,
+                                motion: const ScrollMotion(),
                                 children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Icon(
-                                      IcoFontIcons.blockRight,
-                                      color: AppColors.lightGrey,
-                                      size: 32.sp,
-                                    ),
-                                  ),
-                                  UIHelper.horizontalSpaceSmall(),
-                                  Expanded(
-                                    flex: 9,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Text(
-                                          account.name,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.bold),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      UIHelper.horizontalSpaceMedium(),
+                                      Container(
+                                        height: 60.0.sp,
+                                        margin: EdgeInsets.only(bottom: 8.0.sp),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(8.sp),
+                                          ),
                                         ),
-                                        Text(
-                                          account.budget == 0
-                                              ? "No Budget"
-                                              : "Limit : ${account.budget}",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall,
-                                        )
-                                      ],
-                                    ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.sp, vertical: 8.sp),
+                                        child: IconButton(
+                                          icon: const Icon(
+                                            Icons.edit,
+                                            color: Colors.blue,
+                                          ),
+                                          onPressed: () async {
+                                            // AlertAction? action =
+                                            //     await confirmDialog(context,
+                                            //         "Are you sure? \nYou want to edit this account.");
+
+                                            // if (action == AlertAction.ok) {
+
+                                            // }
+                                            Navigator.pushNamed(
+                                                context, "/account_edit",
+                                                arguments: account.id);
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      UIHelper.horizontalSpaceMedium(),
+                                      Container(
+                                        height: 60.0.sp,
+                                        margin: EdgeInsets.only(bottom: 8.0.sp),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(8.sp),
+                                          ),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.sp, vertical: 8.sp),
+                                        child: IconButton(
+                                          icon: const Icon(
+                                            Icons.delete,
+                                            color: Colors.red,
+                                          ),
+                                          onPressed: () async {
+                                            // AlertAction? action =
+                                            //     await confirmDialog(context,
+                                            //         "Are you sure? \nOnce delete the it can't be recover.");
+
+                                            // if (action == AlertAction.ok) {}
+                                          },
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ],
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 12.0.sp,
+                                    bottom: 12.0.sp,
+                                    left: 8.0.sp,
+                                    right: 16.0.sp),
+                                margin: EdgeInsets.only(
+                                    bottom: 8.0.sp,
+                                    left: 16.0.sp,
+                                    right: 16.0.sp),
+                                decoration: BoxDecoration(
+                                  color: i % 2 == 0
+                                      ? const Color(0xFFF7F7F9)
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(10.sp),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Icon(
+                                        IcoFontIcons.blockRight,
+                                        color: AppColors.lightGrey,
+                                        size: 32.sp,
+                                      ),
+                                    ),
+                                    UIHelper.horizontalSpaceSmall(),
+                                    Expanded(
+                                      flex: 9,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Text(
+                                            account.name,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline6!
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                          ),
+                                          Text(
+                                            account.budget == 0
+                                                ? "No Budget"
+                                                : "Limit : ${account.budget}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

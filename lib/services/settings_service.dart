@@ -35,15 +35,69 @@ final createSettings = FutureProvider.autoDispose
     }
 
     List<AccountsModel> accounts = [
-      AccountsModel(name: 'Household Expense', isSystem: true),
-      AccountsModel(name: 'Repaire & Maintanence', isSystem: true),
-      AccountsModel(name: 'Educational Expense', isSystem: true),
-      AccountsModel(name: 'Travelling and Conveyance', isSystem: true),
-      AccountsModel(name: 'Loans Payment', isSystem: true),
-      AccountsModel(name: 'Online Shopping', isSystem: true),
-      AccountsModel(name: 'Bills Payment', isSystem: true),
-      AccountsModel(name: 'Fuel Expenses', isSystem: true),
-      AccountsModel(name: 'Others', isSystem: true),
+      AccountsModel(
+          name: 'Household Expense',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Repaire & Maintanence',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Educational Expense',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Travelling and Conveyance',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Loans Payment',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Online Shopping',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Bills Payment',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Fuel Expenses',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
+      AccountsModel(
+          name: 'Others',
+          isSystem: true,
+          description: '',
+          isActive: true,
+          isTemporary: false,
+          isVisible: true),
     ];
 
     accountsData.putMany(accounts);
