@@ -10,6 +10,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../utils/index.dart';
 import '../../widgets/index.dart';
 import '../error_screen.dart';
+import '../home/home_controller.dart';
 import '../loading.dart';
 import 'transaction_controller.dart';
 
@@ -127,27 +128,27 @@ class AccountTransactions extends ConsumerWidget {
                                                     await confirmDialog(context,
                                                         "Are you sure? \nOnce delete the it can't be recover.");
 
-                                                // if (action == AlertAction.ok) {
-                                                //   ref
-                                                //       .read(
-                                                //           transactionsProvider(
-                                                //                   account.id)
-                                                //               .notifier)
-                                                //       .deleteEntry(id: txn.id)
-                                                //       .then((value) => {
-                                                //             if (value == true)
-                                                //               {
-                                                //                 //--Update Home Data
-                                                //                 ref
-                                                //                     .watch(homeDataProvider
-                                                //                         .notifier)
-                                                //                     .overviewData(),
-                                                //                 showToast(
-                                                //                     msg:
-                                                //                         'Data deleted permanently')
-                                                //               }
-                                                //           });
-                                                // }
+                                                if (action == AlertAction.ok) {
+                                                  ref
+                                                      .read(
+                                                          transactionsProvider(
+                                                                  account.id)
+                                                              .notifier)
+                                                      .deleteEntry(id: txn.id)
+                                                      .then((value) => {
+                                                            if (value == true)
+                                                              {
+                                                                //--Update Home Data
+                                                                ref
+                                                                    .watch(homeDataProvider
+                                                                        .notifier)
+                                                                    .loadData(),
+                                                                showToast(
+                                                                    msg:
+                                                                        'Data deleted permanently')
+                                                              }
+                                                          });
+                                                }
                                               },
                                             ),
                                           )

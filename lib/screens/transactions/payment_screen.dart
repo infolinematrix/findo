@@ -10,6 +10,7 @@ import '../../constants/constants.dart';
 import '../../data/models/accounts_model.dart';
 import '../../theme/constants.dart';
 import '../../widgets/index.dart';
+import '../home/home_controller.dart';
 import 'transaction_controller.dart';
 
 class PaymentScreen extends ConsumerWidget {
@@ -243,18 +244,18 @@ class PaymentScreen extends ConsumerWidget {
                                     .addEntry(formData: data);
 
                                 response.then((value) {
-                                  // if (value == true) {
-                                  //   showToast(msg: "Transaction saved");
+                                  if (value == true) {
+                                    showToast(msg: "Transaction saved");
 
-                                  //   //--Update Home Data
-                                  //   ref
-                                  //       .watch(homeDataProvider.notifier)
-                                  //       .overviewData();
+                                    //--Update Home Data
+                                    ref
+                                        .watch(homeDataProvider.notifier)
+                                        .loadData();
 
-                                  //   Navigator.pop(context);
-                                  // } else {
-                                  //   showToast(msg: "Transaction fails");
-                                  // }
+                                    Navigator.pop(context);
+                                  } else {
+                                    showToast(msg: "Transaction fails");
+                                  }
                                 });
                               } else {
                                 debugPrint(
