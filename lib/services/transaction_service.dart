@@ -65,23 +65,34 @@ class TransactionService {
   }
 
   //---------CURRENT DATE TRANSACTION LIST-----------//
-  List<TransactionsModel> getAllToday({int? accountId}) {
+  List<TransactionsModel> getAllToday(
+      {int? accountId, int? offset, int? limit}) {
     QueryBuilder<TransactionsModel> builder;
 
     if (accountId == null) {
       builder = objBox!.store.box<TransactionsModel>().query(TransactionsModel_
           .txnDate
-          .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch));
+          .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch)
+        ..and(TransactionsModel_.txnDate
+            .lessOrEqual(DateTime.now().millisecondsSinceEpoch)));
     } else {
       builder = objBox!.store.box<TransactionsModel>().query(TransactionsModel_
           .txnDate
           .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch)
+          .and(TransactionsModel_.txnDate
+              .lessOrEqual(DateTime.now().millisecondsSinceEpoch))
           .and(TransactionsModel_.account.equals(accountId)));
     }
+
     //--Sorting
     builder.order(TransactionsModel_.id, flags: Order.descending);
 
     Query<TransactionsModel> query = builder.build();
+
+    //--Limit
+    if (limit != null) query.limit = limit;
+    if (offset != null) query.offset = offset;
+
     List<TransactionsModel> data = query.find().toList();
 
     query.close();
