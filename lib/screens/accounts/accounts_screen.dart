@@ -114,7 +114,9 @@ class AccountsScreen extends ConsumerWidget {
                                                   fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          "No Budget",
+                                          account.budget == 0
+                                              ? "No Budget"
+                                              : "Limit : ${account.budget}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodySmall,
