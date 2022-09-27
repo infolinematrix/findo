@@ -1,0 +1,151 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8080568095172796682",
+      "lastPropertyId": "7:1018012840951700402",
+      "name": "AccountsModel",
+      "properties": [
+        {
+          "id": "1:5407715257500835510",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8159404935287710292",
+          "name": "name",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "1:3699993172938907636"
+        },
+        {
+          "id": "3:9173590315824460789",
+          "name": "isActive",
+          "type": 1,
+          "flags": 8,
+          "indexId": "5:5936411796222142683"
+        },
+        {
+          "id": "4:1543092980557733361",
+          "name": "isSystem",
+          "type": 1
+        },
+        {
+          "id": "5:4184155973642274529",
+          "name": "isTemporary",
+          "type": 1
+        },
+        {
+          "id": "6:2210614342965218839",
+          "name": "budget",
+          "type": 8
+        },
+        {
+          "id": "7:1018012840951700402",
+          "name": "createdOn",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3304669295260990249",
+      "lastPropertyId": "3:1882783179000984751",
+      "name": "SettingsModel",
+      "properties": [
+        {
+          "id": "1:1150648213957340989",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:757344494552936934",
+          "name": "key",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "2:4547643216483423190"
+        },
+        {
+          "id": "3:1882783179000984751",
+          "name": "value",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3111440568252014630",
+      "lastPropertyId": "9:824780557619384738",
+      "name": "TransactionsModel",
+      "properties": [
+        {
+          "id": "1:517815127092567324",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8785945625348729241",
+          "name": "drAmount",
+          "type": 8
+        },
+        {
+          "id": "3:7121842560550319579",
+          "name": "crAmount",
+          "type": 8
+        },
+        {
+          "id": "4:3637758887083007875",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "5:5008846497105979365",
+          "name": "txnMode",
+          "type": 9
+        },
+        {
+          "id": "6:2655138446617590267",
+          "name": "txnDate",
+          "type": 10,
+          "flags": 8,
+          "indexId": "3:3335271222183504500"
+        },
+        {
+          "id": "7:1768783457015218408",
+          "name": "createdOn",
+          "type": 10
+        },
+        {
+          "id": "8:2740250277629716057",
+          "name": "accountId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:3561233001629372379",
+          "relationTarget": "AccountsModel"
+        },
+        {
+          "id": "9:824780557619384738",
+          "name": "txnType",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:3111440568252014630",
+  "lastIndexId": "5:5936411796222142683",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
