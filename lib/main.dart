@@ -18,7 +18,7 @@ void callbackDispatcher() {
     switch (task) {
       case "fetchBackground":
         // Code to run in background
-        print(inputData);
+        // print(inputData);
         break;
     }
     return Future.value(true);

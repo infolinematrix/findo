@@ -1,21 +1,13 @@
 import 'package:finsoft2/data/source/objectstore.dart';
+import 'package:finsoft2/objectbox.g.dart';
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../constants/constants.dart';
 import '../data/models/accounts_model.dart';
 import '../data/models/settings_model.dart';
 import '../data/models/transactions_model.dart';
-
-// class InitAppModel {
-//   final Box<SettingsModel> settings;
-//   final Box<AccountsModel> accounts;
-
-//   InitAppModel({
-//     required this.settings,
-//     required this.accounts,
-//   });
-// }
 
 final hasSettings = FutureProvider.autoDispose<bool>((ref) async {
   try {
@@ -64,10 +56,6 @@ final createSettings = FutureProvider.autoDispose
   }
 });
 
-final getSettingsProvider = Provider((ref) {
-  return objBox!.store.box<SettingsModel>();
-});
-
 final resetBoxProvider = FutureProvider<bool>((ref) async {
   try {
     final settingsData = objBox!.store.box<SettingsModel>();
@@ -82,3 +70,23 @@ final resetBoxProvider = FutureProvider<bool>((ref) async {
     return false;
   }
 });
+
+getSetting({required String key}) {
+  QueryBuilder<SettingsModel> builder;
+  builder =
+      objBox!.store.box<SettingsModel>().query(SettingsModel_.key.equals(key));
+
+  Query<SettingsModel> query = builder.build();
+
+  SettingsModel data = query.findFirst()!;
+  return data;
+}
+
+currencySymbol() {
+  SettingsModel settings = getSetting(key: 'currency');
+
+  String currency = settings.value;
+  final currencyIcon =
+      currencies.where((element) => element['code'] == currency).first;
+  return currencyIcon['icon'];
+}

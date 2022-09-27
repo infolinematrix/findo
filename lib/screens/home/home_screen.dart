@@ -110,11 +110,11 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 30.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0),
                   child: Text(
-                    "Rajdhani Garments",
-                    style: TextStyle(
+                    getSetting(key: 'name').value.toString(),
+                    style: const TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -235,7 +235,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'Rajdhani Garments',
+                          getSetting(key: 'name').value.toString(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.0.sp,
@@ -296,14 +296,24 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                             fontSize: 10.sp),
                                       ),
                                       UIHelper.verticalSpaceExtraSmall(),
-                                      Text(
-                                        data.thisDay['income'].toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            currencySymbol(),
+                                            size: 14.0.sp,
+                                            color: Colors.white30,
+                                          ),
+                                          Text(
+                                            data.thisDay['income'].toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline6!
+                                                .copyWith(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -328,14 +338,25 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                             fontSize: 10.sp),
                                       ),
                                       UIHelper.verticalSpaceExtraSmall(),
-                                      Text(
-                                        data.thisDay['expenditure'].toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            currencySymbol(),
+                                            size: 14.0.sp,
+                                            color: Colors.white30,
+                                          ),
+                                          Text(
+                                            data.thisDay['expenditure']
+                                                .toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline6!
+                                                .copyWith(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -443,6 +464,12 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
+                                                    Icon(
+                                                      currencySymbol(),
+                                                      size: 14.0.sp,
+                                                      color:
+                                                          Colors.grey.shade500,
+                                                    ),
                                                     Text(
                                                       formatCurrency(data
                                                           .thisDay['income']),
@@ -486,16 +513,27 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                 ),
                                                 UIHelper
                                                     .verticalSpaceExtraSmall(),
-                                                Text(
-                                                  formatCurrency(data
-                                                      .thisDay['expenditure']),
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      currencySymbol(),
+                                                      size: 14.0.sp,
+                                                      color:
+                                                          Colors.grey.shade500,
+                                                    ),
+                                                    Text(
+                                                      formatCurrency(
+                                                          data.thisDay[
+                                                              'expenditure']),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline5!
+                                                          .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -583,6 +621,12 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
+                                                    Icon(
+                                                      currencySymbol(),
+                                                      size: 14.0.sp,
+                                                      color:
+                                                          Colors.grey.shade500,
+                                                    ),
                                                     Text(
                                                       formatCurrency(data
                                                           .thisMonth['income']),
@@ -626,16 +670,27 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                 ),
                                                 UIHelper
                                                     .verticalSpaceExtraSmall(),
-                                                Text(
-                                                  formatCurrency(data.thisMonth[
-                                                      'expenditure']),
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      currencySymbol(),
+                                                      size: 14.0.sp,
+                                                      color:
+                                                          Colors.grey.shade500,
+                                                    ),
+                                                    Text(
+                                                      formatCurrency(
+                                                          data.thisMonth[
+                                                              'expenditure']),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline5!
+                                                          .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -723,6 +778,12 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
+                                                    Icon(
+                                                      currencySymbol(),
+                                                      size: 14.0.sp,
+                                                      color:
+                                                          Colors.grey.shade500,
+                                                    ),
                                                     Text(
                                                       formatCurrency(data
                                                           .thisYear['income']),
@@ -766,16 +827,27 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                 ),
                                                 UIHelper
                                                     .verticalSpaceExtraSmall(),
-                                                Text(
-                                                  formatCurrency(data
-                                                      .thisYear['expenditure']),
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headline5!
-                                                      .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      currencySymbol(),
+                                                      size: 14.0.sp,
+                                                      color:
+                                                          Colors.grey.shade500,
+                                                    ),
+                                                    Text(
+                                                      formatCurrency(
+                                                          data.thisYear[
+                                                              'expenditure']),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline5!
+                                                          .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
