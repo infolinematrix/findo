@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'data/models/accounts_model.dart';
+import 'data/models/ledger_model.dart';
 import 'data/models/settings_model.dart';
 import 'data/models/transactions_model.dart';
 
@@ -24,7 +25,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8080568095172796682),
       name: 'AccountsModel',
-      lastPropertyId: const IdUid(7, 1018012840951700402),
+      lastPropertyId: const IdUid(8, 6381893473725467657),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -50,11 +51,6 @@ final _entities = <ModelEntity>[
             type: 1,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 4184155973642274529),
-            name: 'isTemporary',
-            type: 1,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(6, 2210614342965218839),
             name: 'budget',
             type: 8,
@@ -63,7 +59,14 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 1018012840951700402),
             name: 'createdOn',
             type: 10,
-            flags: 0)
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 6381893473725467657),
+            name: 'ledgerId',
+            type: 11,
+            flags: 520,
+            indexId: const IdUid(6, 1001218422888843300),
+            relationTarget: 'LedgerModel')
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[
@@ -98,7 +101,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 3111440568252014630),
       name: 'TransactionsModel',
-      lastPropertyId: const IdUid(9, 824780557619384738),
+      lastPropertyId: const IdUid(11, 2872802221464130534),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -106,16 +109,6 @@ final _entities = <ModelEntity>[
             name: 'id',
             type: 6,
             flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 8785945625348729241),
-            name: 'drAmount',
-            type: 8,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 7121842560550319579),
-            name: 'crAmount',
-            type: 8,
-            flags: 0),
         ModelProperty(
             id: const IdUid(4, 3637758887083007875),
             name: 'description',
@@ -125,7 +118,8 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 5008846497105979365),
             name: 'txnMode',
             type: 9,
-            flags: 0),
+            flags: 2048,
+            indexId: const IdUid(12, 329040897223215847)),
         ModelProperty(
             id: const IdUid(6, 2655138446617590267),
             name: 'txnDate',
@@ -148,10 +142,78 @@ final _entities = <ModelEntity>[
             id: const IdUid(9, 824780557619384738),
             name: 'txnType',
             type: 9,
+            flags: 2048,
+            indexId: const IdUid(13, 7170203300489413271)),
+        ModelProperty(
+            id: const IdUid(10, 7294493757628710638),
+            name: 'amount',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 2872802221464130534),
+            name: 'scrollNo',
+            type: 6,
+            flags: 8,
+            indexId: const IdUid(11, 2993461747590649745))
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(4, 6456388099575701592),
+      name: 'LedgerModel',
+      lastPropertyId: const IdUid(8, 7152409067748527518),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 4399786035930780212),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 6012842134593463925),
+            name: 'name',
+            type: 9,
+            flags: 2080,
+            indexId: const IdUid(7, 2628037384782407561)),
+        ModelProperty(
+            id: const IdUid(3, 5065219965612753536),
+            name: 'isSystem',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 5866889709495969676),
+            name: 'isActive',
+            type: 1,
+            flags: 8,
+            indexId: const IdUid(8, 1666913837182623160)),
+        ModelProperty(
+            id: const IdUid(5, 4181571944276929759),
+            name: 'ledgerType',
+            type: 9,
+            flags: 2048,
+            indexId: const IdUid(9, 4327489809731861683)),
+        ModelProperty(
+            id: const IdUid(6, 560121976424051924),
+            name: 'hasChild',
+            type: 1,
+            flags: 8,
+            indexId: const IdUid(10, 8145747128961609376)),
+        ModelProperty(
+            id: const IdUid(7, 7927307665217286980),
+            name: 'openingBalance',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 7152409067748527518),
+            name: 'createdOn',
+            type: 10,
             flags: 0)
       ],
       relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[])
+      backlinks: <ModelBacklink>[
+        ModelBacklink(
+            name: 'accounts', srcEntity: 'AccountsModel', srcField: '')
+      ])
 ];
 
 /// Open an ObjectBox store with the model declared in this file.
@@ -174,13 +236,17 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(3, 3111440568252014630),
-      lastIndexId: const IdUid(5, 5936411796222142683),
+      lastEntityId: const IdUid(4, 6456388099575701592),
+      lastIndexId: const IdUid(13, 7170203300489413271),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        4184155973642274529,
+        8785945625348729241,
+        7121842560550319579
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -189,7 +255,7 @@ ModelDefinition getObjectBoxModel() {
   final bindings = <Type, EntityDefinition>{
     AccountsModel: EntityDefinition<AccountsModel>(
         model: _entities[0],
-        toOneRelations: (AccountsModel object) => [],
+        toOneRelations: (AccountsModel object) => [object.ledger],
         toManyRelations: (AccountsModel object) => {
               RelInfo<TransactionsModel>.toOneBacklink(8, object.id,
                       (TransactionsModel srcObject) => srcObject.account):
@@ -201,14 +267,14 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (AccountsModel object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(8);
+          fbb.startTable(9);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addBool(2, object.isActive);
           fbb.addBool(3, object.isSystem);
-          fbb.addBool(4, object.isTemporary);
           fbb.addFloat64(5, object.budget);
           fbb.addInt64(6, object.createdOn?.millisecondsSinceEpoch);
+          fbb.addInt64(7, object.ledger.targetId);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -225,13 +291,14 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 8),
               isSystem: const fb.BoolReader()
                   .vTableGetNullable(buffer, rootOffset, 10),
-              isTemporary: const fb.BoolReader()
-                  .vTableGetNullable(buffer, rootOffset, 12),
               budget: const fb.Float64Reader()
                   .vTableGetNullable(buffer, rootOffset, 14))
             ..createdOn = createdOnValue == null
                 ? null
                 : DateTime.fromMillisecondsSinceEpoch(createdOnValue);
+          object.ledger.targetId =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          object.ledger.attach(store);
           InternalToManyAccess.setRelInfo(
               object.transactions,
               store,
@@ -285,16 +352,16 @@ ModelDefinition getObjectBoxModel() {
               : fbb.writeString(object.description!);
           final txnModeOffset = fbb.writeString(object.txnMode);
           final txnTypeOffset = fbb.writeString(object.txnType);
-          fbb.startTable(10);
+          fbb.startTable(12);
           fbb.addInt64(0, object.id);
-          fbb.addFloat64(1, object.drAmount);
-          fbb.addFloat64(2, object.crAmount);
           fbb.addOffset(3, descriptionOffset);
           fbb.addOffset(4, txnModeOffset);
           fbb.addInt64(5, object.txnDate?.millisecondsSinceEpoch);
           fbb.addInt64(6, object.createdOn?.millisecondsSinceEpoch);
           fbb.addInt64(7, object.account.targetId);
           fbb.addOffset(8, txnTypeOffset);
+          fbb.addFloat64(9, object.amount);
+          fbb.addInt64(10, object.scrollNo);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -307,10 +374,10 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
           final object = TransactionsModel(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
-              drAmount:
-                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0),
-              crAmount:
-                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0),
+              scrollNo:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0),
+              amount:
+                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 22, 0),
               txnMode: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 12, ''),
               txnType: const fb.StringReader(asciiOptimization: true)
@@ -326,6 +393,63 @@ ModelDefinition getObjectBoxModel() {
           object.account.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
           object.account.attach(store);
+          return object;
+        }),
+    LedgerModel: EntityDefinition<LedgerModel>(
+        model: _entities[3],
+        toOneRelations: (LedgerModel object) => [],
+        toManyRelations: (LedgerModel object) => {
+              RelInfo<AccountsModel>.toOneBacklink(8, object.id,
+                      (AccountsModel srcObject) => srcObject.ledger):
+                  object.accounts
+            },
+        getId: (LedgerModel object) => object.id,
+        setId: (LedgerModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (LedgerModel object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final ledgerTypeOffset = fbb.writeString(object.ledgerType);
+          fbb.startTable(9);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addBool(2, object.isSystem);
+          fbb.addBool(3, object.isActive);
+          fbb.addOffset(4, ledgerTypeOffset);
+          fbb.addBool(5, object.hasChild);
+          fbb.addFloat64(6, object.openingBalance);
+          fbb.addInt64(7, object.createdOn?.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final createdOnValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 18);
+          final object = LedgerModel(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              ledgerType: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, ''),
+              openingBalance:
+                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 16, 0),
+              isSystem: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              isActive: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              hasChild: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 14))
+            ..createdOn = createdOnValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(createdOnValue);
+          InternalToManyAccess.setRelInfo(
+              object.accounts,
+              store,
+              RelInfo<AccountsModel>.toOneBacklink(
+                  8, object.id, (AccountsModel srcObject) => srcObject.ledger),
+              store.box<LedgerModel>());
           return object;
         })
   };
@@ -351,17 +475,17 @@ class AccountsModel_ {
   static final isSystem =
       QueryBooleanProperty<AccountsModel>(_entities[0].properties[3]);
 
-  /// see [AccountsModel.isTemporary]
-  static final isTemporary =
-      QueryBooleanProperty<AccountsModel>(_entities[0].properties[4]);
-
   /// see [AccountsModel.budget]
   static final budget =
-      QueryDoubleProperty<AccountsModel>(_entities[0].properties[5]);
+      QueryDoubleProperty<AccountsModel>(_entities[0].properties[4]);
 
   /// see [AccountsModel.createdOn]
   static final createdOn =
-      QueryIntegerProperty<AccountsModel>(_entities[0].properties[6]);
+      QueryIntegerProperty<AccountsModel>(_entities[0].properties[5]);
+
+  /// see [AccountsModel.ledger]
+  static final ledger = QueryRelationToOne<AccountsModel, LedgerModel>(
+      _entities[0].properties[6]);
 }
 
 /// [SettingsModel] entity fields to define ObjectBox queries.
@@ -385,35 +509,70 @@ class TransactionsModel_ {
   static final id =
       QueryIntegerProperty<TransactionsModel>(_entities[2].properties[0]);
 
-  /// see [TransactionsModel.drAmount]
-  static final drAmount =
-      QueryDoubleProperty<TransactionsModel>(_entities[2].properties[1]);
-
-  /// see [TransactionsModel.crAmount]
-  static final crAmount =
-      QueryDoubleProperty<TransactionsModel>(_entities[2].properties[2]);
-
   /// see [TransactionsModel.description]
   static final description =
-      QueryStringProperty<TransactionsModel>(_entities[2].properties[3]);
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[1]);
 
   /// see [TransactionsModel.txnMode]
   static final txnMode =
-      QueryStringProperty<TransactionsModel>(_entities[2].properties[4]);
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[2]);
 
   /// see [TransactionsModel.txnDate]
   static final txnDate =
-      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[5]);
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[3]);
 
   /// see [TransactionsModel.createdOn]
   static final createdOn =
-      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[6]);
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[4]);
 
   /// see [TransactionsModel.account]
   static final account = QueryRelationToOne<TransactionsModel, AccountsModel>(
-      _entities[2].properties[7]);
+      _entities[2].properties[5]);
 
   /// see [TransactionsModel.txnType]
   static final txnType =
-      QueryStringProperty<TransactionsModel>(_entities[2].properties[8]);
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[6]);
+
+  /// see [TransactionsModel.amount]
+  static final amount =
+      QueryDoubleProperty<TransactionsModel>(_entities[2].properties[7]);
+
+  /// see [TransactionsModel.scrollNo]
+  static final scrollNo =
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[8]);
+}
+
+/// [LedgerModel] entity fields to define ObjectBox queries.
+class LedgerModel_ {
+  /// see [LedgerModel.id]
+  static final id =
+      QueryIntegerProperty<LedgerModel>(_entities[3].properties[0]);
+
+  /// see [LedgerModel.name]
+  static final name =
+      QueryStringProperty<LedgerModel>(_entities[3].properties[1]);
+
+  /// see [LedgerModel.isSystem]
+  static final isSystem =
+      QueryBooleanProperty<LedgerModel>(_entities[3].properties[2]);
+
+  /// see [LedgerModel.isActive]
+  static final isActive =
+      QueryBooleanProperty<LedgerModel>(_entities[3].properties[3]);
+
+  /// see [LedgerModel.ledgerType]
+  static final ledgerType =
+      QueryStringProperty<LedgerModel>(_entities[3].properties[4]);
+
+  /// see [LedgerModel.hasChild]
+  static final hasChild =
+      QueryBooleanProperty<LedgerModel>(_entities[3].properties[5]);
+
+  /// see [LedgerModel.openingBalance]
+  static final openingBalance =
+      QueryDoubleProperty<LedgerModel>(_entities[3].properties[6]);
+
+  /// see [LedgerModel.createdOn]
+  static final createdOn =
+      QueryIntegerProperty<LedgerModel>(_entities[3].properties[7]);
 }

@@ -5,9 +5,5 @@ abstract class Routes {
   static const initialRoute = '/onboard';
   static const onboard = '/onboard';
   static const home = '/home';
-  static const accounts = '/accounts';
-  static const accountCreate = '/account_create';
-  static const accountTransactions = '/account_transactions';
-  static const paymentAction = '/payment_action';
-  static const transactions = '/transactions';
+  static const ledgerCreate = '/ledger_create';
 }

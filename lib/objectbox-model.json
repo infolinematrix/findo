@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8080568095172796682",
-      "lastPropertyId": "7:1018012840951700402",
+      "lastPropertyId": "8:6381893473725467657",
       "name": "AccountsModel",
       "properties": [
         {
@@ -34,11 +34,6 @@
           "type": 1
         },
         {
-          "id": "5:4184155973642274529",
-          "name": "isTemporary",
-          "type": 1
-        },
-        {
           "id": "6:2210614342965218839",
           "name": "budget",
           "type": 8
@@ -47,6 +42,14 @@
           "id": "7:1018012840951700402",
           "name": "createdOn",
           "type": 10
+        },
+        {
+          "id": "8:6381893473725467657",
+          "name": "ledgerId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "6:1001218422888843300",
+          "relationTarget": "LedgerModel"
         }
       ],
       "relations": []
@@ -79,7 +82,7 @@
     },
     {
       "id": "3:3111440568252014630",
-      "lastPropertyId": "9:824780557619384738",
+      "lastPropertyId": "11:2872802221464130534",
       "name": "TransactionsModel",
       "properties": [
         {
@@ -89,16 +92,6 @@
           "flags": 1
         },
         {
-          "id": "2:8785945625348729241",
-          "name": "drAmount",
-          "type": 8
-        },
-        {
-          "id": "3:7121842560550319579",
-          "name": "crAmount",
-          "type": 8
-        },
-        {
           "id": "4:3637758887083007875",
           "name": "description",
           "type": 9
@@ -106,7 +99,9 @@
         {
           "id": "5:5008846497105979365",
           "name": "txnMode",
-          "type": 9
+          "type": 9,
+          "flags": 2048,
+          "indexId": "12:329040897223215847"
         },
         {
           "id": "6:2655138446617590267",
@@ -131,21 +126,96 @@
         {
           "id": "9:824780557619384738",
           "name": "txnType",
-          "type": 9
+          "type": 9,
+          "flags": 2048,
+          "indexId": "13:7170203300489413271"
+        },
+        {
+          "id": "10:7294493757628710638",
+          "name": "amount",
+          "type": 8
+        },
+        {
+          "id": "11:2872802221464130534",
+          "name": "scrollNo",
+          "type": 6,
+          "flags": 8,
+          "indexId": "11:2993461747590649745"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:6456388099575701592",
+      "lastPropertyId": "8:7152409067748527518",
+      "name": "LedgerModel",
+      "properties": [
+        {
+          "id": "1:4399786035930780212",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6012842134593463925",
+          "name": "name",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "7:2628037384782407561"
+        },
+        {
+          "id": "3:5065219965612753536",
+          "name": "isSystem",
+          "type": 1
+        },
+        {
+          "id": "4:5866889709495969676",
+          "name": "isActive",
+          "type": 1,
+          "flags": 8,
+          "indexId": "8:1666913837182623160"
+        },
+        {
+          "id": "5:4181571944276929759",
+          "name": "ledgerType",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "9:4327489809731861683"
+        },
+        {
+          "id": "6:560121976424051924",
+          "name": "hasChild",
+          "type": 1,
+          "flags": 8,
+          "indexId": "10:8145747128961609376"
+        },
+        {
+          "id": "7:7927307665217286980",
+          "name": "openingBalance",
+          "type": 8
+        },
+        {
+          "id": "8:7152409067748527518",
+          "name": "createdOn",
+          "type": 10
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "3:3111440568252014630",
-  "lastIndexId": "5:5936411796222142683",
+  "lastEntityId": "4:6456388099575701592",
+  "lastIndexId": "13:7170203300489413271",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    4184155973642274529,
+    8785945625348729241,
+    7121842560550319579
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

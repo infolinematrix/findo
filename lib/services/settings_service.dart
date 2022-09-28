@@ -1,5 +1,4 @@
 import 'package:finsoft2/data/source/objectstore.dart';
-import 'package:finsoft2/objectbox.g.dart';
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,28 +25,28 @@ final hasSettings = FutureProvider.autoDispose<bool>((ref) async {
 final createSettings = FutureProvider.autoDispose
     .family((ref, Map<String, dynamic> formData) async {
   try {
-    final settingsData = objBox!.store.box<SettingsModel>();
-    final accountsData = objBox!.store.box<AccountsModel>();
+    // final settingsData = objBox!.store.box<SettingsModel>();
+    // final accountsData = objBox!.store.box<AccountsModel>();
 
-    for (var element in formData.entries) {
-      settingsData
-          .putAsync(SettingsModel(key: element.key, value: element.value));
-    }
+    // for (var element in formData.entries) {
+    //   settingsData
+    //       .putAsync(SettingsModel(key: element.key, value: element.value));
+    // }
 
-    List<AccountsModel> accounts = [
-      AccountsModel(name: 'Household Expense', isSystem: true),
-      AccountsModel(name: 'Repaire & Maintanence', isSystem: true),
-      AccountsModel(name: 'Educational Expense', isSystem: true),
-      AccountsModel(name: 'Travelling and Conveyance', isSystem: true),
-      AccountsModel(name: 'Loans Payment', isSystem: true),
-      AccountsModel(name: 'Online Shopping', isSystem: true),
-      AccountsModel(name: 'Bills Payment', isSystem: true),
-      AccountsModel(name: 'Fuel Expenses', isSystem: true),
-      AccountsModel(name: 'Others', isSystem: true),
-    ];
+    // List<AccountsModel> accounts = [
+    //   AccountsModel(name: 'Household Expense', isSystem: true),
+    //   AccountsModel(name: 'Repaire & Maintanence', isSystem: true),
+    //   AccountsModel(name: 'Educational Expense', isSystem: true),
+    //   AccountsModel(name: 'Travelling and Conveyance', isSystem: true),
+    //   AccountsModel(name: 'Loans Payment', isSystem: true),
+    //   AccountsModel(name: 'Online Shopping', isSystem: true),
+    //   AccountsModel(name: 'Bills Payment', isSystem: true),
+    //   AccountsModel(name: 'Fuel Expenses', isSystem: true),
+    //   AccountsModel(name: 'Others', isSystem: true),
+    // ];
 
-    accountsData.putMany(accounts);
-    objBox!.store.awaitAsyncSubmitted();
+    // accountsData.putMany(accounts);
+    // objBox!.store.awaitAsyncSubmitted();
 
     return true;
   } catch (e) {
@@ -72,14 +71,14 @@ final resetBoxProvider = FutureProvider<bool>((ref) async {
 });
 
 getSetting({required String key}) {
-  QueryBuilder<SettingsModel> builder;
-  builder =
-      objBox!.store.box<SettingsModel>().query(SettingsModel_.key.equals(key));
+  // QueryBuilder<SettingsModel> builder;
+  // builder =
+  //     objBox!.store.box<SettingsModel>().query(SettingsModel_.key.equals(key));
 
-  Query<SettingsModel> query = builder.build();
+  // Query<SettingsModel> query = builder.build();
 
-  SettingsModel data = query.findFirst()!;
-  return data;
+  // SettingsModel data = query.findFirst()!;
+  // return data;
 }
 
 currencySymbol() {
