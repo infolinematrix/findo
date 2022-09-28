@@ -5,10 +5,16 @@ import 'accounts_model.dart';
 class TransactionsModel {
   int id;
 
-  double drAmount;
-  double crAmount;
+  double amount;
   String? description;
+
+  @Index()
+  int scrollNo;
+
+  @Index()
   String txnMode;
+
+  @Index()
   String txnType;
 
   @Index()
@@ -20,9 +26,9 @@ class TransactionsModel {
 
   TransactionsModel({
     this.id = 0,
-    this.drAmount = 0.00,
-    this.crAmount = 0.00,
-    this.txnMode = 'Cash',
+    this.scrollNo = 0,
+    this.amount = 0.00,
+    this.txnMode = 'CASH',
     this.txnType = 'DR',
     this.description,
     this.txnDate,

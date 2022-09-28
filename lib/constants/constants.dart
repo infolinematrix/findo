@@ -13,3 +13,11 @@ final yesNo = [
   {'key': true, 'value': 'Yes'},
   {'key': false, 'value': 'No'}
 ];
+
+final ledgerType = [
+  {'code': 'INCOME', 'name': 'Income'},
+  {'code': 'EXPENDITURE', 'name': 'Expenditure'},
+  {'code': 'BANK', 'name': 'Bank Account'},
+  {'code': 'DEBTORS', 'name': 'Sundry Debtors'},
+  {'code': 'CREDITORS', 'name': 'Sundry Creditors'},
+];
