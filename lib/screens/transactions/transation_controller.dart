@@ -39,22 +39,35 @@ class TransactionsState
        * THIS IS DEBIT PART
        */
 
-      final data = TransactionsModel(
+      final data1 = TransactionsModel(
         description: formData['description'],
         txnDate: txnDateTime,
         txnType: "DR",
         amount: double.parse(formData['amount'].toString()).toDouble(),
       );
 
-      final account =
+      final account1 =
           objBox!.store.box<AccountsModel>().get(formData['account']);
 
-      data.account.target = account;
-      transactions.put(data);
+      data1.account.target = account1;
+      transactions.put(data1);
 
       /**
        * THIS IS CREDIT PART
        */
+
+      final data2 = TransactionsModel(
+        description: formData['description'],
+        txnDate: txnDateTime,
+        txnType: "DR",
+        amount: double.parse(formData['amount'].toString()).toDouble(),
+      );
+
+      // final account2 =
+      //     objBox!.store.box<AccountsModel>().get(formData['account']);
+
+      // data2.account.target = account2;
+      transactions.put(data2);
 
       objBox!.store.awaitAsyncSubmitted();
 

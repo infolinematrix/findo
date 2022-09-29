@@ -225,6 +225,3 @@ ThemeData appThemeTablet() {
     // ),
   );
 }
-
-TextStyle inputTextStyle = TextStyle(
-    fontWeight: FontWeight.bold, fontSize: 14.0.sp, color: Colors.black);
