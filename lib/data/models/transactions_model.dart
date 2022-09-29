@@ -12,9 +12,6 @@ class TransactionsModel {
   int scrollNo;
 
   @Index()
-  String txnMode;
-
-  @Index()
   String txnType;
 
   @Index()
@@ -28,7 +25,6 @@ class TransactionsModel {
     this.id = 0,
     this.scrollNo = 0,
     this.amount = 0.00,
-    this.txnMode = 'CASH',
     this.txnType = 'DR',
     this.description,
     this.txnDate,

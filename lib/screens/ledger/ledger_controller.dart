@@ -35,9 +35,8 @@ class LedgerState extends StateNotifier<AsyncValue<List<LedgerModel>>> {
   Future<bool> create({required Map<String, dynamic> formData}) async {
     try {
       final data = LedgerModel(
-        name: formData['name'],
+        name: formData['name'].toString().trim(),
         isActive: formData['isActive'],
-        ledgerType: formData['ledger_type'],
       );
 
       ledgerBox.put(data);
@@ -51,7 +50,7 @@ class LedgerState extends StateNotifier<AsyncValue<List<LedgerModel>>> {
   }
 
   //--GET
-  Future getLedger({required int id}) async {
+  Future get({required int id}) async {
     try {
       final data = ledgerBox.get(id);
       return data;
@@ -70,7 +69,8 @@ class LedgerState extends StateNotifier<AsyncValue<List<LedgerModel>>> {
   }
 
   //--UPDATE
-  Future<bool> update({required int id}) async {
+  Future<bool> update(
+      {required int id, required Map<String, dynamic> formData}) async {
     try {
       return true;
     } catch (e) {

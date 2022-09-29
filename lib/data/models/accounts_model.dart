@@ -14,7 +14,7 @@ class AccountsModel {
   bool? isSystem;
   double? budget;
 
-  DateTime? createdOn = DateTime.now();
+  DateTime? createdOn;
 
   @Backlink()
   final transactions = ToMany<TransactionsModel>();
@@ -26,5 +26,6 @@ class AccountsModel {
       required this.name,
       this.isActive = true,
       this.isSystem = false,
+      this.createdOn,
       this.budget = 0.00});
 }

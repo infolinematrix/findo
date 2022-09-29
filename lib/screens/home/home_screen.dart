@@ -123,14 +123,32 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                   title: const Text('General Ledger'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, "/account_create");
+                  },
                   leading: const Icon(Iconsax.chart_2),
                   title: const Text('Accounts'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, "/receive");
+                  },
                   leading: const Icon(Iconsax.profile_2user),
-                  title: const Text('Contacts'),
+                  title: const Text('Receipt'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/payment");
+                  },
+                  leading: const Icon(Iconsax.profile_2user),
+                  title: const Text('Payment'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/transfer");
+                  },
+                  leading: const Icon(Iconsax.profile_2user),
+                  title: const Text('Transfer'),
                 ),
                 const SizedBox(
                   height: 50,
