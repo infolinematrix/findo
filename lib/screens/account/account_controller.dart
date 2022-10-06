@@ -1,12 +1,20 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/data/models/ledger_model.dart';
+import 'package:finsoft2/data/repositories/account_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/source/objectstore.dart';
-import '../../objectbox.g.dart';
 
 final accountBox = objBox!.store.box<AccountsModel>();
 final ledgerBox = objBox!.store.box<LedgerModel>();
+
+/// Accounts by Ledger
+final accountsByLedgerProvider =
+    FutureProvider.family<List<AccountsModel>, int>((ref, ledgerId) async {
+  final List<AccountsModel> data =
+      await AccountRepository().listByLedger(ledgerId: ledgerId);
+  return data;
+});
 
 final accountProvider =
     StateNotifierProvider<AccountState, AsyncValue<List<AccountsModel>>>((ref) {
@@ -19,16 +27,8 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   }
 
   //---GET ALL
-  getAccounts() {
-    QueryBuilder<AccountsModel> builder = accountBox.query(
-        AccountsModel_.isActive.equals(true) &
-            AccountsModel_.name.notEquals(''))
-      ..order(AccountsModel_.name, flags: Order.caseSensitive);
-
-    Query<AccountsModel> query = builder.build();
-    List<AccountsModel> data = query.find().toList();
-    query.close();
-
+  getAccounts() async {
+    final data = await AccountRepository().list();
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
 

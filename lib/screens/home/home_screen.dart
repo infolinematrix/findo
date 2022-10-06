@@ -191,6 +191,30 @@ class _HomePageState extends ConsumerState<HomeScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.grey.shade100,
+        body: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const Text("sdfsf"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  OutlinedButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, "/ledger_list"),
+                      child: const Text("Receipt")),
+                  OutlinedButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, "/ledger_list"),
+                      child: const Text("Payment")),
+                  OutlinedButton(
+                      onPressed: () => null, child: const Text("Transfer"))
+                ],
+              ),
+            ],
+          ),
+        )),
       ),
     );
   }

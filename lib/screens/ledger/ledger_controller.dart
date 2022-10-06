@@ -1,8 +1,8 @@
 import 'package:finsoft2/data/models/ledger_model.dart';
+import 'package:finsoft2/data/repositories/ledger_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/source/objectstore.dart';
-import '../../objectbox.g.dart';
 
 final ledgerBox = objBox!.store.box<LedgerModel>();
 
@@ -17,18 +17,9 @@ class LedgerState extends StateNotifier<AsyncValue<List<LedgerModel>>> {
   }
 
   //---GET ALL
-  getLedgers() {
-    QueryBuilder<LedgerModel> builder = ledgerBox.query(
-        LedgerModel_.isActive.equals(true) & LedgerModel_.name.notEquals(''))
-      ..order(LedgerModel_.name, flags: Order.caseSensitive);
-
-    Query<LedgerModel> query = builder.build();
-
-    List<LedgerModel> data = query.find().toList();
-
+  getLedgers() async {
+    final data = await LederRepository().list();
     state = AsyncValue<List<LedgerModel>>.data(data);
-
-    query.close();
   }
 
   //--CREATE

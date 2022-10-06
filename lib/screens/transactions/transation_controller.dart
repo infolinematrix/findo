@@ -5,6 +5,12 @@ import '../../data/models/accounts_model.dart';
 import '../../data/source/objectstore.dart';
 import '../../utils/functions.dart';
 
+//--IS CASH/BANK
+
+final txnModeProvider = StateProvider.autoDispose<String>((ref) {
+  return 'CASH';
+});
+
 //--SCROLL START
 final scrollProvider = StateNotifierProvider<ScrollState, int>((ref) {
   return ScrollState();

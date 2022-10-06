@@ -1,6 +1,11 @@
+import 'package:finsoft2/data/models/accounts_model.dart';
+import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/screens/account/account_create_screen.dart';
+import 'package:finsoft2/screens/account/account_list_screen.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
 import 'package:finsoft2/screens/ledger/ledger_create_screen.dart';
+import 'package:finsoft2/screens/ledger/ledger_list_screen.dart';
+import 'package:finsoft2/screens/transactions/account_transaction_screen.dart';
 import 'package:finsoft2/screens/transactions/payment_screen.dart';
 import 'package:finsoft2/screens/transactions/receive_screen.dart';
 import 'package:finsoft2/screens/transactions/transfer_screen.dart';
@@ -30,12 +35,23 @@ class AppPages {
           case Routes.ledgerCreate:
             return const LedgerCreateScreen();
 
+          case Routes.ledgerList:
+            return const LedgerListScreen();
+
           case Routes.accountCreate:
             return const AccountCreateScreen();
 
+          case Routes.accountList:
+            return AccountListScreen(ledger: settings.arguments as LedgerModel);
+
           //--Transactions
+
+          case Routes.accountTransaction:
+            return AccountTransactionScreen(
+                account: settings.arguments as AccountsModel);
+
           case Routes.payment:
-            return const PaymentScreen();
+            return PaymentScreen(account: settings.arguments as AccountsModel);
 
           case Routes.receive:
             return const ReceiveScreen();
