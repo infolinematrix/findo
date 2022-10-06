@@ -39,7 +39,8 @@ class AppPages {
             return const LedgerListScreen();
 
           case Routes.accountCreate:
-            return const AccountCreateScreen();
+            return AccountCreateScreen(
+                ledger: settings.arguments as LedgerModel);
 
           case Routes.accountList:
             return AccountListScreen(ledger: settings.arguments as LedgerModel);

@@ -1,3 +1,4 @@
+import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/data/source/objectstore.dart';
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -25,13 +26,28 @@ final hasSettings = FutureProvider.autoDispose<bool>((ref) async {
 final createSettings = FutureProvider.autoDispose
     .family((ref, Map<String, dynamic> formData) async {
   try {
-    // final settingsData = objBox!.store.box<SettingsModel>();
-    // final accountsData = objBox!.store.box<AccountsModel>();
+    final settingBox = objBox!.store.box<SettingsModel>();
+    final ledgerBox = objBox!.store.box<LedgerModel>();
+    final accountBox = objBox!.store.box<AccountsModel>();
 
-    // for (var element in formData.entries) {
-    //   settingsData
-    //       .putAsync(SettingsModel(key: element.key, value: element.value));
-    // }
+    for (var element in formData.entries) {
+      settingBox
+          .putAsync(SettingsModel(key: element.key, value: element.value));
+    }
+
+    List<LedgerModel> ledgers = [
+      LedgerModel(name: 'Bank Account', isSystem: true, isActive: true),
+      LedgerModel(name: 'Household Expenses', isSystem: false, isActive: true),
+      LedgerModel(name: 'Bills', isSystem: false, isActive: true),
+      LedgerModel(name: 'Loans', isSystem: false, isActive: true),
+      LedgerModel(name: 'Entertainment', isSystem: false, isActive: true),
+      LedgerModel(name: 'Travelling', isSystem: false, isActive: true),
+      LedgerModel(
+          name: 'Repaire & Maintanence', isSystem: false, isActive: true),
+    ];
+
+    ledgerBox.putMany(ledgers);
+    objBox!.store.awaitAsyncSubmitted();
 
     // List<AccountsModel> accounts = [
     //   AccountsModel(name: 'Household Expense', isSystem: true),
@@ -45,7 +61,7 @@ final createSettings = FutureProvider.autoDispose
     //   AccountsModel(name: 'Others', isSystem: true),
     // ];
 
-    // accountsData.putMany(accounts);
+    // ledgerBox.putMany(ledgers);
     // objBox!.store.awaitAsyncSubmitted();
 
     return true;

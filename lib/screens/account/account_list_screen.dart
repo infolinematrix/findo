@@ -12,14 +12,23 @@ class AccountListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ledgers = ref.watch(accountsByLedgerProvider(ledger.id));
+    final accounts = ref.watch(accountProvider(ledger.id));
 
     return Scaffold(
-      appBar: AppBar(title: Text(ledger.name)),
+      appBar: AppBar(
+        title: Text(ledger.name),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.pushNamed(context, "/account_create",
+                arguments: ledger),
+            child: const Text("CREATE"),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(8.0.sp),
-          child: ledgers.when(
+          child: accounts.when(
             error: (error, stackTrace) => Text(error.toString()),
             loading: () {
               return const Center(

@@ -1,4 +1,8 @@
+import 'package:finsoft2/screens/error_screen.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
+import 'package:finsoft2/screens/onboard/onboard_screen.dart';
+import 'package:finsoft2/screens/settings/settings_screen.dart';
+import 'package:finsoft2/services/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +16,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final hasSettingsExist = ref.watch(hasSettings);
+    final settingExist = ref.watch(hasSettings);
     return ScreenUtilInit(
         designSize: const Size(375, 812 - 44 - 34),
         minTextAdapt: false,
@@ -28,17 +32,17 @@ class App extends ConsumerWidget {
             theme: screenSize < 650 ? appTheme() : appThemeTablet(),
             themeMode: ThemeMode.light,
             onGenerateRoute: AppPages.onGenerateRoute,
-            // home: hasSettingsExist.when(
-            //   loading: () => const OnBoardScreen(),
-            //   error: (err, stack) => ErrorScreen(msg: err.toString()),
-            //   data: (data) {
-            //     if (data == true) {
-            //       return const HomeScreen();
-            //     }
-            //     return const SettingsScreen();
-            //   },
-            // ),
-            home: const HomeScreen(),
+            home: settingExist.when(
+              loading: () => const OnBoardScreen(),
+              error: (err, stack) => ErrorScreen(msg: err.toString()),
+              data: (data) {
+                if (data == true) {
+                  return const HomeScreen();
+                }
+                return const SettingsScreen();
+              },
+            ),
+            // home: const HomeScreen(),
           );
         });
   }

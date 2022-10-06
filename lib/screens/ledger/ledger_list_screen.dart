@@ -12,7 +12,15 @@ class LedgerListScreen extends ConsumerWidget {
     final ledgers = ref.watch(ledgerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Group")),
+      appBar: AppBar(
+        title: const Text("Group"),
+        actions: [
+          OutlinedButton(
+            onPressed: () => null,
+            child: const Text("CREATE"),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(8.0.sp),

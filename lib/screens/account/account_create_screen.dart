@@ -1,3 +1,4 @@
+import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,8 @@ import '../ledger/ledger_controller.dart';
 import 'account_controller.dart';
 
 class AccountCreateScreen extends ConsumerWidget {
-  const AccountCreateScreen({Key? key}) : super(key: key);
+  const AccountCreateScreen({Key? key, required this.ledger}) : super(key: key);
+  final LedgerModel ledger;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,73 +32,141 @@ class AccountCreateScreen extends ConsumerWidget {
             );
           },
           data: (data) {
-            return FormBuilder(
-              key: formKey,
-              child: Container(
-                padding: EdgeInsets.all(16.0.sp),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    FormBuilderDropdown(
-                      name: 'ledger',
-                      decoration: const InputDecoration(
-                        labelText: 'Select Group',
+            return SingleChildScrollView(
+              child: FormBuilder(
+                key: formKey,
+                child: Container(
+                  padding: EdgeInsets.all(16.0.sp),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // FormBuilderDropdown(
+                      //   name: 'ledger',
+                      //   decoration: const InputDecoration(
+                      //     labelText: 'Select Group',
+                      //   ),
+                      //   validator: FormBuilderValidators.compose(
+                      //       [FormBuilderValidators.required()]),
+                      //   items: data
+                      //       .map((e) => DropdownMenuItem(
+                      //             value: e.id,
+                      //             child: Text(
+                      //               e.name,
+                      //               style: inputTextStyle,
+                      //             ),
+                      //           ))
+                      //       .toList(),
+                      // ),
+                      SizedBox(
+                        height: inputHeight,
+                        child: FormBuilderTextField(
+                          name: 'ledger',
+                          style: inputTextStyle,
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.max(70),
+                          ]),
+                          decoration: const InputDecoration(
+                            labelText: 'Group',
+                          ),
+                          enabled: false,
+                          initialValue: ledger.name,
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          textCapitalization: TextCapitalization.words,
+                        ),
                       ),
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required()]),
-                      items: data
-                          .map((e) => DropdownMenuItem(
-                                value: e.id,
-                                child: Text(
-                                  e.name,
-                                  style: inputTextStyle,
+                      UIHelper.verticalSpaceSmall(),
+                      SizedBox(
+                        height: inputHeight,
+                        child: FormBuilderTextField(
+                          name: 'name',
+                          style: inputTextStyle,
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                          ]),
+                          decoration: const InputDecoration(
+                            labelText: 'Account Name',
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                          ),
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          textCapitalization: TextCapitalization.words,
+                        ),
+                      ),
+                      UIHelper.verticalSpaceSmall(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: inputHeight,
+                              child: FormBuilderTextField(
+                                name: 'budget',
+                                style: inputTextStyle,
+                                decoration: const InputDecoration(
+                                  labelText: 'Monthly Budget',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
                                 ),
-                              ))
-                          .toList(),
-                    ),
-                    UIHelper.verticalSpaceSmall(),
-                    FormBuilderTextField(
-                      name: 'name',
-                      style: inputTextStyle,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.max(70),
-                      ]),
-                      decoration: const InputDecoration(
-                        labelText: 'Account Name',
+                                keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
+                                textCapitalization: TextCapitalization.words,
+                              ),
+                            ),
+                          ),
+                          UIHelper.horizontalSpaceSmall(),
+                          Expanded(
+                            child: SizedBox(
+                              height: inputHeight,
+                              child: FormBuilderCheckbox(
+                                name: 'isActive',
+                                initialValue: true,
+                                title: const Text("Is Active"),
+                                decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 4),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.words,
-                    ),
-                    UIHelper.verticalSpaceSmall(),
-                    FormBuilderCheckbox(
-                      name: 'isActive',
-                      initialValue: true,
-                      title: const Text("Is Active"),
-                      decoration: const InputDecoration(),
-                    ),
-                    UIHelper.verticalSpaceExtraLarge(),
-                    FormButton(
-                        text: const Text("SUBMIT"),
-                        onTap: () async {
-                          if (formKey.currentState?.saveAndValidate() ??
-                              false) {
-                            final resp = await ref
-                                .watch(accountProvider.notifier)
-                                .create(formData: formKey.currentState!.value);
+                      UIHelper.verticalSpaceSmall(),
+                      Text(
+                        "Leave blank if you have unlimited budget",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      UIHelper.verticalSpaceExtraLarge(),
+                      FormButton(
+                          text: const Text("SUBMIT"),
+                          onTap: () async {
+                            if (formKey.currentState?.saveAndValidate() ??
+                                false) {
+                              final data = {
+                                'ledgerId': ledger.id,
+                                ...formKey.currentState!.value
+                              };
 
-                            if (resp == true) {
-                              showToast(msg: 'Account Created successfully!');
+                              await ref
+                                  .read(accountProvider(ledger.id).notifier)
+                                  .create(formData: data)
+                                  .then((value) {
+                                if (value == true) {
+                                  showToast(
+                                      msg: 'Account Created successfully!');
+                                  Navigator.pop(context);
+                                } else {
+                                  showToast(msg: 'Invalid! may be duplicate');
+                                }
+                              });
                             } else {
-                              showToast(msg: 'Invalid! may be duplicate');
+                              debugPrint(
+                                  formKey.currentState?.value.toString());
+                              showToast(msg: 'validation failed');
                             }
-                          } else {
-                            debugPrint(formKey.currentState?.value.toString());
-                            showToast(msg: 'validation failed');
-                          }
-                        }),
-                  ],
+                          }),
+                    ],
+                  ),
                 ),
               ),
             );

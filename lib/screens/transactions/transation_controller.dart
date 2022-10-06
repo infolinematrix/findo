@@ -1,18 +1,27 @@
 import 'package:finsoft2/data/models/transactions_model.dart';
+import 'package:finsoft2/data/repositories/account_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/accounts_model.dart';
 import '../../data/source/objectstore.dart';
 import '../../utils/functions.dart';
 
-//--IS CASH/BANK
+//--Load Bank accounts
+final banksProvider = FutureProvider.autoDispose((ref) async {
+  final List<AccountsModel> banks =
+      await AccountRepository().listByLedger(ledgerId: 1);
 
+  return banks;
+});
+
+//--IS CASH/BANK
 final txnModeProvider = StateProvider.autoDispose<String>((ref) {
   return 'CASH';
 });
 
 //--SCROLL START
-final scrollProvider = StateNotifierProvider<ScrollState, int>((ref) {
+final scrollProvider =
+    StateNotifierProvider.autoDispose<ScrollState, int>((ref) {
   return ScrollState();
 });
 

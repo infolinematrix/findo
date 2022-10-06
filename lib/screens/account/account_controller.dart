@@ -8,48 +8,56 @@ import '../../data/source/objectstore.dart';
 final accountBox = objBox!.store.box<AccountsModel>();
 final ledgerBox = objBox!.store.box<LedgerModel>();
 
-/// Accounts by Ledger
-final accountsByLedgerProvider =
-    FutureProvider.family<List<AccountsModel>, int>((ref, ledgerId) async {
-  final List<AccountsModel> data =
-      await AccountRepository().listByLedger(ledgerId: ledgerId);
-  return data;
-});
-
-final accountProvider =
-    StateNotifierProvider<AccountState, AsyncValue<List<AccountsModel>>>((ref) {
-  return AccountState();
+final accountProvider = StateNotifierProvider.autoDispose
+    .family<AccountState, AsyncValue<List<AccountsModel>>, int>(
+        (ref, ledgerId) {
+  return AccountState(ledgerId: ledgerId);
 });
 
 class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
-  AccountState() : super(const AsyncValue<List<AccountsModel>>.loading()) {
+  final int ledgerId;
+  AccountState({required this.ledgerId})
+      : super(const AsyncValue<List<AccountsModel>>.loading()) {
     getAccounts();
   }
 
   //---GET ALL
   getAccounts() async {
-    final data = await AccountRepository().list();
+    final data = await AccountRepository().listByLedger(ledgerId: ledgerId);
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
+
+  // accountsByLedger({required ledgerId}) {
+  //   final List<AccountsModel> data =
+  //       AccountRepository().listByLedger(ledgerId: ledgerId);
+
+  //   state = AsyncValue<List<AccountsModel>>.data(data);
+  // }
 
   //--CREATE
   Future<bool> create({required Map<String, dynamic> formData}) async {
     try {
       final data = AccountsModel(
         name: formData['name'].toString().trim(),
-        isActive: formData['isActive'],
+        isActive: formData['isActive'] ?? false,
+        isSystem: false,
+        budget: formData['budget'] != null
+            ? double.parse(formData['budget'].toString()).toDouble()
+            : 0.0,
         createdOn: DateTime.now(),
       );
 
-      final ledger = ledgerBox.get(formData['ledger']);
+      final ledger = ledgerBox.get(formData['ledgerId']);
       data.ledger.target = ledger;
 
       accountBox.put(data);
       objBox!.store.awaitAsyncSubmitted();
 
       getAccounts();
+
       return true;
     } catch (e) {
+      print(e.toString());
       return false;
     }
   }

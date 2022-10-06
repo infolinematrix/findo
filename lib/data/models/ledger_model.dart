@@ -10,15 +10,16 @@ class LedgerModel {
 
   @Index()
   bool? isActive;
+  bool? isSystem;
 
   DateTime? createdOn = DateTime.now();
 
   @Backlink()
   final accounts = ToMany<AccountsModel>();
 
-  LedgerModel({
-    this.id = 0,
-    required this.name,
-    this.isActive = true,
-  });
+  LedgerModel(
+      {this.id = 0,
+      required this.name,
+      this.isActive = true,
+      this.isSystem = false});
 }
