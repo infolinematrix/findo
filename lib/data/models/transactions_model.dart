@@ -1,5 +1,4 @@
 import 'package:objectbox/objectbox.dart';
-import 'accounts_model.dart';
 
 @Entity()
 class TransactionsModel {
@@ -15,19 +14,26 @@ class TransactionsModel {
   String txnType;
 
   @Index()
+  @Property(type: PropertyType.date)
   DateTime? txnDate;
 
-  DateTime? createdOn = DateTime.now();
+  @Index()
+  int account;
 
-  final account = ToOne<AccountsModel>();
+  String? narration;
+
+  @Property(type: PropertyType.date)
+  DateTime? createdOn = DateTime.now();
 
   TransactionsModel({
     this.id = 0,
+    this.account = 0,
     this.scrollNo = 0,
     this.amount = 0.00,
     this.txnType = 'DR',
     this.description,
     this.txnDate,
     this.createdOn,
+    this.narration,
   });
 }

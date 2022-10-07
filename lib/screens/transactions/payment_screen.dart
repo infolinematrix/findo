@@ -1,11 +1,12 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
+import 'package:finsoft2/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
-
 import '../../theme/constants.dart';
 import '../../utils/index.dart';
 import '../../widgets/index.dart';
@@ -67,7 +68,7 @@ class PaymentScreen extends ConsumerWidget {
                           child: FormBuilderDateTimePicker(
                             name: 'txnDate',
                             initialEntryMode: DatePickerEntryMode.calendarOnly,
-                            initialValue: DateTime.now(),
+                            initialValue: DateTime.now().toUtc(),
                             inputType: InputType.date,
                             style: inputTextStyle,
                             decoration: InputDecoration(
@@ -142,6 +143,7 @@ class PaymentScreen extends ConsumerWidget {
                           child: FormBuilderTextField(
                             name: 'amount',
                             style: inputTextStyle,
+                            initialValue: "125",
                             decoration: InputDecoration(
                               labelText: 'Amount',
                               errorStyle: const TextStyle(
@@ -200,46 +202,34 @@ class PaymentScreen extends ConsumerWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             UIHelper.verticalSpaceSmall(),
-                            SizedBox(
-                              height: inputHeight,
-                              // child: FormBuilderTextField(
-                              //   name: 'bank_account',
-                              //   initialValue:
-                              //       data.isNotEmpty ? data[0].name : '',
-                              //   enabled: false,
-                              //   style: inputTextStyle,
-                              //   validator: FormBuilderValidators.compose([
-                              //     FormBuilderValidators.required(),
-                              //   ]),
-                              //   decoration: const InputDecoration(
-                              //     labelText: 'From Bank',
-                              //   ),
-                              //   keyboardType: TextInputType.name,
-                              //   textInputAction: TextInputAction.next,
-                              //   textCapitalization: TextCapitalization.words,
-                              // ),
-
-                              child: FormBuilderDropdown<int>(
-                                name: 'bank_account',
-                                decoration: const InputDecoration(
-                                  labelText: 'From Bank',
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                ),
-                                style: inputTextStyle,
-                                initialValue: data[0].id,
-                                validator: FormBuilderValidators.compose(
-                                    [FormBuilderValidators.required()]),
-                                items: data
-                                    .map((item) => DropdownMenuItem(
-                                          alignment:
-                                              AlignmentDirectional.centerStart,
-                                          value: item.id,
-                                          child: Text(item.name),
-                                        ))
-                                    .toList(),
-                              ),
-                            ),
+                            data.isNotEmpty
+                                ? SizedBox(
+                                    height: inputHeight,
+                                    child: FormBuilderDropdown<int>(
+                                      name: 'bank_account',
+                                      decoration: const InputDecoration(
+                                        labelText: 'From Bank',
+                                        floatingLabelBehavior:
+                                            FloatingLabelBehavior.always,
+                                      ),
+                                      style: inputTextStyle,
+                                      initialValue: data[0].id,
+                                      validator: FormBuilderValidators.compose(
+                                          [FormBuilderValidators.required()]),
+                                      items: data
+                                          .map((item) => DropdownMenuItem(
+                                                alignment: AlignmentDirectional
+                                                    .centerStart,
+                                                value: item.id,
+                                                child: Text(item.name),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  )
+                                : const InfoBox(
+                                    text: Text("Please add a Bank account"),
+                                    color: AppColors.darkOrage,
+                                  ),
                           ],
                         )
                       : const SizedBox.shrink(),
@@ -268,23 +258,36 @@ class PaymentScreen extends ConsumerWidget {
                   ),
                   UIHelper.verticalSpaceExtraLarge(),
                   FormButton(
-                      text: const Text("SUBMIT"),
-                      onTap: () async {
-                        if (formKey.currentState?.saveAndValidate() ?? false) {
-                          // final resp = await ref
-                          //     .watch(accountProvider.notifier)
-                          //     .create(formData: formKey.currentState!.value);
-
-                          // if (resp == true) {
-                          //   showToast(msg: 'Account Created successfully!');
-                          // } else {
-                          //   showToast(msg: 'Invalid! may be duplicate');
-                          // }
-                        } else {
-                          debugPrint(formKey.currentState?.value.toString());
-                          showToast(msg: 'validation failed');
-                        }
-                      }),
+                    text: const Text("SUBMIT"),
+                    onTap: data.isNotEmpty
+                        ? () async {
+                            EasyLoading.showProgress(0.3, status: 'Saving...');
+                            if (formKey.currentState?.saveAndValidate() ??
+                                false) {
+                              await ref
+                                  .read(
+                                      transactionProvider(account.id).notifier)
+                                  .addPayment(
+                                      formData: formKey.currentState!.value)
+                                  .then((value) {
+                                if (value == true) {
+                                  // showToast(msg: "Successfull");
+                                  EasyLoading.showSuccess(
+                                      'Transaction Success!');
+                                } else {
+                                  // showToast(msg: "Transaction fail");
+                                  EasyLoading.showError('Transaction Failed');
+                                }
+                              });
+                            } else {
+                              debugPrint(
+                                  formKey.currentState?.value.toString());
+                              // showToast(msg: 'validation failed');
+                              EasyLoading.showError('Failed with Error');
+                            }
+                          }
+                        : () => null,
+                  ),
                 ],
               ),
             ),

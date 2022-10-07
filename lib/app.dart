@@ -4,6 +4,7 @@ import 'package:finsoft2/screens/onboard/onboard_screen.dart';
 import 'package:finsoft2/screens/settings/settings_screen.dart';
 import 'package:finsoft2/services/settings_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -32,6 +33,7 @@ class App extends ConsumerWidget {
             theme: screenSize < 650 ? appTheme() : appThemeTablet(),
             themeMode: ThemeMode.light,
             onGenerateRoute: AppPages.onGenerateRoute,
+            builder: EasyLoading.init(),
             home: settingExist.when(
               loading: () => const OnBoardScreen(),
               error: (err, stack) => ErrorScreen(msg: err.toString()),

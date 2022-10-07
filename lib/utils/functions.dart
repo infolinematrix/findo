@@ -9,7 +9,7 @@ Future<void> gotoUrl({required String url}) async {
   }
 }
 
-convertDateToLocal(String strDate) {
+DateTime convertDateToLocal(String strDate) {
   var dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(strDate, true);
   var dateLocal = dateTime.toLocal();
 

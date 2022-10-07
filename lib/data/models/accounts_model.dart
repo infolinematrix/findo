@@ -1,5 +1,4 @@
 import 'package:finsoft2/data/models/ledger_model.dart';
-import 'package:finsoft2/data/models/transactions_model.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -16,8 +15,8 @@ class AccountsModel {
 
   DateTime? createdOn;
 
-  @Backlink()
-  final transactions = ToMany<TransactionsModel>();
+  // @Backlink()
+  // final transactions = ToMany<TransactionsModel>();
 
   final ledger = ToOne<LedgerModel>();
 

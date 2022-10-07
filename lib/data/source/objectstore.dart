@@ -18,8 +18,11 @@ class ObjectStore {
   static Future<ObjectStore> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
 
-    final store =
-        await openStore(directory: p.join(docsDir.path, "obx-finsdo"));
+    final store = await openStore(
+      directory: p.join(docsDir.path, "obx-finsdo"),
+      maxReaders: 1,
+      maxDBSizeInKB: 1024 * 1024,
+    );
 
     //--Delete Database with all object
     // store.close();

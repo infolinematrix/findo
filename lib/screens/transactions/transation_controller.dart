@@ -1,10 +1,12 @@
 import 'package:finsoft2/data/models/transactions_model.dart';
 import 'package:finsoft2/data/repositories/account_repository.dart';
+import 'package:finsoft2/objectbox.g.dart';
+import 'package:finsoft2/utils/functions.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/accounts_model.dart';
 import '../../data/source/objectstore.dart';
-import '../../utils/functions.dart';
 
 //--Load Bank accounts
 final banksProvider = FutureProvider.autoDispose((ref) async {
@@ -12,6 +14,11 @@ final banksProvider = FutureProvider.autoDispose((ref) async {
       await AccountRepository().listByLedger(ledgerId: 1);
 
   return banks;
+});
+
+//--ALLOW SAVE
+final allowSaveProvider = StateProvider.autoDispose<bool>((ref) {
+  return true;
 });
 
 //--IS CASH/BANK
@@ -41,56 +48,78 @@ class TransactionsState
     extends StateNotifier<AsyncValue<List<TransactionsModel>>> {
   final Ref ref;
   final int account;
-  final transactions = objBox!.store.box<TransactionsModel>();
+  final transactionsBox = objBox!.store.box<TransactionsModel>();
   TransactionsState(this.ref, this.account)
       : super(const AsyncValue<List<TransactionsModel>>.loading());
 
   //--Save transaction
-  Future<bool> addEntry({required Map<String, dynamic> formData}) async {
+  Future<bool> addPayment({required Map<String, dynamic> formData}) async {
     try {
-      var txnDateTime = convertDateToLocal(formData['date'].toString());
+      // EasyLoading.show(status: 'Saving...');
 
-      /**
-       * THIS IS DEBIT PART
-       */
+      var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
 
-      final data1 = TransactionsModel(
-        description: formData['description'],
-        txnDate: txnDateTime,
-        txnType: "DR",
-        amount: double.parse(formData['amount'].toString()).toDouble(),
-      );
+      objBox!.store.runInTransaction(TxMode.write, () {
+        if (formData['txnMode'] == 'BANK') {
+          //--Get Bank account
+          AccountsModel? bank =
+              AccountRepository().accountBox.get(formData['bank_account']);
 
-      final account1 =
-          objBox!.store.box<AccountsModel>().get(formData['account']);
+          //--DEBIT
+          final dataDr = TransactionsModel(
+            account: account,
+            description: formData['description'].toString().trim(),
+            txnDate: txnDateTime,
+            createdOn: DateTime.now().toUtc().toLocal(),
+            txnType: "DR",
+            amount: double.parse(formData['amount'].toString()).toDouble(),
+            narration: "To, ${bank!.name}",
+          );
+          objBox!.store.box<TransactionsModel>().putAsync(dataDr);
 
-      data1.account.target = account1;
-      transactions.put(data1);
+          //--CREDIT
+          final dataCr = TransactionsModel(
+            account: formData['bank_account'],
+            description: formData['description'].toString().trim(),
+            txnDate: txnDateTime,
+            createdOn: DateTime.now().toUtc().toLocal(),
+            txnType: "CR",
+            amount: double.parse(formData['amount'].toString()).toDouble(),
+            narration: 'By ${formData['account_to']}',
+          );
+          objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+        } else {
+          //--DEBIT
+          final dataDr = TransactionsModel(
+            account: account,
+            description: formData['description'].toString().trim(),
+            txnDate: txnDateTime,
+            createdOn: DateTime.now().toUtc().toLocal(),
+            txnType: "DR",
+            amount: double.parse(formData['amount'].toString()).toDouble(),
+            narration: "To, Cash",
+          );
+          objBox!.store.box<TransactionsModel>().putAsync(dataDr);
 
-      /**
-       * THIS IS CREDIT PART
-       */
-
-      final data2 = TransactionsModel(
-        description: formData['description'],
-        txnDate: txnDateTime,
-        txnType: "DR",
-        amount: double.parse(formData['amount'].toString()).toDouble(),
-      );
-
-      // final account2 =
-      //     objBox!.store.box<AccountsModel>().get(formData['account']);
-
-      // data2.account.target = account2;
-      transactions.put(data2);
+          //--CREDIT
+          final dataCr = TransactionsModel(
+            account: 0,
+            description: formData['description'].toString().trim(),
+            txnDate: txnDateTime,
+            createdOn: DateTime.now().toUtc().toLocal(),
+            txnType: "CR",
+            amount: double.parse(formData['amount'].toString()).toDouble(),
+            narration: 'By ${formData['to_account']}',
+          );
+          objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+        }
+      });
 
       objBox!.store.awaitAsyncSubmitted();
-
-      // getAccountTransactions();
-
+      EasyLoading.dismiss();
       return true;
     } catch (e) {
-      rethrow;
+      return false;
     }
   }
 }
