@@ -10,16 +10,21 @@ class LedgerModel {
 
   @Index()
   bool? isActive;
-  bool? isSystem;
 
-  DateTime? createdOn = DateTime.now();
+  bool? isSystem;
+  bool? isVisible;
+
+  @Property(type: PropertyType.date)
+  DateTime? createdOn = DateTime.now().toLocal();
 
   @Backlink()
   final accounts = ToMany<AccountsModel>();
 
-  LedgerModel(
-      {this.id = 0,
-      required this.name,
-      this.isActive = true,
-      this.isSystem = false});
+  LedgerModel({
+    this.id = 0,
+    required this.name,
+    this.isActive = true,
+    this.isVisible = true,
+    this.isSystem = false,
+  });
 }

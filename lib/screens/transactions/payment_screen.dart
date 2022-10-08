@@ -256,7 +256,7 @@ class PaymentScreen extends ConsumerWidget {
                       textCapitalization: TextCapitalization.words,
                     ),
                   ),
-                  UIHelper.verticalSpaceExtraLarge(),
+                  UIHelper.verticalSpaceLarge(),
                   FormButton(
                     text: const Text("SUBMIT"),
                     onTap: data.isNotEmpty
@@ -271,11 +271,10 @@ class PaymentScreen extends ConsumerWidget {
                                       formData: formKey.currentState!.value)
                                   .then((value) {
                                 if (value == true) {
-                                  // showToast(msg: "Successfull");
                                   EasyLoading.showSuccess(
                                       'Transaction Success!');
+                                  Navigator.pop(context);
                                 } else {
-                                  // showToast(msg: "Transaction fail");
                                   EasyLoading.showError('Transaction Failed');
                                 }
                               });

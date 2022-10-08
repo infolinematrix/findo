@@ -14,6 +14,9 @@ class TransactionsModel {
   String txnType;
 
   @Index()
+  String txnMode;
+
+  @Index()
   @Property(type: PropertyType.date)
   DateTime? txnDate;
 
@@ -23,7 +26,7 @@ class TransactionsModel {
   String? narration;
 
   @Property(type: PropertyType.date)
-  DateTime? createdOn = DateTime.now();
+  DateTime? createdOn = DateTime.now().toLocal();
 
   TransactionsModel({
     this.id = 0,
@@ -31,6 +34,7 @@ class TransactionsModel {
     this.scrollNo = 0,
     this.amount = 0.00,
     this.txnType = 'DR',
+    this.txnMode = 'PAYMENT',
     this.description,
     this.txnDate,
     this.createdOn,

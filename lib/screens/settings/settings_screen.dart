@@ -22,113 +22,117 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          FormBuilder(
-            key: formKey,
-            onChanged: () {
-              formKey.currentState!.save();
-              debugPrint(formKey.currentState!.value.toString());
-            },
-            child: Padding(
-              padding: EdgeInsets.all(16.0.sp),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Settings",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  UIHelper.verticalSpaceMedium(),
-                  FormBuilderTextField(
-                    name: 'name',
-                    style: inputTextStyle,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.max(70),
-                    ]),
-                    decoration: const InputDecoration(
-                      labelText: 'Your Name',
+          child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FormBuilder(
+              key: formKey,
+              onChanged: () {
+                formKey.currentState!.save();
+                debugPrint(formKey.currentState!.value.toString());
+              },
+              child: Padding(
+                padding: EdgeInsets.all(16.0.sp),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Settings",
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    textCapitalization: TextCapitalization.words,
-                  ),
-                  UIHelper.verticalSpaceMedium(),
-                  FormBuilderDropdown(
-                    style: inputTextStyle,
-                    name: 'currency',
-                    decoration: const InputDecoration(
-                      labelText: 'Currency',
+                    UIHelper.verticalSpaceMedium(),
+                    FormBuilderTextField(
+                      name: 'name',
+                      style: inputTextStyle,
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                        FormBuilderValidators.max(70),
+                      ]),
+                      decoration: const InputDecoration(
+                        labelText: 'Your Name',
+                      ),
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
+                      textCapitalization: TextCapitalization.words,
                     ),
-                    validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required()]),
-                    items: currencies
-                        .map((currency) => DropdownMenuItem(
-                              alignment: AlignmentDirectional.centerStart,
-                              value: currency['code'],
-                              child: Text(currency['name']),
-                            ))
-                        .toList(),
-                    onChanged: (val) {},
-                    valueTransformer: (val) => val?.toString(),
-                  ),
-                  UIHelper.verticalSpaceMedium(),
-                  FormBuilderDropdown(
-                    style: inputTextStyle,
-                    name: 'dateFormat',
-                    decoration: const InputDecoration(
-                      labelText: 'Date Format',
+                    UIHelper.verticalSpaceMedium(),
+                    FormBuilderDropdown(
+                      style: inputTextStyle,
+                      name: 'currency',
+                      decoration: const InputDecoration(
+                        labelText: 'Currency',
+                      ),
+                      validator: FormBuilderValidators.compose(
+                          [FormBuilderValidators.required()]),
+                      items: currencies
+                          .map((currency) => DropdownMenuItem(
+                                alignment: AlignmentDirectional.centerStart,
+                                value: currency['code'],
+                                child: Text(currency['name']),
+                              ))
+                          .toList(),
+                      onChanged: (val) {},
+                      valueTransformer: (val) => val?.toString(),
                     ),
-                    validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required()]),
-                    items: dateFormat
-                        .map((dateFormat) => DropdownMenuItem(
-                              alignment: AlignmentDirectional.centerStart,
-                              value: dateFormat,
-                              child: Text(dateFormat),
-                            ))
-                        .toList(),
-                    onChanged: (val) {},
-                    valueTransformer: (val) => val?.toString(),
-                  ),
-                  UIHelper.verticalSpaceLarge(),
-                  FormButton(
-                      text: const Text("SUBMIT"),
-                      onTap: () async {
-                        if (formKey.currentState?.saveAndValidate() ?? false) {
-                          ref
-                              .watch(createSettings(formKey.currentState!.value)
-                                  .future)
-                              .then((value) {
-                            if (value == true) {
-                              showToast(msg: 'Settings updated!');
-                              Navigator.pushReplacementNamed(
-                                  context, Routes.home);
-                            } else {
-                              showToast(msg: 'Something went wrong!');
-                            }
-                          });
-                        } else {
-                          debugPrint(formKey.currentState?.value.toString());
-                          showToast(msg: 'validation failed');
-                        }
-                      }),
-                ],
+                    UIHelper.verticalSpaceMedium(),
+                    FormBuilderDropdown(
+                      style: inputTextStyle,
+                      name: 'dateFormat',
+                      decoration: const InputDecoration(
+                        labelText: 'Date Format',
+                      ),
+                      validator: FormBuilderValidators.compose(
+                          [FormBuilderValidators.required()]),
+                      items: dateFormat
+                          .map((dateFormat) => DropdownMenuItem(
+                                alignment: AlignmentDirectional.centerStart,
+                                value: dateFormat,
+                                child: Text(dateFormat),
+                              ))
+                          .toList(),
+                      onChanged: (val) {},
+                      valueTransformer: (val) => val?.toString(),
+                    ),
+                    UIHelper.verticalSpaceLarge(),
+                    FormButton(
+                        text: const Text("SUBMIT"),
+                        onTap: () async {
+                          if (formKey.currentState?.saveAndValidate() ??
+                              false) {
+                            ref
+                                .watch(
+                                    createSettings(formKey.currentState!.value)
+                                        .future)
+                                .then((value) {
+                              if (value == true) {
+                                showToast(msg: 'Settings updated!');
+                                Navigator.pushReplacementNamed(
+                                    context, Routes.home);
+                              } else {
+                                showToast(msg: 'Something went wrong!');
+                              }
+                            });
+                          } else {
+                            debugPrint(formKey.currentState?.value.toString());
+                            showToast(msg: 'validation failed');
+                          }
+                        }),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            color: AppColors.lightGrey,
-            child: Padding(
-              padding: EdgeInsets.all(16.0.sp),
-              child: const Text("Application settings"),
+            Container(
+              color: AppColors.lightGrey,
+              child: Padding(
+                padding: EdgeInsets.all(16.0.sp),
+                child: const Text("Application settings"),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       )),
     );
   }

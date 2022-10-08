@@ -16,6 +16,7 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'data/models/accounts_model.dart';
 import 'data/models/ledger_model.dart';
+import 'data/models/scroll_model.dart';
 import 'data/models/settings_model.dart';
 import 'data/models/transactions_model.dart';
 
@@ -25,7 +26,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8080568095172796682),
       name: 'AccountsModel',
-      lastPropertyId: const IdUid(8, 6381893473725467657),
+      lastPropertyId: const IdUid(13, 5693908136639282277),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -66,7 +67,32 @@ final _entities = <ModelEntity>[
             type: 11,
             flags: 520,
             indexId: const IdUid(6, 1001218422888843300),
-            relationTarget: 'LedgerModel')
+            relationTarget: 'LedgerModel'),
+        ModelProperty(
+            id: const IdUid(9, 1240485944357317749),
+            name: 'isVisible',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 4940136979261597881),
+            name: 'allowReceipt',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 2751903627924274688),
+            name: 'allowPayment',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 1130350582867143436),
+            name: 'allowTransfer',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 5693908136639282277),
+            name: 'openingBalance',
+            type: 8,
+            flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
@@ -98,7 +124,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 3111440568252014630),
       name: 'TransactionsModel',
-      lastPropertyId: const IdUid(13, 6739219775410121101),
+      lastPropertyId: const IdUid(14, 1567056385331140227),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -149,14 +175,20 @@ final _entities = <ModelEntity>[
             id: const IdUid(13, 6739219775410121101),
             name: 'narration',
             type: 9,
-            flags: 0)
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(14, 1567056385331140227),
+            name: 'txnMode',
+            type: 9,
+            flags: 2048,
+            indexId: const IdUid(15, 6655853337755261551))
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[]),
   ModelEntity(
       id: const IdUid(4, 6456388099575701592),
       name: 'LedgerModel',
-      lastPropertyId: const IdUid(9, 2012658583602722140),
+      lastPropertyId: const IdUid(10, 8356077043540955942),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -185,13 +217,37 @@ final _entities = <ModelEntity>[
             id: const IdUid(9, 2012658583602722140),
             name: 'isSystem',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 8356077043540955942),
+            name: 'isVisible',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[
         ModelBacklink(
             name: 'accounts', srcEntity: 'AccountsModel', srcField: '')
-      ])
+      ]),
+  ModelEntity(
+      id: const IdUid(5, 8539384137577777432),
+      name: 'ScrollModel',
+      lastPropertyId: const IdUid(6, 1000014282862274742),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3883337206629247657),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(6, 1000014282862274742),
+            name: 'slno',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[])
 ];
 
 /// Open an ObjectBox store with the model declared in this file.
@@ -214,8 +270,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(4, 6456388099575701592),
-      lastIndexId: const IdUid(14, 8529450228772212183),
+      lastEntityId: const IdUid(5, 8539384137577777432),
+      lastIndexId: const IdUid(15, 6655853337755261551),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
@@ -234,7 +290,11 @@ ModelDefinition getObjectBoxModel() {
         560121976424051924,
         7927307665217286980,
         5008846497105979365,
-        2740250277629716057
+        2740250277629716057,
+        8898934310129591389,
+        1583887717524046253,
+        876536127755102342,
+        8507925181080087548
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -252,7 +312,7 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (AccountsModel object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(9);
+          fbb.startTable(14);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addBool(2, object.isActive);
@@ -260,6 +320,11 @@ ModelDefinition getObjectBoxModel() {
           fbb.addFloat64(5, object.budget);
           fbb.addInt64(6, object.createdOn?.millisecondsSinceEpoch);
           fbb.addInt64(7, object.ledger.targetId);
+          fbb.addBool(8, object.isVisible);
+          fbb.addBool(9, object.allowReceipt);
+          fbb.addBool(10, object.allowPayment);
+          fbb.addBool(11, object.allowTransfer);
+          fbb.addFloat64(12, object.openingBalance);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -276,6 +341,16 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 8),
               isSystem: const fb.BoolReader()
                   .vTableGetNullable(buffer, rootOffset, 10),
+              isVisible: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 20),
+              allowPayment: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 24),
+              allowReceipt: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 22),
+              allowTransfer: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 26),
+              openingBalance: const fb.Float64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 28),
               createdOn: createdOnValue == null
                   ? null
                   : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
@@ -333,7 +408,8 @@ ModelDefinition getObjectBoxModel() {
           final narrationOffset = object.narration == null
               ? null
               : fbb.writeString(object.narration!);
-          fbb.startTable(14);
+          final txnModeOffset = fbb.writeString(object.txnMode);
+          fbb.startTable(15);
           fbb.addInt64(0, object.id);
           fbb.addOffset(3, descriptionOffset);
           fbb.addInt64(5, object.txnDate?.millisecondsSinceEpoch);
@@ -343,6 +419,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(10, object.scrollNo);
           fbb.addInt64(11, object.account);
           fbb.addOffset(12, narrationOffset);
+          fbb.addOffset(13, txnModeOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -363,6 +440,8 @@ ModelDefinition getObjectBoxModel() {
                   const fb.Float64Reader().vTableGet(buffer, rootOffset, 22, 0),
               txnType: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 20, ''),
+              txnMode: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 30, ''),
               description: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 10),
               txnDate: txnDateValue == null
@@ -390,12 +469,13 @@ ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (LedgerModel object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(10);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addBool(3, object.isActive);
           fbb.addInt64(7, object.createdOn?.millisecondsSinceEpoch);
           fbb.addBool(8, object.isSystem);
+          fbb.addBool(9, object.isVisible);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -410,6 +490,8 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 6, ''),
               isActive: const fb.BoolReader()
                   .vTableGetNullable(buffer, rootOffset, 10),
+              isVisible: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 22),
               isSystem: const fb.BoolReader()
                   .vTableGetNullable(buffer, rootOffset, 20))
             ..createdOn = createdOnValue == null
@@ -421,6 +503,33 @@ ModelDefinition getObjectBoxModel() {
               RelInfo<AccountsModel>.toOneBacklink(
                   8, object.id, (AccountsModel srcObject) => srcObject.ledger),
               store.box<LedgerModel>());
+          return object;
+        }),
+    ScrollModel: EntityDefinition<ScrollModel>(
+        model: _entities[4],
+        toOneRelations: (ScrollModel object) => [],
+        toManyRelations: (ScrollModel object) => {},
+        getId: (ScrollModel object) => object.id,
+        setId: (ScrollModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (ScrollModel object, fb.Builder fbb) {
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(5, object.slno);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = ScrollModel(
+              slno: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 14))
+            ..id =
+                const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
+
           return object;
         })
   };
@@ -457,6 +566,26 @@ class AccountsModel_ {
   /// see [AccountsModel.ledger]
   static final ledger = QueryRelationToOne<AccountsModel, LedgerModel>(
       _entities[0].properties[6]);
+
+  /// see [AccountsModel.isVisible]
+  static final isVisible =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[7]);
+
+  /// see [AccountsModel.allowReceipt]
+  static final allowReceipt =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[8]);
+
+  /// see [AccountsModel.allowPayment]
+  static final allowPayment =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[9]);
+
+  /// see [AccountsModel.allowTransfer]
+  static final allowTransfer =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[10]);
+
+  /// see [AccountsModel.openingBalance]
+  static final openingBalance =
+      QueryDoubleProperty<AccountsModel>(_entities[0].properties[11]);
 }
 
 /// [SettingsModel] entity fields to define ObjectBox queries.
@@ -511,6 +640,10 @@ class TransactionsModel_ {
   /// see [TransactionsModel.narration]
   static final narration =
       QueryStringProperty<TransactionsModel>(_entities[2].properties[8]);
+
+  /// see [TransactionsModel.txnMode]
+  static final txnMode =
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[9]);
 }
 
 /// [LedgerModel] entity fields to define ObjectBox queries.
@@ -534,4 +667,19 @@ class LedgerModel_ {
   /// see [LedgerModel.isSystem]
   static final isSystem =
       QueryBooleanProperty<LedgerModel>(_entities[3].properties[4]);
+
+  /// see [LedgerModel.isVisible]
+  static final isVisible =
+      QueryBooleanProperty<LedgerModel>(_entities[3].properties[5]);
+}
+
+/// [ScrollModel] entity fields to define ObjectBox queries.
+class ScrollModel_ {
+  /// see [ScrollModel.id]
+  static final id =
+      QueryIntegerProperty<ScrollModel>(_entities[4].properties[0]);
+
+  /// see [ScrollModel.slno]
+  static final slno =
+      QueryIntegerProperty<ScrollModel>(_entities[4].properties[1]);
 }

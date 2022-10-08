@@ -14,10 +14,15 @@ final yesNo = [
   {'key': false, 'value': 'No'}
 ];
 
-final ledgerType = [
+final List<Map<String, dynamic>> ledgerType = [
   {'code': 'INCOME', 'name': 'Income'},
   {'code': 'EXPENDITURE', 'name': 'Expenditure'},
   {'code': 'BANK', 'name': 'Bank Account'},
   {'code': 'DEBTORS', 'name': 'Sundry Debtors'},
   {'code': 'CREDITORS', 'name': 'Sundry Creditors'},
+];
+
+final List<Map<String, dynamic>> transferMode = [
+  {'code': 1, 'name': 'Cash Deposit to Bank'},
+  {'code': 2, 'name': 'Cash Withdrawl from Bank'},
 ];

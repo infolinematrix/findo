@@ -55,7 +55,7 @@ class AppPages {
             return PaymentScreen(account: settings.arguments as AccountsModel);
 
           case Routes.receive:
-            return const ReceiveScreen();
+            return ReceiptScreen(account: settings.arguments as AccountsModel);
 
           case Routes.transfer:
             return const TransferScreen();

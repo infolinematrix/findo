@@ -128,8 +128,8 @@ String strToYear(String dt) {
   return d;
 }
 
-String strToWeekDay(String dt) {
-  DateTime tempDate = DateTime.now();
+String strToWeekDay(DateTime dt) {
+  // DateTime tempDate = DateTime.now();
 
   List<String> dayOfWeek = [
     'Sunday',
@@ -140,7 +140,7 @@ String strToWeekDay(String dt) {
     'Friday',
     'Saturday'
   ];
-  String d = dayOfWeek[tempDate.weekday];
+  String d = dayOfWeek[dt.weekday];
 
   return d;
 }

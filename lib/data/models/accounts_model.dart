@@ -11,8 +11,14 @@ class AccountsModel {
   @Index()
   bool? isActive;
   bool? isSystem;
+  bool? isVisible;
   double? budget;
+  bool? allowReceipt;
+  bool? allowPayment;
+  bool? allowTransfer;
+  double? openingBalance;
 
+  @Property(type: PropertyType.date)
   DateTime? createdOn;
 
   // @Backlink()
@@ -25,6 +31,11 @@ class AccountsModel {
       required this.name,
       this.isActive = true,
       this.isSystem = false,
+      this.isVisible = true,
+      this.allowPayment = true,
+      this.allowReceipt = true,
+      this.allowTransfer = false,
+      this.openingBalance = 0.00,
       this.createdOn,
       this.budget = 0.00});
 }

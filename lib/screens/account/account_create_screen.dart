@@ -118,6 +118,90 @@ class AccountCreateScreen extends ConsumerWidget {
                           Expanded(
                             child: SizedBox(
                               height: inputHeight,
+                              child: FormBuilderTextField(
+                                name: 'openingBalance',
+                                style: inputTextStyle,
+                                decoration: const InputDecoration(
+                                  labelText: 'Opening Balance',
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                ),
+                                keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
+                                textCapitalization: TextCapitalization.words,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      UIHelper.verticalSpaceSmall(),
+                      Text(
+                        "Leave blank if you have unlimited budget",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      UIHelper.verticalSpaceSmall(),
+                      Text(
+                        "Allow Transaction mode",
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      UIHelper.verticalSpaceSmall(),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: inputHeight,
+                              child: FormBuilderCheckbox(
+                                name: 'allowReceipt',
+                                initialValue: true,
+                                title: const Text("Receipt"),
+                                decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 4),
+                                ),
+                              ),
+                            ),
+                          ),
+                          UIHelper.horizontalSpaceSmall(),
+                          Expanded(
+                            child: SizedBox(
+                              height: inputHeight,
+                              child: FormBuilderCheckbox(
+                                name: 'allowPayment',
+                                initialValue: true,
+                                title: const Text("Payment"),
+                                decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 4),
+                                ),
+                              ),
+                            ),
+                          ),
+                          UIHelper.horizontalSpaceSmall(),
+                          Expanded(
+                            child: SizedBox(
+                              height: inputHeight,
+                              child: FormBuilderCheckbox(
+                                name: 'allowTransfer',
+                                initialValue: false,
+                                title: const Text("Transfer"),
+                                decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 4),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      UIHelper.verticalSpaceSmall(),
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: inputHeight,
                               child: FormBuilderCheckbox(
                                 name: 'isActive',
                                 initialValue: true,
@@ -131,11 +215,7 @@ class AccountCreateScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      UIHelper.verticalSpaceSmall(),
-                      Text(
-                        "Leave blank if you have unlimited budget",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
+
                       UIHelper.verticalSpaceExtraLarge(),
                       FormButton(
                           text: const Text("SUBMIT"),

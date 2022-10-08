@@ -18,6 +18,6 @@ abstract class Routes {
   static const accountTransaction = '/account_transactions';
 
   static const payment = '/payment';
-  static const receive = '/receive';
+  static const receive = '/receipt';
   static const transfer = '/transfer';
 }

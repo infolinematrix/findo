@@ -1,48 +1,28 @@
+import 'package:finsoft2/data/models/transactions_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/index.dart';
 
-class TransactionItem extends ConsumerWidget {
-  final DateTime? txnDate;
-  final double amount;
-  final String? account;
-  final String? description;
-  final String? narration;
-
-  final String? txnType;
-  final String? txnDrCr;
-  final String? txnMode;
-  const TransactionItem(
-      {Key? key,
-      required this.txnDate,
-      required this.amount,
-      this.account,
-      this.description,
-      this.txnType,
-      this.txnDrCr,
-      this.txnMode,
-      this.narration})
+class TransactionWidget extends ConsumerWidget {
+  const TransactionWidget({Key? key, required this.txn, this.color})
       : super(key: key);
+  final TransactionsModel txn;
+  final Color? color;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String day;
-    final String month;
-    final String year;
-    final String weekday;
-
-    day = txnDate!.day.toString();
-    month = txnDate!.month.toString();
-    year = txnDate!.year.toString();
-    weekday = strToWeekDay(txnDate!);
+    String day = txn.txnDate!.day.toString();
+    String month = txn.txnDate!.month.toString();
+    String year = txn.txnDate!.year.toString();
+    String weekday = strToWeekDay(txn.txnDate!);
 
     return Container(
       height: 50.0.sp,
       margin: EdgeInsets.only(bottom: 8.0.sp),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color ?? Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(8.sp),
         ),
@@ -60,9 +40,9 @@ class TransactionItem extends ConsumerWidget {
                   child: Container(
                     padding: EdgeInsets.all(4.0.sp),
                     decoration: BoxDecoration(
-                      color: txnType == 'DR'
-                          ? Colors.blue.shade100
-                          : Colors.red.shade100,
+                      color: txn.txnType == 'DR'
+                          ? Colors.lightBlue.shade100
+                          : Colors.lightGreen.shade100,
                       borderRadius: BorderRadius.all(
                         Radius.circular(8.sp),
                       ),
@@ -103,15 +83,12 @@ class TransactionItem extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  child: Text("$narration",
+                  child: Text(txn.narration.toString().trim(),
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontWeight: FontWeight.bold)),
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith()),
                 ),
                 Flexible(
-                  child: Text(description ?? 'No description',
+                  child: Text(txn.description ?? 'No description',
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall),
                 ),
@@ -124,12 +101,13 @@ class TransactionItem extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text("${txnType == 'DR' ? '-' : '+'} ${formatCurrency(amount)}",
+                Text(
+                    "${txn.txnType == 'DR' ? '-' : '+'} ${formatCurrency(txn.amount)}",
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1!
                         .copyWith(fontWeight: FontWeight.bold)),
-                Text("$txnType", style: Theme.of(context).textTheme.bodySmall),
+                Text(txn.txnType, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),

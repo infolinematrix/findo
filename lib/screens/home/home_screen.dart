@@ -209,7 +209,9 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                           Navigator.pushNamed(context, "/ledger_list"),
                       child: const Text("Payment")),
                   OutlinedButton(
-                      onPressed: () => null, child: const Text("Transfer"))
+                      onPressed: () =>
+                          Navigator.pushNamed(context, "/transfer"),
+                      child: const Text("Transfer"))
                 ],
               ),
             ],

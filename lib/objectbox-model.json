@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:8080568095172796682",
-      "lastPropertyId": "8:6381893473725467657",
+      "lastPropertyId": "13:5693908136639282277",
       "name": "AccountsModel",
       "properties": [
         {
@@ -50,6 +50,31 @@
           "flags": 520,
           "indexId": "6:1001218422888843300",
           "relationTarget": "LedgerModel"
+        },
+        {
+          "id": "9:1240485944357317749",
+          "name": "isVisible",
+          "type": 1
+        },
+        {
+          "id": "10:4940136979261597881",
+          "name": "allowReceipt",
+          "type": 1
+        },
+        {
+          "id": "11:2751903627924274688",
+          "name": "allowPayment",
+          "type": 1
+        },
+        {
+          "id": "12:1130350582867143436",
+          "name": "allowTransfer",
+          "type": 1
+        },
+        {
+          "id": "13:5693908136639282277",
+          "name": "openingBalance",
+          "type": 8
         }
       ],
       "relations": []
@@ -82,7 +107,7 @@
     },
     {
       "id": "3:3111440568252014630",
-      "lastPropertyId": "13:6739219775410121101",
+      "lastPropertyId": "14:1567056385331140227",
       "name": "TransactionsModel",
       "properties": [
         {
@@ -138,13 +163,20 @@
           "id": "13:6739219775410121101",
           "name": "narration",
           "type": 9
+        },
+        {
+          "id": "14:1567056385331140227",
+          "name": "txnMode",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "15:6655853337755261551"
         }
       ],
       "relations": []
     },
     {
       "id": "4:6456388099575701592",
-      "lastPropertyId": "9:2012658583602722140",
+      "lastPropertyId": "10:8356077043540955942",
       "name": "LedgerModel",
       "properties": [
         {
@@ -176,13 +208,37 @@
           "id": "9:2012658583602722140",
           "name": "isSystem",
           "type": 1
+        },
+        {
+          "id": "10:8356077043540955942",
+          "name": "isVisible",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:8539384137577777432",
+      "lastPropertyId": "6:1000014282862274742",
+      "name": "ScrollModel",
+      "properties": [
+        {
+          "id": "1:3883337206629247657",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "6:1000014282862274742",
+          "name": "slno",
+          "type": 6
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "4:6456388099575701592",
-  "lastIndexId": "14:8529450228772212183",
+  "lastEntityId": "5:8539384137577777432",
+  "lastIndexId": "15:6655853337755261551",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
@@ -203,7 +259,11 @@
     560121976424051924,
     7927307665217286980,
     5008846497105979365,
-    2740250277629716057
+    2740250277629716057,
+    8898934310129591389,
+    1583887717524046253,
+    876536127755102342,
+    8507925181080087548
   ],
   "retiredRelationUids": [],
   "version": 1

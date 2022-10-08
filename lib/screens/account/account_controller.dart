@@ -1,6 +1,7 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/data/repositories/account_repository.dart';
+import 'package:finsoft2/utils/functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/source/objectstore.dart';
@@ -41,10 +42,16 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
         name: formData['name'].toString().trim(),
         isActive: formData['isActive'] ?? false,
         isSystem: false,
+        createdOn: convertDateToLocal(DateTime.now().toString()),
+        allowPayment: formData['allowPayment'] ?? false,
+        allowReceipt: formData['allowReceipt'] ?? false,
+        allowTransfer: formData['allowTransfer'] ?? false,
         budget: formData['budget'] != null
             ? double.parse(formData['budget'].toString()).toDouble()
             : 0.0,
-        createdOn: DateTime.now(),
+        openingBalance: formData['openingBalance'] != null
+            ? double.parse(formData['budget'].toString()).toDouble()
+            : 0.0,
       );
 
       final ledger = ledgerBox.get(formData['ledgerId']);
@@ -57,7 +64,6 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
 
       return true;
     } catch (e) {
-      print(e.toString());
       return false;
     }
   }
