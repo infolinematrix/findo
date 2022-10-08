@@ -868,6 +868,25 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                 //---------------
 
                 SliverToBoxAdapter(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/ledger_list"),
+                          child: const Text("Receipt")),
+                      OutlinedButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/ledger_list"),
+                          child: const Text("Payment")),
+                      OutlinedButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/transfer"),
+                          child: const Text("Transfer"))
+                    ],
+                  ),
+                ),
+                SliverToBoxAdapter(
                   child: Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: 8.0.sp, vertical: 8.0.sp),
