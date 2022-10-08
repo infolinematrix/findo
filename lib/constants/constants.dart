@@ -7,7 +7,7 @@ final List<Map<String, dynamic>> currencies = [
   {'code': 'baht', 'name': 'Baht', 'icon': IcoFontIcons.baht},
 ];
 
-final dateFormat = ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD'];
+final dateFormat = ['dd-MM-yyyy', 'MM-dd-yyyy', 'yyyy-MM-dd'];
 
 final yesNo = [
   {'key': true, 'value': 'Yes'},

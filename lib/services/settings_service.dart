@@ -1,9 +1,9 @@
 import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/data/models/scroll_model.dart';
 import 'package:finsoft2/data/source/objectstore.dart';
+import 'package:finsoft2/objectbox.g.dart';
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:objectbox/objectbox.dart';
 
 import '../constants/constants.dart';
 import '../data/models/accounts_model.dart';
@@ -133,14 +133,14 @@ final resetBoxProvider = FutureProvider<bool>((ref) async {
 });
 
 getSetting({required String key}) {
-  // QueryBuilder<SettingsModel> builder;
-  // builder =
-  //     objBox!.store.box<SettingsModel>().query(SettingsModel_.key.equals(key));
+  QueryBuilder<SettingsModel> builder;
+  builder =
+      objBox!.store.box<SettingsModel>().query(SettingsModel_.key.equals(key));
 
-  // Query<SettingsModel> query = builder.build();
+  Query<SettingsModel> query = builder.build();
 
-  // SettingsModel data = query.findFirst()!;
-  // return data;
+  SettingsModel data = query.findFirst()!;
+  return data;
 }
 
 currencySymbol() {

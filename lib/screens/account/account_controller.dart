@@ -1,10 +1,9 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/data/repositories/account_repository.dart';
+import 'package:finsoft2/data/source/objectstore.dart';
 import 'package:finsoft2/utils/functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../data/source/objectstore.dart';
 
 final accountBox = objBox!.store.box<AccountsModel>();
 final ledgerBox = objBox!.store.box<LedgerModel>();
@@ -28,13 +27,6 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
 
-  // accountsByLedger({required ledgerId}) {
-  //   final List<AccountsModel> data =
-  //       AccountRepository().listByLedger(ledgerId: ledgerId);
-
-  //   state = AsyncValue<List<AccountsModel>>.data(data);
-  // }
-
   //--CREATE
   Future<bool> create({required Map<String, dynamic> formData}) async {
     try {
@@ -50,7 +42,7 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
             ? double.parse(formData['budget'].toString()).toDouble()
             : 0.0,
         openingBalance: formData['openingBalance'] != null
-            ? double.parse(formData['budget'].toString()).toDouble()
+            ? double.parse(formData['openingBalance'].toString()).toDouble()
             : 0.0,
       );
 

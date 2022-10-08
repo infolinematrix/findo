@@ -1,5 +1,6 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
+import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
+import 'package:intl/intl.dart';
 import '../../theme/constants.dart';
 import '../../utils/index.dart';
 import '../../widgets/index.dart';
@@ -72,6 +74,9 @@ class ReceiptScreen extends ConsumerWidget {
                             initialValue: DateTime.now().toUtc(),
                             inputType: InputType.date,
                             style: inputTextStyle,
+                            format: DateFormat(
+                              getSetting(key: 'dateFormat').value.toString(),
+                            ),
                             decoration: InputDecoration(
                               labelText: 'Date',
                               suffixIcon: IconButton(
@@ -155,7 +160,7 @@ class ReceiptScreen extends ConsumerWidget {
                                 borderSide: BorderSide(color: Colors.red),
                               ),
                               suffixIcon: IconButton(
-                                icon: const Icon(IcoFontIcons.rupee),
+                                icon: Icon(currencySymbol()),
                                 onPressed: () {},
                               ),
                             ),

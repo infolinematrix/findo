@@ -1,6 +1,8 @@
 import 'package:finsoft2/constants/constants.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
+import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/constants.dart';
+import 'package:finsoft2/theme/styles.dart';
 import 'package:finsoft2/utils/index.dart';
 import 'package:finsoft2/widgets/index.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
+import 'package:intl/intl.dart';
 
 class TransferScreen extends ConsumerStatefulWidget {
   const TransferScreen({Key? key}) : super(key: key);
@@ -90,26 +93,32 @@ class _TransferScreenState extends ConsumerState<TransferScreen> {
                   UIHelper.verticalSpaceSmall(),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
-                    child: SizedBox(
-                      height: inputHeight,
-                      child: FormBuilderDropdown<int>(
-                        name: 'bank',
-                        initialValue: data[0].id,
-                        decoration: InputDecoration(
-                          labelText: title,
-                        ),
-                        style: inputTextStyle,
-                        validator: FormBuilderValidators.compose(
-                            [FormBuilderValidators.required()]),
-                        items: data
-                            .map((item) => DropdownMenuItem(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  value: item.id,
-                                  child: Text(item.name),
-                                ))
-                            .toList(),
-                      ),
-                    ),
+                    child: data.isNotEmpty
+                        ? SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderDropdown(
+                              name: 'bank',
+                              initialValue: data.isNotEmpty ? data[0].id : '',
+                              decoration: InputDecoration(
+                                labelText: title,
+                              ),
+                              style: inputTextStyle,
+                              validator: FormBuilderValidators.compose(
+                                  [FormBuilderValidators.required()]),
+                              items: data
+                                  .map((item) => DropdownMenuItem(
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
+                                        value: item.id,
+                                        child: Text(item.name),
+                                      ))
+                                  .toList(),
+                            ),
+                          )
+                        : const InfoBox(
+                            text: Text("Please add a Bank account"),
+                            color: AppColors.darkOrage,
+                          ),
                   ),
                   UIHelper.verticalSpaceSmall(),
                   Padding(
@@ -134,7 +143,7 @@ class _TransferScreenState extends ConsumerState<TransferScreen> {
                                   borderSide: BorderSide(color: Colors.red),
                                 ),
                                 suffixIcon: IconButton(
-                                  icon: const Icon(IcoFontIcons.rupee),
+                                  icon: Icon(currencySymbol()),
                                   onPressed: () {},
                                 ),
                               ),
@@ -155,13 +164,13 @@ class _TransferScreenState extends ConsumerState<TransferScreen> {
                                   DatePickerEntryMode.calendarOnly,
                               initialValue: DateTime.now().toUtc(),
                               inputType: InputType.date,
+                              format: DateFormat(
+                                getSetting(key: 'dateFormat').value.toString(),
+                              ),
                               style: inputTextStyle,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Date',
-                                suffixIcon: IconButton(
-                                  icon: const Icon(IcoFontIcons.calendar),
-                                  onPressed: () {},
-                                ),
+                                suffixIcon: Icon(IcoFontIcons.calendar),
                               ),
                             ),
                           ),
