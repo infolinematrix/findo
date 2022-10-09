@@ -105,7 +105,7 @@ final thisDayDataProvider = Provider((ref) {
   return data;
 });
 
-//======================================================================
+//=============================================================--=========
 final homeDataProvider =
     StateNotifierProvider.autoDispose<HomeNotifier, AsyncValue<InitDataModel>>(
         (ref) {
