@@ -216,7 +216,7 @@ class TransactionsState
     var scrollNo = await TransactionRepository().getScroll();
     var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
     try {
-      //--Cash Deposit to Bank
+      //--Cash Deposit to Bank --
       if (formData['txnType'] == 1) {
         /**
          * DEBIT
