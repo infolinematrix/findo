@@ -25,7 +25,7 @@ final thisDayTransactionsProvider = Provider.autoDispose((ref) {
   return transactions;
 });
 
-final thisWeekDataProvider = Provider((ref) {
+final thisWeekDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllWithDateRange(
       startDate: firstDayOfWeek(), endtDate: lastDayOfWeek());
   double income = 0.00;
@@ -45,7 +45,7 @@ final thisWeekDataProvider = Provider((ref) {
   return data;
 });
 
-final thisMonthDataProvider = Provider((ref) {
+final thisMonthDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllWithDateRange(
       startDate: firstDayOfMonth(), endtDate: lastDayOfMonth());
 
@@ -66,7 +66,7 @@ final thisMonthDataProvider = Provider((ref) {
   return data;
 });
 
-final thisYearDataProvider = Provider((ref) {
+final thisYearDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllWithDateRange(
       startDate: firstDayOfYear(), endtDate: lastDayOfYear());
 
@@ -87,7 +87,7 @@ final thisYearDataProvider = Provider((ref) {
   return data;
 });
 
-final thisDayDataProvider = Provider((ref) {
+final thisDayDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllToday();
   double income = 0.00;
   double expenditure = 0.00;
