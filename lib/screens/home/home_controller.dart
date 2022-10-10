@@ -18,7 +18,7 @@ class InitDataModel {
       required this.thisTransactions});
 }
 
-final thisDayTransactionsProvider = Provider((ref) {
+final thisDayTransactionsProvider = Provider.autoDispose((ref) {
   List<TransactionsModel> transactions =
       TransactionService.instance.getAllToday();
 
@@ -120,11 +120,11 @@ class HomeNotifier extends StateNotifier<AsyncValue<InitDataModel>> {
 
   void loadData() {
     final alldata = InitDataModel(
-      thisDay: ref.watch(thisDayDataProvider),
-      thisWeek: ref.watch(thisWeekDataProvider),
-      thisMonth: ref.watch(thisMonthDataProvider),
-      thisYear: ref.watch(thisYearDataProvider),
-      thisTransactions: ref.watch(thisDayTransactionsProvider),
+      thisDay: ref.read(thisDayDataProvider),
+      thisWeek: ref.read(thisWeekDataProvider),
+      thisMonth: ref.read(thisMonthDataProvider),
+      thisYear: ref.read(thisYearDataProvider),
+      thisTransactions: ref.read(thisDayTransactionsProvider),
     );
 
     state = AsyncValue<InitDataModel>.data(alldata);

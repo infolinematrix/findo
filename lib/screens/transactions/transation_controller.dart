@@ -124,6 +124,7 @@ class TransactionsState
 
       objBox!.store.awaitAsyncSubmitted();
       getAll(account);
+
       EasyLoading.dismiss();
       return true;
     } catch (e) {

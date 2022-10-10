@@ -1,4 +1,5 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
+import 'package:finsoft2/screens/home/home_controller.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
 import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/colors.dart';
@@ -278,6 +279,12 @@ class PaymentScreen extends ConsumerWidget {
                                 if (value == true) {
                                   EasyLoading.showSuccess(
                                       'Transaction Success!');
+
+                                  //--Call Home page Data loader
+                                  ref
+                                      .read(homeDataProvider.notifier)
+                                      .loadData();
+
                                   Navigator.pop(context);
                                 } else {
                                   EasyLoading.showError('Transaction Failed');
