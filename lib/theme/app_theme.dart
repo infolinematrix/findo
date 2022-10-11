@@ -6,87 +6,42 @@ ThemeData appTheme() {
   return ThemeData(
     scaffoldBackgroundColor: const Color.fromARGB(255, 237, 237, 237),
     // primarySwatch: Colors.yellow,
+    unselectedWidgetColor: Colors.black,
     brightness: Brightness.light,
-    highlightColor: Colors.transparent,
+    // highlightColor: Colors.transparent,
+
     appBarTheme: appBarTheme(),
     tabBarTheme: tabTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     inputDecorationTheme: inputTheme(),
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.android: ZoomPageTransitionsBuilder(),
-      },
+    checkboxTheme: CheckboxThemeData(
+      checkColor: MaterialStateProperty.all(Colors.white),
+      fillColor: MaterialStateProperty.all(AppColors.black2),
+      side: const BorderSide(
+        color: Colors.black, //your desire colour here
+        width: 0,
+      ),
     ),
     cardColor: Colors.white,
     textTheme: TextTheme(
-      //   headline1: TextStyle(
-      //     fontSize: 24.0.sp,
-      //     fontWeight: FontWeight.bold,
-      //     color: Colors.black,
-      //   ),
-      //   headline2: TextStyle(
-      //     fontSize: 18.sp,
-      //     fontWeight: FontWeight.bold,
-      //     color: Colors.black,
-      //   ),
-      //   headline3: TextStyle(
-      //     fontSize: 20.0.sp,
-      //     fontWeight: FontWeight.bold,
-      //     color: Colors.black,
-      //   ),
-      //   headline4: TextStyle(
-      //     fontSize: 18.0.sp,
-      //     fontWeight: FontWeight.bold,
-      //     color: Colors.black,
-      //   ),
-      //   headline5: TextStyle(
-      //     fontSize: 16.0.sp,
-      //     fontWeight: FontWeight.w400,
-      //     color: Colors.black,
-      //   ),
-      //   headline6: TextStyle(
-      //     fontSize: 14.0.sp,
-      //     fontWeight: FontWeight.w500,
-      //     color: Colors.black,
-      //   ),
-      //   subtitle1: TextStyle(
-      //     fontSize: 12.0.sp,
-      //     fontWeight: FontWeight.w400,
-      //     color: Colors.black,
-      //   ),
-      //   subtitle2: TextStyle(
-      //     fontSize: 13.0.sp,
-      //     fontWeight: FontWeight.w500,
-      //     color: Colors.black,
-      //   ),
-      //   bodyText1: TextStyle(
-      //     fontSize: 12.0.sp,
-      //     fontWeight: FontWeight.w600,
-      //     color: Colors.black,
-      //   ),
-      //   bodyText2: TextStyle(
-      //     fontSize: 12.0.sp,
-      //     fontWeight: FontWeight.w400,
-      //     color: Colors.black,
-      //   ),
       button: TextStyle(
         fontSize: 14.0.sp,
         fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
-      //   labelMedium: TextStyle(
-      //     fontSize: 12.0.sp,
-      //     fontWeight: FontWeight.normal,
-      //     color: Colors.black,
-      //   ),
-      //   overline: TextStyle(
-      //     fontSize: 10.0.sp,
-      //     fontWeight: FontWeight.normal,
-      //     color: Colors.black,
-      //   ),
     ),
   );
 }
+
+InputDecoration checkboxDecoration = const InputDecoration(
+  contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+  fillColor: Colors.transparent,
+  filled: true,
+  isDense: true,
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.transparent, width: 0),
+  ),
+);
 
 InputDecorationTheme inputTheme() {
   return InputDecorationTheme(

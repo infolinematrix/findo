@@ -1,4 +1,3 @@
-import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/data/models/scroll_model.dart';
 import 'package:finsoft2/data/source/objectstore.dart';
 import 'package:finsoft2/objectbox.g.dart';
@@ -30,7 +29,7 @@ final createSettings = FutureProvider.autoDispose
 
   try {
     final settingBox = objBox!.store.box<SettingsModel>();
-    final ledgerBox = objBox!.store.box<LedgerModel>();
+
     final accountBox = objBox!.store.box<AccountsModel>();
     final scrollBox = objBox!.store.box<ScrollModel>();
 
@@ -47,56 +46,56 @@ final createSettings = FutureProvider.autoDispose
       /**
        * Creating Ledgers/Groups
        */
-      List<LedgerModel> ledgers = [
-        LedgerModel(
-            name: 'Cash Account',
-            isSystem: true,
-            isActive: true,
-            isVisible: false),
-        LedgerModel(
-            name: 'Bank Account',
-            isSystem: true,
-            isActive: true,
-            isVisible: true),
-        LedgerModel(
-            name: 'Household Expenses',
-            isSystem: false,
-            isActive: true,
-            isVisible: true),
-        LedgerModel(
-            name: 'Bills', isSystem: false, isActive: true, isVisible: true),
-        LedgerModel(
-            name: 'Loans', isSystem: false, isActive: true, isVisible: true),
-        LedgerModel(
-            name: 'Entertainment',
-            isSystem: false,
-            isActive: true,
-            isVisible: true),
-        LedgerModel(
-            name: 'Travelling',
-            isSystem: false,
-            isActive: true,
-            isVisible: true),
-        LedgerModel(
-            name: 'Food & Beverage',
-            isSystem: false,
-            isActive: true,
-            isVisible: true),
-      ];
+      // List<LedgerModel> ledgers = [
+      //   LedgerModel(
+      //       name: 'Cash Account',
+      //       isSystem: true,
+      //       isActive: true,
+      //       isVisible: false),
+      //   LedgerModel(
+      //       name: 'Bank Account',
+      //       isSystem: true,
+      //       isActive: true,
+      //       isVisible: true),
+      //   LedgerModel(
+      //       name: 'Household Expenses',
+      //       isSystem: false,
+      //       isActive: true,
+      //       isVisible: true),
+      //   LedgerModel(
+      //       name: 'Bills', isSystem: false, isActive: true, isVisible: true),
+      //   LedgerModel(
+      //       name: 'Loans', isSystem: false, isActive: true, isVisible: true),
+      //   LedgerModel(
+      //       name: 'Entertainment',
+      //       isSystem: false,
+      //       isActive: true,
+      //       isVisible: true),
+      //   LedgerModel(
+      //       name: 'Travelling',
+      //       isSystem: false,
+      //       isActive: true,
+      //       isVisible: true),
+      //   LedgerModel(
+      //       name: 'Food & Beverage',
+      //       isSystem: false,
+      //       isActive: true,
+      //       isVisible: true),
+      // ];
 
-      ledgerBox.putMany(ledgers);
-      objBox!.store.awaitAsyncSubmitted();
+      // ledgerBox.putMany(ledgers);
+      // objBox!.store.awaitAsyncSubmitted();
 
       /**
        * Creating Accounts
        */
-      AccountsModel accounts = AccountsModel(
-          name: 'Cash', isSystem: true, isVisible: false, allowTransfer: true);
+      // AccountsModel accounts = AccountsModel(
+      //     name: 'Cash', isSystem: true, isVisible: false, allowTransfer: true);
 
-      final ledger = ledgerBox.get(1);
-      accounts.ledger.target = ledger; //--Set Cash Ledger
-      accountBox.put(accounts);
-      objBox!.store.awaitAsyncSubmitted();
+      // final ledger = ledgerBox.get(1);
+      // accounts.ledger.target = ledger; //--Set Cash Ledger
+      // accountBox.put(accounts);
+      // objBox!.store.awaitAsyncSubmitted();
 
       /**
        * Scroll
