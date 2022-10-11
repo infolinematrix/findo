@@ -1,4 +1,3 @@
-import 'package:finsoft2/data/models/ledger_model.dart';
 import 'package:finsoft2/screens/account/account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,20 +6,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/constants.dart';
 
 class AccountListScreen extends ConsumerWidget {
-  const AccountListScreen({Key? key, required this.ledger}) : super(key: key);
-  final LedgerModel ledger;
+  const AccountListScreen({Key? key, this.parent}) : super(key: key);
+  final int? parent;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final accounts = ref.watch(accountProvider(ledger.id));
+    final accounts = ref.watch(accountProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(ledger.name),
+        title: const Text("Parent Name"),
         actions: [
           OutlinedButton(
             onPressed: () => Navigator.pushNamed(context, "/account_create",
-                arguments: ledger),
+                arguments: parent),
             child: const Text("CREATE"),
           ),
         ],
@@ -36,24 +35,26 @@ class AccountListScreen extends ConsumerWidget {
               );
             },
             data: (data) {
-              return ListView.separated(
-                itemCount: data.length,
-                separatorBuilder: (context, index) => Divider(
-                  height: 1.0.h,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    dense: true,
-                    title: Text(
-                      data[index].name,
-                      style: listTileStyle,
-                    ),
-                    onTap: () => Navigator.pushNamed(
-                        context, "/account_transactions",
-                        arguments: data[index]),
-                  );
-                },
-              );
+              return data.isNotEmpty
+                  ? ListView.separated(
+                      itemCount: data.length,
+                      separatorBuilder: (context, index) => Divider(
+                        height: 1.0.h,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          dense: true,
+                          title: Text(
+                            data[index].name,
+                            style: listTileStyle,
+                          ),
+                          onTap: () => Navigator.pushNamed(
+                              context, "/account_transactions",
+                              arguments: data[index]),
+                        );
+                      },
+                    )
+                  : const Text("No Account created yet!");
             },
           ),
         ),

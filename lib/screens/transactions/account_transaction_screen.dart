@@ -20,7 +20,7 @@ class AccountTransactionScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(account.name),
       ),
-      bottomSheet: account.ledger.target!.isSystem == false
+      bottomSheet: false == false
           ? Row(
               children: [
                 Expanded(

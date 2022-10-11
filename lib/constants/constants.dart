@@ -26,3 +26,12 @@ final List<Map<String, dynamic>> transferMode = [
   {'code': 1, 'name': 'Cash Deposit to Bank'},
   {'code': 2, 'name': 'Cash Withdrawl from Bank'},
 ];
+
+//--11/10/2022
+final List<Map<String, dynamic>> accountType = [
+  {'code': 'REVENUE', 'name': 'Revinue'},
+  {'code': 'EXPENSES', 'name': 'Expenses'},
+  {'code': 'ASSETS', 'name': 'Assets'},
+  {'code': 'LIABILITIES', 'name': 'Liabilities'},
+  {'code': 'EQUITY', 'name': 'Equity'},
+];

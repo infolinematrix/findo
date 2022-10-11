@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:finsoft2/data/models/transactions_model.dart';
 import 'package:finsoft2/utils/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
@@ -891,50 +890,55 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OutlinedButton(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, "/ledger_list"),
-                            child: const Text("Receipt")),
+                            onPressed: () => Navigator.pushNamed(
+                                context, "/account_list",
+                                arguments: 0),
+                            child: const Text("Account List")),
                         OutlinedButton(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, "/ledger_list"),
-                            child: const Text("Payment")),
-                        OutlinedButton(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, "/transfer"),
-                            child: const Text("Transfer"))
+                            onPressed: () => Navigator.pushNamed(
+                                context, "/account_create",
+                                arguments: 0),
+                            child: const Text("Account")),
+                        // OutlinedButton                        //     onPressed: () =>
+                        //         Navigator.pushNamed(context, "/ledger_list"),
+                        //     child: const Text("Payment")),
+                        // OutlinedButton(
+                        //     onPressed: () =>
+                        //         Navigator.pushNamed(context, "/transfer"),
+                        //     child: const Text("Transfer"))
                       ],
                     ),
                   ),
 
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 8.0.sp, vertical: 8.0.sp),
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Todays' Transactions",
-                            style: Theme.of(context).textTheme.subtitle2,
-                          ),
-                          ListView.builder(
-                            itemCount: data.thisTransactions.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) {
-                              TransactionsModel txn =
-                                  data.thisTransactions[index];
-                              return TransactionWidget(
-                                txn: txn,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // SliverToBoxAdapter(
+                  //   child: Container(
+                  //     margin: EdgeInsets.symmetric(
+                  //         horizontal: 8.0.sp, vertical: 8.0.sp),
+                  //     width: double.infinity,
+                  //     child: Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       mainAxisAlignment: MainAxisAlignment.start,
+                  //       children: [
+                  //         Text(
+                  //           "Todays' Transactions",
+                  //           style: Theme.of(context).textTheme.subtitle2,
+                  //         ),
+                  //         ListView.builder(
+                  //           itemCount: data.thisTransactions.length,
+                  //           shrinkWrap: true,
+                  //           physics: const NeverScrollableScrollPhysics(),
+                  //           itemBuilder: (BuildContext context, int index) {
+                  //             TransactionsModel txn =
+                  //                 data.thisTransactions[index];
+                  //             return TransactionWidget(
+                  //               txn: txn,
+                  //             );
+                  //           },
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             );
