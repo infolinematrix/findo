@@ -47,8 +47,8 @@ class AppColors {
 
   static const Color deliveryBackColor2 = Color.fromRGBO(97, 85, 204, 0.15);
 
-  static const Color addToCart2 = Color(0xFFFE9C5E);
-  static const Color addToCart1 = Color(0xFFfdcb6e);
+  static const Color listColor1 = lightGrey;
+  static const Color listColor2 = extraLightGrey;
 
   static const Color buyNow1 = Color(0xFFF77777);
   static const Color buyNow2 = Color(0xFFd63031);

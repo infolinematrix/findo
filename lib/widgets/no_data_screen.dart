@@ -1,10 +1,10 @@
 import 'package:finsoft2/utils/index.dart';
-import 'package:finsoft2/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NoDataScreen extends StatelessWidget {
-  const NoDataScreen({Key? key}) : super(key: key);
+  const NoDataScreen({Key? key, this.msg}) : super(key: key);
+  final String? msg;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class NoDataScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox.square(
-              dimension: 100.0.sp,
+              dimension: 70.0.sp,
               child: AspectRatio(
                 aspectRatio: 1.0,
                 child: Image.asset("assets/images/no_data.png"),
@@ -22,16 +22,16 @@ class NoDataScreen extends StatelessWidget {
             ),
             UIHelper.verticalSpaceSmall(),
             Text(
-              "No Data Found",
-              style: Theme.of(context).textTheme.headline6,
+              msg ?? "No Data Found",
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             UIHelper.verticalSpaceMedium(),
             SizedBox(
               width: 100.0.w,
-              height: 34.sp,
-              child: FormButton(
-                  text: const Text("Back"),
-                  onTap: () => Navigator.pop(context)),
+              child: OutlinedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Back"),
+              ),
             )
           ],
         ),

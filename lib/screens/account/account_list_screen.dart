@@ -1,10 +1,12 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_controller.dart';
+import 'package:finsoft2/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../theme/constants.dart';
+import 'components/account_item_widget.dart';
 
 class AccountListScreen extends ConsumerWidget {
   const AccountListScreen({Key? key, this.account}) : super(key: key);
@@ -44,19 +46,14 @@ class AccountListScreen extends ConsumerWidget {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         AccountsModel account = data[index];
-                        return ListTile(
-                          dense: true,
-                          title: Text(
-                            data[index].name,
-                            style: listTileStyle,
-                          ),
-                          onTap: () => account.hasChild == true
-                              ? Navigator.pushNamed(context, "/account_list",
-                                  arguments: {
-                                      'parent': account.id,
-                                      'name': account.name
-                                    })
-                              : null,
+                        return FadeInDown(
+                          duration: Duration(milliseconds: (index + 1) * 100),
+                          child: index % 2 != 0
+                              ? AccountListItemWidget(
+                                  account: account, color: AppColors.listColor1)
+                              : AccountListItemWidget(
+                                  account: account,
+                                  color: AppColors.listColor2),
                         );
                       },
                     )

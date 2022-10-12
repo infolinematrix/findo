@@ -14,6 +14,13 @@ final accountProvider = StateNotifierProvider.autoDispose
   return AccountState(account: account);
 });
 
+final operationalAccounsProvider = StateNotifierProvider.family.autoDispose<
+    OperationalAccountsNotifier,
+    AsyncValue<List<AccountsModel>>,
+    String>((ref, txnType) {
+  return OperationalAccountsNotifier(txnType);
+});
+
 class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   final int account;
   AccountState({required this.account})
@@ -93,13 +100,6 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   }
 }
 
-final operationalAccounsProvider = StateNotifierProvider.family.autoDispose<
-    OperationalAccountsNotifier,
-    AsyncValue<List<AccountsModel>>,
-    String>((ref, txnType) {
-  return OperationalAccountsNotifier(txnType);
-});
-
 class OperationalAccountsNotifier
     extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   final String txnType;
@@ -113,3 +113,5 @@ class OperationalAccountsNotifier
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
 }
+
+
