@@ -13,8 +13,9 @@ import '../../utils/index.dart';
 import '../../widgets/index.dart';
 
 class AccountCreateScreen extends ConsumerWidget {
-  const AccountCreateScreen({Key? key, required this.parent}) : super(key: key);
-  final int parent;
+  const AccountCreateScreen({Key? key, required this.account})
+      : super(key: key);
+  final Map<String, dynamic> account;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,27 +32,10 @@ class AccountCreateScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // FormBuilderDropdown(
-                  //   name: 'ledger',
-                  //   decoration: const InputDecoration(
-                  //     labelText: 'Select Group',
-                  //   ),
-                  //   validator: FormBuilderValidators.compose(
-                  //       [FormBuilderValidators.required()]),
-                  //   items: data
-                  //       .map((e) => DropdownMenuItem(
-                  //             value: e.id,
-                  //             child: Text(
-                  //               e.name,
-                  //               style: inputTextStyle,
-                  //             ),
-                  //           ))
-                  //       .toList(),
-                  // ),
                   SizedBox(
                     height: inputHeight,
                     child: FormBuilderTextField(
-                      name: 'ledger',
+                      name: 'group',
                       style: inputTextStyle,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
@@ -61,7 +45,8 @@ class AccountCreateScreen extends ConsumerWidget {
                         labelText: 'Parent Account',
                       ),
                       enabled: false,
-                      initialValue: parent == 0 ? "Root" : "Account Name",
+                      initialValue:
+                          account['parent'] == 0 ? "Root" : account['name'],
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
                       textCapitalization: TextCapitalization.words,
@@ -149,7 +134,6 @@ class AccountCreateScreen extends ConsumerWidget {
                     ],
                   ),
                   UIHelper.verticalSpaceSmall(),
-
                   ref.watch(hasChildProvider) == false
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -278,7 +262,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                     height: inputHeight,
                                     child: FormBuilderCheckbox(
                                       name: 'isLocked',
-                                      initialValue: true,
+                                      initialValue: false,
                                       title: const Text("Is Lock"),
                                       decoration: checkboxDecoration,
                                     ),
@@ -292,19 +276,18 @@ class AccountCreateScreen extends ConsumerWidget {
                           ],
                         )
                       : const SizedBox.shrink(),
-
                   UIHelper.verticalSpaceExtraLarge(),
                   FormButton(
                       text: const Text("SUBMIT"),
                       onTap: () async {
                         if (formKey.currentState?.saveAndValidate() ?? false) {
                           final data = {
-                            'parent': parent,
+                            'parent': account['parent'],
                             ...formKey.currentState!.value
                           };
 
                           await ref
-                              .read(accountProvider.notifier)
+                              .read(accountProvider(account['parent']).notifier)
                               .create(formData: data)
                               .then((value) {
                             if (value == true) {

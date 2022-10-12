@@ -1,3 +1,4 @@
+import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,20 +7,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/constants.dart';
 
 class AccountListScreen extends ConsumerWidget {
-  const AccountListScreen({Key? key, this.parent}) : super(key: key);
-  final int? parent;
+  const AccountListScreen({Key? key, this.account}) : super(key: key);
+  final Map<String, dynamic>? account;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final accounts = ref.watch(accountProvider);
+    final accounts = ref.watch(accountProvider(account!['parent']));
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Parent Name"),
+        title: Text(account == null ? "Parent Name" : account!['name']),
         actions: [
           OutlinedButton(
             onPressed: () => Navigator.pushNamed(context, "/account_create",
-                arguments: parent),
+                arguments: account),
             child: const Text("CREATE"),
           ),
         ],
@@ -42,15 +43,20 @@ class AccountListScreen extends ConsumerWidget {
                         height: 1.0.h,
                       ),
                       itemBuilder: (BuildContext context, int index) {
+                        AccountsModel account = data[index];
                         return ListTile(
                           dense: true,
                           title: Text(
                             data[index].name,
                             style: listTileStyle,
                           ),
-                          onTap: () => Navigator.pushNamed(
-                              context, "/account_transactions",
-                              arguments: data[index]),
+                          onTap: () => account.hasChild == true
+                              ? Navigator.pushNamed(context, "/account_list",
+                                  arguments: {
+                                      'parent': account.id,
+                                      'name': account.name
+                                    })
+                              : null,
                         );
                       },
                     )

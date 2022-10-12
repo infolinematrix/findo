@@ -1,5 +1,4 @@
 import 'package:finsoft2/screens/error_screen.dart';
-import 'package:finsoft2/screens/home/home_screen.dart';
 import 'package:finsoft2/screens/onboard/onboard_screen.dart';
 import 'package:finsoft2/screens/settings/settings_screen.dart';
 import 'package:finsoft2/services/settings_service.dart';
@@ -39,7 +38,8 @@ class App extends ConsumerWidget {
               error: (err, stack) => ErrorScreen(msg: err.toString()),
               data: (data) {
                 if (data == true) {
-                  return const HomeScreen();
+                  // return const HomeScreen();
+                  return const OnBoardScreen();
                 }
                 return const SettingsScreen();
               },

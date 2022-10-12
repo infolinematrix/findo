@@ -9,19 +9,21 @@ final accountBox = objBox!.store.box<AccountsModel>();
 
 final hasChildProvider = StateProvider<bool>((ref) => false);
 
-final accountProvider = StateNotifierProvider.autoDispose<AccountState,
-    AsyncValue<List<AccountsModel>>>((ref) {
-  return AccountState();
+final accountProvider = StateNotifierProvider.autoDispose
+    .family<AccountState, AsyncValue<List<AccountsModel>>, int>((ref, account) {
+  return AccountState(account: account);
 });
 
 class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
-  AccountState() : super(const AsyncValue<List<AccountsModel>>.loading()) {
-    getAccounts();
+  final int account;
+  AccountState({required this.account})
+      : super(const AsyncValue<List<AccountsModel>>.loading()) {
+    getAccounts(account);
   }
 
   //---GET ALL
-  getAccounts() async {
-    final data = await AccountRepository().list();
+  getAccounts(int account) async {
+    final data = await AccountRepository().list(parent: account);
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
 
@@ -53,7 +55,7 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
       accountBox.put(data);
       objBox!.store.awaitAsyncSubmitted();
 
-      getAccounts();
+      getAccounts(account);
 
       return true;
     } catch (e) {
@@ -88,5 +90,26 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
     } catch (e) {
       return false;
     }
+  }
+}
+
+final operationalAccounsProvider = StateNotifierProvider.family.autoDispose<
+    OperationalAccountsNotifier,
+    AsyncValue<List<AccountsModel>>,
+    String>((ref, txnType) {
+  return OperationalAccountsNotifier(txnType);
+});
+
+class OperationalAccountsNotifier
+    extends StateNotifier<AsyncValue<List<AccountsModel>>> {
+  final String txnType;
+  OperationalAccountsNotifier(this.txnType)
+      : super(const AsyncValue<List<AccountsModel>>.loading()) {
+    getAccounts(txnType);
+  }
+
+  getAccounts(String txnType) async {
+    final data = await AccountRepository().listWithTxnType(txnType: txnType);
+    state = AsyncValue<List<AccountsModel>>.data(data);
   }
 }
