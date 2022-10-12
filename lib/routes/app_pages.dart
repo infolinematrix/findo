@@ -1,6 +1,7 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_create_screen.dart';
 import 'package:finsoft2/screens/account/account_list_screen.dart';
+import 'package:finsoft2/screens/account/account_statement.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_create_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_list_screen.dart';
@@ -43,6 +44,10 @@ class AppPages {
 
           case Routes.accountList:
             return AccountListScreen(
+                account: settings.arguments as Map<String, dynamic>);
+
+          case Routes.accountStatement:
+            return AccountStatementScreen(
                 account: settings.arguments as Map<String, dynamic>);
 
           //--Transactions
