@@ -866,7 +866,6 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                   // ),
 
                   //---------------
-
                   SliverToBoxAdapter(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -874,20 +873,33 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                         OutlinedButton(
                             onPressed: () => Navigator.pushNamed(
                                 context, "/account_list",
-                                arguments: 0),
-                            child: const Text("Account List")),
+                                arguments: {'parent': 0, 'name': "Root"}),
+                            child: const Text("Accounts")),
+                      ],
+                    ),
+                  ),
+
+                  SliverToBoxAdapter(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
                         OutlinedButton(
-                            onPressed: () => Navigator.pushNamed(
-                                context, "/account_create",
-                                arguments: 0),
-                            child: const Text("Account")),
-                        // OutlinedButton                        //     onPressed: () =>
-                        //         Navigator.pushNamed(context, "/ledger_list"),
-                        //     child: const Text("Payment")),
-                        // OutlinedButton(
-                        //     onPressed: () =>
-                        //         Navigator.pushNamed(context, "/transfer"),
-                        //     child: const Text("Transfer"))
+                          onPressed: () => Navigator.pushNamed(
+                              context, "/account_transactions",
+                              arguments: "RECEIPT"),
+                          child: const Text("Receit"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, "/account_transactions",
+                              arguments: "PAYMENT"),
+                          child: const Text("Payment"),
+                        ),
+                        OutlinedButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/transfer"),
+                          child: const Text("Transfer"),
+                        ),
                       ],
                     ),
                   ),

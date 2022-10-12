@@ -38,16 +38,18 @@ class AppPages {
           //   return const LedgerListScreen();
 
           case Routes.accountCreate:
-            return AccountCreateScreen(parent: settings.arguments as int);
+            return AccountCreateScreen(
+                account: settings.arguments as Map<String, dynamic>);
 
           case Routes.accountList:
-            return AccountListScreen(parent: settings.arguments as int);
+            return AccountListScreen(
+                account: settings.arguments as Map<String, dynamic>);
 
           //--Transactions
 
           case Routes.accountTransaction:
             return AccountTransactionScreen(
-                account: settings.arguments as AccountsModel);
+                txnType: settings.arguments as String);
 
           case Routes.payment:
             return PaymentScreen(account: settings.arguments as AccountsModel);
