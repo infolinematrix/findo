@@ -16,6 +16,7 @@ abstract class Routes {
   static const accountStatement = '/account_statement';
 
   //--Transations
+  static const accountSelect = '/account_select';
   static const accountTransaction = '/account_transactions';
 
   static const payment = '/payment';

@@ -89,8 +89,8 @@ String strToShortDate(String dt) {
   return d;
 }
 
-String strToShortMonth(String dt) {
-  DateTime tempDate = DateTime.now();
+String strToShortMonth(int monthNo) {
+  // DateTime tempDate = DateTime.now();
 
   List<String> months = [
     'Jan',
@@ -107,7 +107,7 @@ String strToShortMonth(String dt) {
     'Dec'
   ];
 
-  String d = months[tempDate.month - 1];
+  String d = months[monthNo - 1];
 
   return d;
 }

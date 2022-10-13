@@ -3,9 +3,11 @@ import 'package:finsoft2/screens/account/account_create_screen.dart';
 import 'package:finsoft2/screens/account/account_list_screen.dart';
 import 'package:finsoft2/screens/account/account_statement.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
+import 'package:finsoft2/screens/transactions/account_select_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_create_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_list_screen.dart';
-import 'package:finsoft2/screens/transactions/account_transaction_screen.dart';
+
+import 'package:finsoft2/screens/transactions/account_transactions_screen.dart';
 import 'package:finsoft2/screens/transactions/payment_screen.dart';
 import 'package:finsoft2/screens/transactions/receive_screen.dart';
 import 'package:finsoft2/screens/transactions/transfer_screen.dart';
@@ -51,10 +53,12 @@ class AppPages {
                 account: settings.arguments as Map<String, dynamic>);
 
           //--Transactions
+          case Routes.accountSelect:
+            return AccountSelectScreen(txnType: settings.arguments as String);
 
           case Routes.accountTransaction:
             return AccountTransactionScreen(
-                txnType: settings.arguments as String);
+                param: settings.arguments as Map<String, dynamic>);
 
           case Routes.payment:
             return PaymentScreen(account: settings.arguments as AccountsModel);
