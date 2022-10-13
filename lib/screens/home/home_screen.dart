@@ -885,13 +885,13 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                       children: [
                         OutlinedButton(
                           onPressed: () => Navigator.pushNamed(
-                              context, "/account_transactions",
+                              context, "/account_select",
                               arguments: "RECEIPT"),
                           child: const Text("Receit"),
                         ),
                         OutlinedButton(
                           onPressed: () => Navigator.pushNamed(
-                              context, "/account_transactions",
+                              context, "/account_select",
                               arguments: "PAYMENT"),
                           child: const Text("Payment"),
                         ),

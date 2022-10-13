@@ -14,7 +14,7 @@ class TransactionWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String day = txn.txnDate!.day.toString();
-    String month = txn.txnDate!.month.toString();
+    String month = strToShortMonth(txn.txnDate!.month);
     String year = txn.txnDate!.year.toString();
     String weekday = strToWeekDay(txn.txnDate!);
 
