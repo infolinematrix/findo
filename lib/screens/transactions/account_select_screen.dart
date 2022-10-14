@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:class_to_map/class_to_map.dart';
-
 class AccountSelectScreen extends ConsumerWidget {
   const AccountSelectScreen({Key? key, required this.txnType})
       : super(key: key);
@@ -76,7 +74,7 @@ class AccountSelectScreen extends ConsumerWidget {
                   itemBuilder: (BuildContext context, int index) {
                     AccountsModel account = data[index];
 
-                    final accountModelMap = account.toMap();
+                    final accountModelMap = account;
 
                     return InkWell(
                       onTap: () {
