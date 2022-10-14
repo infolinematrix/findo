@@ -59,43 +59,60 @@ class SettingsScreen extends ConsumerWidget {
                       textCapitalization: TextCapitalization.words,
                     ),
                     UIHelper.verticalSpaceMedium(),
-                    FormBuilderDropdown(
-                      style: inputTextStyle,
-                      name: 'currency',
-                      decoration: const InputDecoration(
-                        labelText: 'Currency',
-                      ),
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required()]),
-                      items: currencies
-                          .map((currency) => DropdownMenuItem(
-                                alignment: AlignmentDirectional.centerStart,
-                                value: currency['code'],
-                                child: Text(currency['name']),
-                              ))
-                          .toList(),
-                      onChanged: (val) {},
-                      valueTransformer: (val) => val?.toString(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderDropdown(
+                              style: inputTextStyle,
+                              name: 'currency',
+                              decoration: const InputDecoration(
+                                labelText: 'Currency',
+                              ),
+                              validator: FormBuilderValidators.compose(
+                                  [FormBuilderValidators.required()]),
+                              items: currencies
+                                  .map((currency) => DropdownMenuItem(
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
+                                        value: currency['code'],
+                                        child: Text(currency['name']),
+                                      ))
+                                  .toList(),
+                              onChanged: (val) {},
+                              valueTransformer: (val) => val?.toString(),
+                            ),
+                          ),
+                        ),
+                        UIHelper.horizontalSpaceSmall(),
+                        Expanded(
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderDropdown(
+                              style: inputTextStyle,
+                              name: 'dateFormat',
+                              decoration: const InputDecoration(
+                                labelText: 'Date Format',
+                              ),
+                              validator: FormBuilderValidators.compose(
+                                  [FormBuilderValidators.required()]),
+                              items: dateFormat
+                                  .map((dateFormat) => DropdownMenuItem(
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
+                                        value: dateFormat,
+                                        child: Text(dateFormat),
+                                      ))
+                                  .toList(),
+                              onChanged: (val) {},
+                              valueTransformer: (val) => val?.toString(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     UIHelper.verticalSpaceMedium(),
-                    FormBuilderDropdown(
-                      style: inputTextStyle,
-                      name: 'dateFormat',
-                      decoration: const InputDecoration(
-                        labelText: 'Date Format',
-                      ),
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required()]),
-                      items: dateFormat
-                          .map((dateFormat) => DropdownMenuItem(
-                                alignment: AlignmentDirectional.centerStart,
-                                value: dateFormat,
-                                child: Text(dateFormat),
-                              ))
-                          .toList(),
-                      onChanged: (val) {},
-                      valueTransformer: (val) => val?.toString(),
-                    ),
                     UIHelper.verticalSpaceLarge(),
                     FormButton(
                         text: const Text("SUBMIT"),
