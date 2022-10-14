@@ -1,5 +1,5 @@
 import 'package:finsoft2/constants/constants.dart';
-import 'package:finsoft2/theme/colors.dart';
+import 'package:finsoft2/theme/app_theme.dart';
 import 'package:finsoft2/utils/index.dart';
 import 'package:finsoft2/widgets/form_button.dart';
 import 'package:finsoft2/widgets/loader.dart';
@@ -9,7 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../../routes/app_pages.dart';
 import '../../services/settings_service.dart';
 import '../../theme/constants.dart';
 
@@ -19,6 +18,8 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormBuilderState>();
+    final appThemeState = ref.read(appThemeStateNotifier);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Settings")),
       body: SafeArea(
@@ -39,11 +40,6 @@ class SettingsScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      "Settings",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    UIHelper.verticalSpaceMedium(),
                     FormBuilderTextField(
                       name: 'name',
                       style: inputTextStyle,
@@ -113,7 +109,46 @@ class SettingsScreen extends ConsumerWidget {
                       ],
                     ),
                     UIHelper.verticalSpaceMedium(),
-                    UIHelper.verticalSpaceLarge(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderTextField(
+                              name: 'cashInHand',
+                              style: inputTextStyle,
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(),
+                              ]),
+                              decoration: const InputDecoration(
+                                labelText: 'Cash in Hand',
+                              ),
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                            ),
+                          ),
+                        ),
+                        UIHelper.horizontalSpaceSmall(),
+                        Expanded(
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderSwitch(
+                              title: const Text('Dark Mode'),
+                              name: 'theme',
+                              initialValue: appThemeState.isDarkModeEnabled,
+                              onChanged: (enabled) {
+                                if (enabled!) {
+                                  appThemeState.setDarkTheme();
+                                } else {
+                                  appThemeState.setLightTheme();
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    UIHelper.verticalSpaceExtraLarge(),
                     FormButton(
                         text: const Text("SUBMIT"),
                         onTap: () async {
@@ -126,8 +161,11 @@ class SettingsScreen extends ConsumerWidget {
                                 .then((value) {
                               if (value == true) {
                                 showToast(msg: 'Settings updated!');
+                                // Navigator.pushReplacementNamed(
+                                //     context, Routes.home);
+
                                 Navigator.pushReplacementNamed(
-                                    context, Routes.home);
+                                    context, "/initial_bank_create");
                               } else {
                                 showToast(msg: 'Something went wrong!');
                               }
@@ -139,13 +177,6 @@ class SettingsScreen extends ConsumerWidget {
                         }),
                   ],
                 ),
-              ),
-            ),
-            Container(
-              color: AppColors.lightGrey,
-              child: Padding(
-                padding: EdgeInsets.all(16.0.sp),
-                child: const Text("Application settings"),
               ),
             ),
           ],

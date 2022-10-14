@@ -3,6 +3,7 @@ import 'package:finsoft2/screens/account/account_create_screen.dart';
 import 'package:finsoft2/screens/account/account_list_screen.dart';
 import 'package:finsoft2/screens/account/account_statement.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
+import 'package:finsoft2/screens/settings/bank_account_create_screen.dart';
 import 'package:finsoft2/screens/transactions/account_select_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_create_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_list_screen.dart';
@@ -33,6 +34,9 @@ class AppPages {
 
           case Routes.home:
             return const HomeScreen();
+
+          case Routes.initialBankAccountCreate:
+            return const BankAccountCreateScreen();
 
           // case Routes.ledgerCreate:
           //   return const LedgerCreateScreen();
