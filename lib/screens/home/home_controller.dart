@@ -32,8 +32,8 @@ final thisWeekDataProvider = Provider.autoDispose((ref) {
   double expenditure = 0.00;
 
   for (var txn in txnData) {
-    if (txn.txnType == 'CR') income += txn.account;
-    if (txn.txnType == 'DR') expenditure += txn.amount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -53,8 +53,8 @@ final thisMonthDataProvider = Provider.autoDispose((ref) {
   double expenditure = 0.00;
 
   for (var txn in txnData) {
-    if (txn.txnType == 'CR') income += txn.account;
-    if (txn.txnType == 'DR') expenditure += txn.amount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -74,8 +74,8 @@ final thisYearDataProvider = Provider.autoDispose((ref) {
   double expenditure = 0.00;
 
   for (var txn in txnData) {
-    if (txn.txnType == 'CR') income += txn.account;
-    if (txn.txnType == 'DR') expenditure += txn.amount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -92,8 +92,8 @@ final thisDayDataProvider = Provider.autoDispose((ref) {
   double income = 0.00;
   double expenditure = 0.00;
   for (var txn in txnData) {
-    if (txn.txnType == 'CR') income += txn.account;
-    if (txn.txnType == 'DR') expenditure += txn.amount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -105,7 +105,7 @@ final thisDayDataProvider = Provider.autoDispose((ref) {
   return data;
 });
 
-//=============================================================--=========
+//=========== HOME PROVIDER ==================================================
 final homeDataProvider =
     StateNotifierProvider.autoDispose<HomeNotifier, AsyncValue<InitDataModel>>(
         (ref) {
