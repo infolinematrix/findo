@@ -186,198 +186,198 @@ class _HomePageState extends ConsumerState<HomeScreen> {
               child: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  // SliverAppBar(
-                  //   expandedHeight: 240.0.sp,
-                  //   elevation: 0,
-                  //   pinned: true,
-                  //   stretch: true,
-                  //   toolbarHeight: 80.sp,
-                  //   backgroundColor: AppColors.primaryColor,
-                  //   leading: IconButton(
-                  //     color: Colors.black,
-                  //     onPressed: _handleMenuButtonPressed,
-                  //     icon: ValueListenableBuilder<AdvancedDrawerValue>(
-                  //       valueListenable: _advancedDrawerController,
-                  //       builder: (_, value, __) {
-                  //         return AnimatedSwitcher(
-                  //           duration: const Duration(milliseconds: 250),
-                  //           child: Icon(
-                  //             value.visible ? IcoFontIcons.close : Iconsax.menu,
-                  //             color: Colors.white,
-                  //             key: ValueKey<bool>(value.visible),
-                  //           ),
-                  //         );
-                  //       },
-                  //     ),
-                  //   ),
-                  //   actions: [
-                  //     IconButton(
-                  //       icon:
-                  //           const Icon(Iconsax.notification, color: Colors.white),
-                  //       onPressed: () {},
-                  //     ),
-                  //     IconButton(
-                  //       icon: const Icon(Iconsax.more, color: Colors.white),
-                  //       onPressed: () {},
-                  //     ),
-                  //   ],
-                  //   shape: const RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.only(
-                  //       bottomLeft: Radius.circular(20),
-                  //       bottomRight: Radius.circular(20),
-                  //     ),
-                  //   ),
-                  //   centerTitle: true,
-                  //   title: AnimatedOpacity(
-                  //     opacity: _isScrolled ? 1.0 : 0.0,
-                  //     duration: const Duration(milliseconds: 500),
-                  //     child: Column(
-                  //       children: [
-                  //         Text(
-                  //           getSetting(key: 'name').value.toString(),
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontSize: 18.0.sp,
-                  //             fontWeight: FontWeight.bold,
-                  //           ),
-                  //         ),
-                  //         SizedBox(
-                  //           height: 20.0.sp,
-                  //         ),
-                  //         Container(
-                  //           width: 30.0.sp,
-                  //           height: 4.0.sp,
-                  //           decoration: BoxDecoration(
-                  //             color: Colors.white,
-                  //             borderRadius: BorderRadius.circular(10),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  //   flexibleSpace: FlexibleSpaceBar(
-                  //     collapseMode: CollapseMode.pin,
-                  //     titlePadding: const EdgeInsets.only(left: 20, right: 20),
-                  //     title: AnimatedOpacity(
-                  //       duration: const Duration(milliseconds: 500),
-                  //       opacity: _isScrolled ? 0.0 : 1.0,
-                  //       child: Column(
-                  //         mainAxisAlignment: MainAxisAlignment.end,
-                  //         children: [
-                  //           UIHelper.verticalSpaceSmall(),
-                  //           Text(
-                  //             data.thisDay['title'],
-                  //             style: TextStyle(
-                  //                 color: Colors.white,
-                  //                 fontSize: 11.sp,
-                  //                 fontWeight: FontWeight.bold),
-                  //           ),
-                  //           UIHelper.verticalSpaceSmall(),
-                  //           Container(
-                  //             decoration: BoxDecoration(
-                  //               color: const Color.fromARGB(255, 1, 139, 252),
-                  //               borderRadius: BorderRadius.circular(10),
-                  //             ),
-                  //             padding: EdgeInsets.symmetric(
-                  //                 vertical: 8.0.sp, horizontal: 16.0.sp),
-                  //             child: Row(
-                  //               mainAxisAlignment: MainAxisAlignment.center,
-                  //               children: [
-                  //                 Flexible(
-                  //                   fit: FlexFit.tight,
-                  //                   child: Wrap(
-                  //                     direction: Axis.vertical,
-                  //                     children: [
-                  //                       Text(
-                  //                         "Income",
-                  //                         style: const TextStyle().copyWith(
-                  //                             color: Colors.white54,
-                  //                             fontSize: 10.sp),
-                  //                       ),
-                  //                       UIHelper.verticalSpaceExtraSmall(),
-                  //                       Row(
-                  //                         children: [
-                  //                           Icon(
-                  //                             currencySymbol(),
-                  //                             size: 14.0.sp,
-                  //                             color: Colors.white30,
-                  //                           ),
-                  //                           Text(
-                  //                             data.thisDay['income'].toString(),
-                  //                             style: Theme.of(context)
-                  //                                 .textTheme
-                  //                                 .titleMedium!
-                  //                                 .copyWith(
-                  //                                     color: Colors.white,
-                  //                                     fontWeight:
-                  //                                         FontWeight.bold),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //                 Flexible(
-                  //                   fit: FlexFit.tight,
-                  //                   child: VerticalDivider(
-                  //                     thickness: 1.8.sp,
-                  //                     color: Colors.white,
-                  //                     // width: 10,
-                  //                   ),
-                  //                 ),
-                  //                 Flexible(
-                  //                   fit: FlexFit.tight,
-                  //                   child: Wrap(
-                  //                     direction: Axis.vertical,
-                  //                     children: [
-                  //                       Text(
-                  //                         "Expenditure",
-                  //                         style: const TextStyle().copyWith(
-                  //                             color: Colors.white54,
-                  //                             fontSize: 10.sp),
-                  //                       ),
-                  //                       UIHelper.verticalSpaceExtraSmall(),
-                  //                       Row(
-                  //                         children: [
-                  //                           Icon(
-                  //                             currencySymbol(),
-                  //                             size: 14.0.sp,
-                  //                             color: Colors.white30,
-                  //                           ),
-                  //                           Text(
-                  //                             data.thisDay['expenditure']
-                  //                                 .toString(),
-                  //                             style: Theme.of(context)
-                  //                                 .textTheme
-                  //                                 .titleMedium!
-                  //                                 .copyWith(
-                  //                                     color: Colors.white,
-                  //                                     fontWeight:
-                  //                                         FontWeight.bold),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //           UIHelper.verticalSpaceSmall(),
-                  //           Container(
-                  //             width: 30.0.sp,
-                  //             height: 3.0.sp,
-                  //             decoration: BoxDecoration(
-                  //               color: Colors.white24,
-                  //               borderRadius: BorderRadius.circular(10),
-                  //             ),
-                  //           ),
-                  //           UIHelper.verticalSpaceSmall()
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  SliverAppBar(
+                    expandedHeight: 240.0.sp,
+                    elevation: 0,
+                    pinned: true,
+                    stretch: true,
+                    toolbarHeight: 80.sp,
+                    backgroundColor: AppColors.primaryColor,
+                    leading: IconButton(
+                      color: Colors.black,
+                      onPressed: _handleMenuButtonPressed,
+                      icon: ValueListenableBuilder<AdvancedDrawerValue>(
+                        valueListenable: _advancedDrawerController,
+                        builder: (_, value, __) {
+                          return AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 250),
+                            child: Icon(
+                              value.visible ? IcoFontIcons.close : Iconsax.menu,
+                              color: Colors.white,
+                              key: ValueKey<bool>(value.visible),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(Iconsax.notification,
+                            color: Colors.white),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Iconsax.more, color: Colors.white),
+                        onPressed: () {},
+                      ),
+                    ],
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                    centerTitle: true,
+                    title: AnimatedOpacity(
+                      opacity: _isScrolled ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 500),
+                      child: Column(
+                        children: [
+                          Text(
+                            getSetting(key: 'name').value.toString(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20.0.sp,
+                          ),
+                          Container(
+                            width: 30.0.sp,
+                            height: 4.0.sp,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    flexibleSpace: FlexibleSpaceBar(
+                      collapseMode: CollapseMode.pin,
+                      titlePadding: const EdgeInsets.only(left: 20, right: 20),
+                      title: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 500),
+                        opacity: _isScrolled ? 0.0 : 1.0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            UIHelper.verticalSpaceSmall(),
+                            Text(
+                              data.thisDay['title'],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 11.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            UIHelper.verticalSpaceSmall(),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 1, 139, 252),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 8.0.sp, horizontal: 16.0.sp),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: Wrap(
+                                      direction: Axis.vertical,
+                                      children: [
+                                        Text(
+                                          "Income",
+                                          style: const TextStyle().copyWith(
+                                              color: Colors.white54,
+                                              fontSize: 10.sp),
+                                        ),
+                                        UIHelper.verticalSpaceExtraSmall(),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              currencySymbol(),
+                                              size: 14.0.sp,
+                                              color: Colors.white30,
+                                            ),
+                                            Text(
+                                              data.thisDay['income'].toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: VerticalDivider(
+                                      thickness: 1.8.sp,
+                                      color: Colors.white,
+                                      // width: 10,
+                                    ),
+                                  ),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    child: Wrap(
+                                      direction: Axis.vertical,
+                                      children: [
+                                        Text(
+                                          "Expenditure",
+                                          style: const TextStyle().copyWith(
+                                              color: Colors.white54,
+                                              fontSize: 10.sp),
+                                        ),
+                                        UIHelper.verticalSpaceExtraSmall(),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              currencySymbol(),
+                                              size: 14.0.sp,
+                                              color: Colors.white30,
+                                            ),
+                                            Text(
+                                              data.thisDay['expenditure']
+                                                  .toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            UIHelper.verticalSpaceSmall(),
+                            Container(
+                              width: 30.0.sp,
+                              height: 3.0.sp,
+                              decoration: BoxDecoration(
+                                color: Colors.white24,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            UIHelper.verticalSpaceSmall()
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
 
                   //---------------
                   // MainMenuWidget(services: _services),
