@@ -40,19 +40,22 @@ class SettingsScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    FormBuilderTextField(
-                      name: 'name',
-                      style: inputTextStyle,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.max(70),
-                      ]),
-                      decoration: const InputDecoration(
-                        labelText: 'Your Name',
+                    SizedBox(
+                      height: inputHeight,
+                      child: FormBuilderTextField(
+                        name: 'name',
+                        style: inputTextStyle,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                          FormBuilderValidators.max(70),
+                        ]),
+                        decoration: const InputDecoration(
+                          labelText: 'Your Name',
+                        ),
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        textCapitalization: TextCapitalization.words,
                       ),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.words,
                     ),
                     UIHelper.verticalSpaceMedium(),
                     Row(
@@ -61,7 +64,7 @@ class SettingsScreen extends ConsumerWidget {
                           child: SizedBox(
                             height: inputHeight,
                             child: FormBuilderDropdown(
-                              style: inputTextStyle,
+                              // style: dropdownTextStyle,
                               name: 'currency',
                               decoration: const InputDecoration(
                                 labelText: 'Currency',
@@ -86,7 +89,7 @@ class SettingsScreen extends ConsumerWidget {
                           child: SizedBox(
                             height: inputHeight,
                             child: FormBuilderDropdown(
-                              style: inputTextStyle,
+                              // style: dropdownTextStyle,
                               name: 'dateFormat',
                               decoration: const InputDecoration(
                                 labelText: 'Date Format',

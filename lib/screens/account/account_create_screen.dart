@@ -1,5 +1,4 @@
 import 'package:finsoft2/screens/account/account_controller.dart';
-import 'package:finsoft2/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -206,7 +205,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'allowReceipt',
                                       initialValue: true,
                                       title: const Text("Receipt"),
-                                      decoration: checkboxDecoration,
+                                      // decoration: checkboxDecoration,
                                     ),
                                   ),
                                 ),
@@ -218,7 +217,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'allowPayment',
                                       initialValue: true,
                                       title: const Text("Payment"),
-                                      decoration: checkboxDecoration,
+                                      // decoration: checkboxDecoration,
                                     ),
                                   ),
                                 ),
@@ -230,7 +229,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'allowTransfer',
                                       initialValue: false,
                                       title: const Text("Transfer"),
-                                      decoration: checkboxDecoration,
+                                      // decoration: checkboxDecoration,
                                     ),
                                   ),
                                 ),
@@ -253,7 +252,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'isActive',
                                       initialValue: true,
                                       title: const Text("Is Active"),
-                                      decoration: checkboxDecoration,
+                                      // decoration: checkboxDecoration,
                                     ),
                                   ),
                                 ),
@@ -264,7 +263,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'isLocked',
                                       initialValue: false,
                                       title: const Text("Is Lock"),
-                                      decoration: checkboxDecoration,
+                                      // decoration: checkboxDecoration,
                                     ),
                                   ),
                                 ),

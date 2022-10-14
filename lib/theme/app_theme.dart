@@ -34,28 +34,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 //   );
 // }
 
-InputDecoration checkboxDecoration = const InputDecoration(
-  contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-  fillColor: Colors.transparent,
-  filled: true,
-  isDense: true,
-  enabledBorder: UnderlineInputBorder(
-    borderSide: BorderSide(color: Colors.transparent, width: 0),
-  ),
-);
+// InputDecoration checkboxDecoration = const InputDecoration(
+//   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+//   fillColor: Colors.transparent,
+//   filled: true,
+//   isDense: true,
+//   enabledBorder: UnderlineInputBorder(
+//     borderSide: BorderSide(color: Colors.transparent, width: 0),
+//   ),
+// );
 
 InputDecorationTheme inputTheme(bool isDarkTheme) {
   return InputDecorationTheme(
-    contentPadding: EdgeInsets.all(12.0.sp), //
+    contentPadding: EdgeInsets.all(14.0.sp),
     fillColor: isDarkTheme ? Colors.grey.shade900 : Colors.grey.shade100,
     filled: true,
-    isDense: false,
+    // isDense: false,
     labelStyle: TextStyle(color: isDarkTheme ? Colors.white : Colors.black54),
-    floatingLabelStyle:
-        TextStyle(fontWeight: FontWeight.normal, fontSize: 14.0.sp),
-
+    floatingLabelStyle: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 13.0.sp,
+        color: isDarkTheme ? Colors.white : Colors.black54),
     enabledBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.black12, width: .50),
+      borderSide: BorderSide(color: Colors.black12, width: .00),
+    ),
+    errorStyle:
+        const TextStyle(color: Colors.transparent, fontSize: 0, height: 0),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: isDarkTheme ? Colors.blue : Colors.red),
     ),
   );
 }
@@ -130,7 +136,7 @@ class AppStyles {
           isDarkTheme ? const Color(0xff0B2512) : const Color(0xffA8DAB5),
       disabledColor: Colors.grey,
       cardColor: isDarkTheme ? const Color(0xFF151515) : Colors.white,
-      canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
+      canvasColor: isDarkTheme ? Colors.black : Colors.grey.shade50,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme

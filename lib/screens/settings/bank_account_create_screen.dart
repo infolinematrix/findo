@@ -1,5 +1,4 @@
 import 'package:finsoft2/services/settings_service.dart';
-import 'package:finsoft2/theme/app_theme.dart';
 import 'package:finsoft2/theme/constants.dart';
 import 'package:finsoft2/utils/index.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +22,7 @@ class BankAccountCreateScreen extends ConsumerWidget {
           child: Padding(
             padding: EdgeInsets.all(8.0.sp),
             child: FormBuilder(
+              key: formKey,
               child: Column(
                 children: [
                   SizedBox(
@@ -77,7 +77,7 @@ class BankAccountCreateScreen extends ConsumerWidget {
                                   name: 'isActive',
                                   initialValue: true,
                                   title: const Text("Is Active"),
-                                  decoration: checkboxDecoration,
+                                  // decoration: checkboxDecoration,
                                 ),
                               ),
                             ),
