@@ -42,6 +42,11 @@ class AccountSelectScreen extends ConsumerWidget {
                   itemBuilder: (BuildContext context, int index) {
                     AccountsModel account = data[index];
 
+<<<<<<< HEAD
+=======
+                    final accountModelMap = account;
+
+>>>>>>> d59cd6a26e9323ddcf9490579b44024ca1a0d4c3
                     return InkWell(
                       onTap: () {
                         switch (txnType) {

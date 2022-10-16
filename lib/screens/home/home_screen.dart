@@ -181,7 +181,11 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                 controller: _scrollController,
                 slivers: [
                   SliverAppBar(
+<<<<<<< HEAD
                     expandedHeight: 200.0.sp,
+=======
+                    expandedHeight: 240.0.sp,
+>>>>>>> d59cd6a26e9323ddcf9490579b44024ca1a0d4c3
                     elevation: 0,
                     pinned: true,
                     stretch: true,
