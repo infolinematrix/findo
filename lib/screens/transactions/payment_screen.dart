@@ -1,4 +1,5 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
+import 'package:finsoft2/screens/account/account_transaction_controller.dart';
 import 'package:finsoft2/screens/home/home_controller.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
 import 'package:finsoft2/services/settings_service.dart';
@@ -271,9 +272,10 @@ class PaymentScreen extends ConsumerWidget {
                             if (formKey.currentState?.saveAndValidate() ??
                                 false) {
                               await ref
-                                  .read(
-                                      transactionProvider(account.id).notifier)
+                                  .read(accountTractionsProvider(account.id)
+                                      .notifier)
                                   .addPayment(
+                                      accountNo: account.id,
                                       formData: formKey.currentState!.value)
                                   .then((value) {
                                 if (value == true) {

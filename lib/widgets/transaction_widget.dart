@@ -20,7 +20,7 @@ class TransactionWidget extends ConsumerWidget {
 
     return Container(
       height: 50.0.sp,
-      margin: EdgeInsets.only(bottom: 8.0.sp),
+      margin: EdgeInsets.only(bottom: 1.0.sp),
       decoration: BoxDecoration(
         color: color ?? Colors.white,
         borderRadius: BorderRadius.all(
@@ -40,7 +40,7 @@ class TransactionWidget extends ConsumerWidget {
                   child: Container(
                     padding: EdgeInsets.all(4.0.sp),
                     decoration: BoxDecoration(
-                      color: txn.txnType == 'DR'
+                      color: txn.txnType == 'PAYMENT'
                           ? Colors.lightBlue.shade100
                           : Colors.lightGreen.shade100,
                       borderRadius: BorderRadius.all(

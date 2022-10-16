@@ -43,16 +43,11 @@ class AccountItem extends StatelessWidget {
         style: listTileStyle,
       ),
       subtitle: account.type == 'ASSET'
-          ? const Text("Opening Balnce : 12,650.0")
+          ? const Text("Balance : 12,650.0")
           : const Text("Budget: 5000.0"),
       trailing: account.hasChild == true
           ? const Icon(IcoFontIcons.arrowRight)
           : const SizedBox.shrink(),
-      // onTap: () => account.hasChild == true
-      //     ? Navigator.pushNamed(context, "/account_list",
-      //         arguments: {'parent': account.id, 'name': account.name})
-      //     : Navigator.pushNamed(context, "/account_statement",
-      //         arguments: {'id': account.id, 'name': account.name}),
     );
   }
 }

@@ -64,10 +64,11 @@ class AccountRepository {
     }
   }
 
-  listByLedger({required int ledgerId}) {
+  listByLedger({required int parent}) {
     QueryBuilder<AccountsModel> builder = accountBox.query(
         AccountsModel_.isActive.equals(true) &
-            AccountsModel_.name.notEquals(''))
+            AccountsModel_.name.notEquals('') &
+            AccountsModel_.parent.equals(parent))
       ..order(AccountsModel_.name, flags: Order.caseSensitive);
 
     Query<AccountsModel> query = builder.build();

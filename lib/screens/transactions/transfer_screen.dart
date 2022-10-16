@@ -1,4 +1,5 @@
 import 'package:finsoft2/constants/constants.dart';
+import 'package:finsoft2/screens/account/account_transaction_controller.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
 import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/constants.dart';
@@ -218,8 +219,9 @@ class _TransferScreenState extends ConsumerState<TransferScreen> {
                               if (formKey.currentState?.saveAndValidate() ??
                                   false) {
                                 await ref
-                                    .read(transactionProvider(1).notifier)
+                                    .read(accountTractionsProvider(1).notifier)
                                     .addTransfer(
+                                        accountNo: 1,
                                         formData: formKey.currentState!.value)
                                     .then((value) {
                                   if (value == true) {

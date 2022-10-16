@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color primaryColor = Color(0xFF2D3142);
+  static const Color secondaryColor = Color.fromARGB(255, 255, 217, 0);
+
   static const Color primaryBackground = Color(0xFFF4F6FA);
   static const Color darkOrage = Color.fromARGB(255, 251, 154, 9);
   static const Color darkPrimaryColor = Color(0xFFF79E27);
@@ -30,9 +33,6 @@ class AppColors {
   static Color buttonLine1 = const Color.fromARGB(255, 255, 217, 1);
 
   static const Color buttonLine2 = Color.fromARGB(255, 223, 219, 0);
-
-  static const Color primaryColor = Color.fromARGB(255, 31, 91, 255);
-  static const Color secondaryColor = Color.fromARGB(255, 255, 217, 0);
 
   static const Color primaryColorAccent = Color(0xFFE1DDF5);
 

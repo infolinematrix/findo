@@ -57,7 +57,7 @@ dependencies:
   fl_chart: ^0.55.2
   flutter_easyloading: ^3.0.5
   local_auth: ^2.1.2
-  class_to_map: ^0.0.1
+  
 
 dev_dependencies:
   flutter_test:
