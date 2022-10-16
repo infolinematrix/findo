@@ -70,23 +70,26 @@ class TransactionService {
     QueryBuilder<TransactionsModel> builder;
 
     if (accountId == null) {
-      builder = objBox!.store.box<TransactionsModel>().query(TransactionsModel_
-          .txnDate
-          .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch)
-        ..and(TransactionsModel_.txnDate
-            .lessOrEqual(DateTime.now().millisecondsSinceEpoch)));
+      builder = objBox!.store.box<TransactionsModel>().query(
+            TransactionsModel_.txnDate
+                .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch)
+                .and(TransactionsModel_.txnDate
+                    .lessOrEqual(DateTime.now().millisecondsSinceEpoch))
+                .and(TransactionsModel_.txnType.equals('CR')),
+          );
     } else {
-      builder = objBox!.store.box<TransactionsModel>().query(TransactionsModel_
-          .txnDate
-          .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch)
-          .and(TransactionsModel_.txnDate
-              .lessOrEqual(DateTime.now().millisecondsSinceEpoch))
-          .and(TransactionsModel_.account.equals(accountId)));
+      builder = objBox!.store.box<TransactionsModel>().query(
+            TransactionsModel_.txnDate
+                .greaterOrEqual(dateTodayStart().millisecondsSinceEpoch)
+                .and(TransactionsModel_.txnDate
+                    .lessOrEqual(DateTime.now().millisecondsSinceEpoch))
+                .and(TransactionsModel_.account.equals(accountId))
+                .and(TransactionsModel_.txnType.equals('CR')),
+          );
     }
 
     //--Sorting
     builder.order(TransactionsModel_.id, flags: Order.descending);
-
     Query<TransactionsModel> query = builder.build();
 
     //--Limit
@@ -97,15 +100,5 @@ class TransactionService {
 
     query.close();
     return data;
-  }
-
-  //---------ADD TRANSACTION-------------------------//
-  bool add({required Map<String, dynamic> data}) {
-    return true;
-  }
-
-  //---------DELETE TRANSACTION----------------------//
-  bool delete({required int txnId}) {
-    return true;
   }
 }

@@ -9,7 +9,7 @@ Future<void> gotoUrl({required String url}) async {
   }
 }
 
-convertDateToLocal(String strDate) {
+DateTime convertDateToLocal(String strDate) {
   var dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(strDate, true);
   var dateLocal = dateTime.toLocal();
 
@@ -43,35 +43,35 @@ DateTime dateTodayStart() {
 // }
 
 DateTime firstDayOfWeek() {
-  DateTime now = DateTime.now();
+  DateTime now = DateTime.now().toUtc().toLocal();
   int currentDay = now.weekday;
-  DateTime firstDayOfWeek = now.subtract(Duration(days: currentDay));
+  DateTime firstDayOfWeek = now.subtract(Duration(days: currentDay -1));
   return firstDayOfWeek;
 }
 
 DateTime lastDayOfWeek() {
-  DateTime now = DateTime.now();
+  DateTime now = DateTime.now().toUtc().toLocal();
   DateTime firstDayOfWeek =
       now.add(Duration(days: DateTime.daysPerWeek - now.weekday));
   return firstDayOfWeek;
 }
 
 DateTime firstDayOfMonth() {
-  DateTime now = DateTime.now();
+  DateTime now = DateTime.now().toUtc();
   return DateTime(now.year, now.month, 1);
 }
 
 DateTime lastDayOfMonth() {
-  DateTime now = DateTime.now();
+  DateTime now = DateTime.now().toUtc();
   return DateTime(now.year, now.month + 1, 0);
 }
 
 DateTime firstDayOfYear() {
-  DateTime now = DateTime.now();
+  DateTime now = DateTime.now().toUtc();
   return DateTime(now.year, 1, 1);
 }
 
 DateTime lastDayOfYear() {
-  DateTime now = DateTime.now();
+  DateTime now = DateTime.now().toUtc();
   return DateTime(now.year, 12, 31);
 }

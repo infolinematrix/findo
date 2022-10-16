@@ -18,22 +18,22 @@ class InitDataModel {
       required this.thisTransactions});
 }
 
-final thisDayTransactionsProvider = Provider((ref) {
+final thisDayTransactionsProvider = Provider.autoDispose((ref) {
   List<TransactionsModel> transactions =
       TransactionService.instance.getAllToday();
 
   return transactions;
 });
 
-final thisWeekDataProvider = Provider((ref) {
+final thisWeekDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllWithDateRange(
       startDate: firstDayOfWeek(), endtDate: lastDayOfWeek());
   double income = 0.00;
   double expenditure = 0.00;
 
   for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -45,7 +45,7 @@ final thisWeekDataProvider = Provider((ref) {
   return data;
 });
 
-final thisMonthDataProvider = Provider((ref) {
+final thisMonthDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllWithDateRange(
       startDate: firstDayOfMonth(), endtDate: lastDayOfMonth());
 
@@ -53,8 +53,8 @@ final thisMonthDataProvider = Provider((ref) {
   double expenditure = 0.00;
 
   for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -66,7 +66,7 @@ final thisMonthDataProvider = Provider((ref) {
   return data;
 });
 
-final thisYearDataProvider = Provider((ref) {
+final thisYearDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllWithDateRange(
       startDate: firstDayOfYear(), endtDate: lastDayOfYear());
 
@@ -74,8 +74,8 @@ final thisYearDataProvider = Provider((ref) {
   double expenditure = 0.00;
 
   for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -87,13 +87,13 @@ final thisYearDataProvider = Provider((ref) {
   return data;
 });
 
-final thisDayDataProvider = Provider((ref) {
+final thisDayDataProvider = Provider.autoDispose((ref) {
   final txnData = TransactionService.instance.getAllToday();
   double income = 0.00;
   double expenditure = 0.00;
   for (var txn in txnData) {
-    if (txn.crAmount != 0) income += txn.crAmount;
-    if (txn.drAmount != 0) expenditure += txn.drAmount;
+    if (txn.txnType == 'RECEIPT') income += txn.account;
+    if (txn.txnType == 'PAYMENT') expenditure += txn.amount;
   }
 
   Map<String, dynamic> data = {
@@ -105,7 +105,7 @@ final thisDayDataProvider = Provider((ref) {
   return data;
 });
 
-//======================================================================
+//=========== HOME PROVIDER ==================================================
 final homeDataProvider =
     StateNotifierProvider.autoDispose<HomeNotifier, AsyncValue<InitDataModel>>(
         (ref) {
@@ -120,11 +120,11 @@ class HomeNotifier extends StateNotifier<AsyncValue<InitDataModel>> {
 
   void loadData() {
     final alldata = InitDataModel(
-      thisDay: ref.watch(thisDayDataProvider),
-      thisWeek: ref.watch(thisWeekDataProvider),
-      thisMonth: ref.watch(thisMonthDataProvider),
-      thisYear: ref.watch(thisYearDataProvider),
-      thisTransactions: ref.watch(thisDayTransactionsProvider),
+      thisDay: ref.read(thisDayDataProvider),
+      thisWeek: ref.read(thisWeekDataProvider),
+      thisMonth: ref.read(thisMonthDataProvider),
+      thisYear: ref.read(thisYearDataProvider),
+      thisTransactions: ref.read(thisDayTransactionsProvider),
     );
 
     state = AsyncValue<InitDataModel>.data(alldata);

@@ -1,6 +1,5 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_transaction_controller.dart';
-import 'package:finsoft2/screens/home/home_controller.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
 import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/colors.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
 import 'package:intl/intl.dart';
@@ -15,8 +15,8 @@ import '../../theme/constants.dart';
 import '../../utils/index.dart';
 import '../../widgets/index.dart';
 
-class PaymentScreen extends ConsumerWidget {
-  const PaymentScreen({Key? key, required this.account}) : super(key: key);
+class ReceiptScreen extends ConsumerWidget {
+  const ReceiptScreen({Key? key, required this.account}) : super(key: key);
   final AccountsModel account;
 
   @override
@@ -26,7 +26,7 @@ class PaymentScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Payment"),
+        title: const Text("Receipt"),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -39,7 +39,7 @@ class PaymentScreen extends ConsumerWidget {
           return FormBuilder(
             key: formKey,
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0.sp),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -55,7 +55,7 @@ class PaymentScreen extends ConsumerWidget {
                         FormBuilderValidators.max(70),
                       ]),
                       decoration: const InputDecoration(
-                        labelText: 'Payment to',
+                        labelText: 'Receive to',
                       ),
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
@@ -245,7 +245,7 @@ class PaymentScreen extends ConsumerWidget {
                     height: inputHeight,
                     child: FormBuilderTextField(
                       name: 'description',
-                      initialValue: "Paid in Cash",
+                      initialValue: "Receive in Cash",
                       style: inputTextStyle,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(),
@@ -274,19 +274,13 @@ class PaymentScreen extends ConsumerWidget {
                               await ref
                                   .read(accountTractionsProvider(account.id)
                                       .notifier)
-                                  .addPayment(
+                                  .addReceipt(
                                       accountNo: account.id,
                                       formData: formKey.currentState!.value)
                                   .then((value) {
                                 if (value == true) {
                                   EasyLoading.showSuccess(
                                       'Transaction Success!');
-
-                                  //--Call Home page Data loader
-                                  ref
-                                      .read(homeDataProvider.notifier)
-                                      .loadData();
-
                                   Navigator.pop(context);
                                 } else {
                                   EasyLoading.showError('Transaction Failed');

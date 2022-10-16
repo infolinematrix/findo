@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/index.dart';
 
-class TransactionItem extends StatelessWidget {
+class TransactionItem extends ConsumerWidget {
   final DateTime? txnDate;
   final double amount;
   final String? account;
   final String? description;
+  final String? narration;
 
   final String? txnType;
   final String? txnDrCr;
   final String? txnMode;
-  const TransactionItem({
-    Key? key,
-    required this.txnDate,
-    required this.amount,
-    this.account,
-    this.description,
-    this.txnType,
-    this.txnDrCr,
-    this.txnMode,
-  }) : super(key: key);
+  const TransactionItem(
+      {Key? key,
+      required this.txnDate,
+      required this.amount,
+      this.account,
+      this.description,
+      this.txnType,
+      this.txnDrCr,
+      this.txnMode,
+      this.narration})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final String day;
     final String month;
     final String year;
     final String weekday;
 
-    day = strToDay(txnDate.toString());
-    month = strToShortMonth(txnDate.toString());
-    year = strToYear(txnDate.toString());
-    weekday = strToWeekDay(txnDate.toString());
+    day = txnDate!.day.toString();
+    month = txnDate!.month.toString();
+    year = txnDate!.year.toString();
+    weekday = strToWeekDay(txnDate!);
 
     return Container(
       height: 50.0.sp,
@@ -57,7 +60,9 @@ class TransactionItem extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(4.0.sp),
                     decoration: BoxDecoration(
-                      color: Colors.blueGrey.shade100,
+                      color: txnType == 'DR'
+                          ? Colors.blue.shade100
+                          : Colors.red.shade100,
                       borderRadius: BorderRadius.all(
                         Radius.circular(8.sp),
                       ),
@@ -65,7 +70,10 @@ class TransactionItem extends StatelessWidget {
                     child: Center(
                       child: Text(
                         day,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontWeight: FontWeight.w900),
                       ),
                     ),
                   ),
@@ -89,17 +97,17 @@ class TransactionItem extends StatelessWidget {
           ),
           UIHelper.horizontalSpaceSmall(),
           Expanded(
-            flex: 4,
+            flex: 5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  child: Text(account.toString(),
+                  child: Text("$narration",
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle1!
+                          .bodyText1!
                           .copyWith(fontWeight: FontWeight.bold)),
                 ),
                 Flexible(
@@ -111,18 +119,17 @@ class TransactionItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text("${txnDrCr == 'DR' ? '-' : '+'} ${formatCurrency(amount)}",
+                Text("${txnType == 'DR' ? '-' : '+'} ${formatCurrency(amount)}",
                     style: Theme.of(context)
                         .textTheme
-                        .headline6!
+                        .subtitle1!
                         .copyWith(fontWeight: FontWeight.bold)),
-                Text("$txnMode $txnType",
-                    style: Theme.of(context).textTheme.bodySmall),
+                Text("$txnType", style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),

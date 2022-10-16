@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color primaryColor = Color(0xFF2D3142);
+  static const Color secondaryColor = Color.fromARGB(255, 255, 217, 0);
+
   static const Color primaryBackground = Color(0xFFF4F6FA);
   static const Color darkOrage = Color.fromARGB(255, 251, 154, 9);
   static const Color darkPrimaryColor = Color(0xFFF79E27);
@@ -31,9 +34,6 @@ class AppColors {
 
   static const Color buttonLine2 = Color.fromARGB(255, 223, 219, 0);
 
-  static const Color primaryColor = Color.fromARGB(255, 31, 91, 255);
-  static const Color secondaryColor = Color.fromARGB(255, 255, 217, 0);
-
   static const Color primaryColorAccent = Color(0xFFE1DDF5);
 
   static const Color priceColor = Color(0xFFF77777);
@@ -47,8 +47,8 @@ class AppColors {
 
   static const Color deliveryBackColor2 = Color.fromRGBO(97, 85, 204, 0.15);
 
-  static const Color addToCart2 = Color(0xFFFE9C5E);
-  static const Color addToCart1 = Color(0xFFfdcb6e);
+  static const Color listColor1 = lightGrey;
+  static const Color listColor2 = extraLightGrey;
 
   static const Color buyNow1 = Color(0xFFF77777);
   static const Color buyNow2 = Color(0xFFd63031);

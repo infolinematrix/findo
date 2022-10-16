@@ -17,9 +17,12 @@ class ObjectStore {
   /// Create an instance of ObjectBox to use throughout the app.
   static Future<ObjectStore> create() async {
     final docsDir = await getApplicationDocumentsDirectory();
-    // Future<Store> openStore() {...} is defined in the generated objectbox.g.dart
-    final store =
-        await openStore(directory: p.join(docsDir.path, "obx-finsoft"));
+
+    final store = await openStore(
+      directory: p.join(docsDir.path, "obx-finsdo"),
+      maxReaders: 1,
+      maxDBSizeInKB: 1024 * 1024,
+    );
 
     //--Delete Database with all object
     // store.close();

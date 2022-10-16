@@ -5,34 +5,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/index.dart';
 
-class TransactionItemWidget extends ConsumerWidget {
-  final TransactionsModel transaction;
-  const TransactionItemWidget({Key? key, required this.transaction})
+class TransactionWidget extends ConsumerWidget {
+  const TransactionWidget({Key? key, required this.txn, this.color})
       : super(key: key);
+  final TransactionsModel txn;
+  final Color? color;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String day;
-    final String month;
-    final String year;
-    final String weekday;
-
-    day = strToDay(transaction.txnDate.toString());
-    month = strToShortMonth(transaction.txnDate.toString());
-    year = strToYear(transaction.txnDate.toString());
-    weekday = strToWeekDay(transaction.txnDate.toString());
-
-    String account = transaction.account.target!.name;
-
-    String amount = transaction.txnType == 'DR'
-        ? "- ${transaction.drAmount.toString()}"
-        : "+ ${transaction.crAmount.toString()}";
+    String day = txn.txnDate!.day.toString();
+    String month = strToShortMonth(txn.txnDate!.month);
+    String year = txn.txnDate!.year.toString();
+    String weekday = strToWeekDay(txn.txnDate!);
 
     return Container(
       height: 50.0.sp,
-      margin: EdgeInsets.only(bottom: 8.0.sp),
+      margin: EdgeInsets.only(bottom: 1.0.sp),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color ?? Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(8.sp),
         ),
@@ -50,7 +40,9 @@ class TransactionItemWidget extends ConsumerWidget {
                   child: Container(
                     padding: EdgeInsets.all(4.0.sp),
                     decoration: BoxDecoration(
-                      color: Colors.blueGrey.shade100,
+                      color: txn.txnType == 'PAYMENT'
+                          ? Colors.lightBlue.shade100
+                          : Colors.lightGreen.shade100,
                       borderRadius: BorderRadius.all(
                         Radius.circular(8.sp),
                       ),
@@ -58,7 +50,10 @@ class TransactionItemWidget extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         day,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontWeight: FontWeight.w900),
                       ),
                     ),
                   ),
@@ -82,21 +77,18 @@ class TransactionItemWidget extends ConsumerWidget {
           ),
           UIHelper.horizontalSpaceSmall(),
           Expanded(
-            flex: 4,
+            flex: 5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  child: Text(account.toString(),
+                  child: Text(txn.narration.toString().trim(),
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle1!
-                          .copyWith(fontWeight: FontWeight.bold)),
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith()),
                 ),
                 Flexible(
-                  child: Text(transaction.description ?? 'No description',
+                  child: Text(txn.description ?? 'No description',
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall),
                 ),
@@ -104,19 +96,18 @@ class TransactionItemWidget extends ConsumerWidget {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(amount,
+                Text(
+                    "${txn.txnType == 'DR' ? '-' : '+'} ${formatCurrency(txn.amount)}",
                     style: Theme.of(context)
                         .textTheme
-                        .headline6!
+                        .subtitle1!
                         .copyWith(fontWeight: FontWeight.bold)),
-                Text(
-                    "${transaction.txnMode} ${transaction.txnType == 'CR' ? 'Received' : 'Payment'}",
-                    style: Theme.of(context).textTheme.bodySmall),
+                Text(txn.txnType, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),

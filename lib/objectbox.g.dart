@@ -15,6 +15,7 @@ import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'data/models/accounts_model.dart';
+import 'data/models/scroll_model.dart';
 import 'data/models/settings_model.dart';
 import 'data/models/transactions_model.dart';
 
@@ -24,7 +25,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8080568095172796682),
       name: 'AccountsModel',
-      lastPropertyId: const IdUid(7, 1018012840951700402),
+      lastPropertyId: const IdUid(18, 204342999415530558),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -48,12 +49,8 @@ final _entities = <ModelEntity>[
             id: const IdUid(4, 1543092980557733361),
             name: 'isSystem',
             type: 1,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 4184155973642274529),
-            name: 'isTemporary',
-            type: 1,
-            flags: 0),
+            flags: 8,
+            indexId: const IdUid(17, 6573362713887636352)),
         ModelProperty(
             id: const IdUid(6, 2210614342965218839),
             name: 'budget',
@@ -63,17 +60,60 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 1018012840951700402),
             name: 'createdOn',
             type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 4940136979261597881),
+            name: 'allowReceipt',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 2751903627924274688),
+            name: 'allowPayment',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 1130350582867143436),
+            name: 'allowTransfer',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 5693908136639282277),
+            name: 'openingBalance',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(14, 3877912590832830759),
+            name: 'parent',
+            type: 6,
+            flags: 8,
+            indexId: const IdUid(16, 357638762794576444)),
+        ModelProperty(
+            id: const IdUid(15, 201144459406318340),
+            name: 'type',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(16, 7088736736460225904),
+            name: 'hasChild',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(17, 6069181043299947546),
+            name: 'allowAlert',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(18, 204342999415530558),
+            name: 'isLocked',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[
-        ModelBacklink(
-            name: 'transactions', srcEntity: 'TransactionsModel', srcField: '')
-      ]),
+      backlinks: <ModelBacklink>[]),
   ModelEntity(
       id: const IdUid(2, 3304669295260990249),
       name: 'SettingsModel',
-      lastPropertyId: const IdUid(3, 1882783179000984751),
+      lastPropertyId: const IdUid(4, 2586337654315384446),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -88,7 +128,7 @@ final _entities = <ModelEntity>[
             flags: 2048,
             indexId: const IdUid(2, 4547643216483423190)),
         ModelProperty(
-            id: const IdUid(3, 1882783179000984751),
+            id: const IdUid(4, 2586337654315384446),
             name: 'value',
             type: 9,
             flags: 0)
@@ -98,7 +138,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 3111440568252014630),
       name: 'TransactionsModel',
-      lastPropertyId: const IdUid(9, 824780557619384738),
+      lastPropertyId: const IdUid(14, 1567056385331140227),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -107,23 +147,8 @@ final _entities = <ModelEntity>[
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 8785945625348729241),
-            name: 'drAmount',
-            type: 8,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 7121842560550319579),
-            name: 'crAmount',
-            type: 8,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(4, 3637758887083007875),
             name: 'description',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 5008846497105979365),
-            name: 'txnMode',
             type: 9,
             flags: 0),
         ModelProperty(
@@ -138,16 +163,57 @@ final _entities = <ModelEntity>[
             type: 10,
             flags: 0),
         ModelProperty(
-            id: const IdUid(8, 2740250277629716057),
-            name: 'accountId',
-            type: 11,
-            flags: 520,
-            indexId: const IdUid(4, 3561233001629372379),
-            relationTarget: 'AccountsModel'),
-        ModelProperty(
             id: const IdUid(9, 824780557619384738),
             name: 'txnType',
             type: 9,
+            flags: 2048,
+            indexId: const IdUid(13, 7170203300489413271)),
+        ModelProperty(
+            id: const IdUid(10, 7294493757628710638),
+            name: 'amount',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 2872802221464130534),
+            name: 'scrollNo',
+            type: 6,
+            flags: 8,
+            indexId: const IdUid(11, 2993461747590649745)),
+        ModelProperty(
+            id: const IdUid(12, 7214021498504376873),
+            name: 'account',
+            type: 6,
+            flags: 8,
+            indexId: const IdUid(14, 8529450228772212183)),
+        ModelProperty(
+            id: const IdUid(13, 6739219775410121101),
+            name: 'narration',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(14, 1567056385331140227),
+            name: 'txnMode',
+            type: 9,
+            flags: 2048,
+            indexId: const IdUid(15, 6655853337755261551))
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(5, 8539384137577777432),
+      name: 'ScrollModel',
+      lastPropertyId: const IdUid(6, 1000014282862274742),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3883337206629247657),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(6, 1000014282862274742),
+            name: 'slno',
+            type: 6,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -174,13 +240,46 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(3, 3111440568252014630),
-      lastIndexId: const IdUid(5, 5936411796222142683),
+      lastEntityId: const IdUid(5, 8539384137577777432),
+      lastIndexId: const IdUid(17, 6573362713887636352),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredEntityUids: const [6456388099575701592],
+      retiredIndexUids: const [
+        4327489809731861683,
+        8145747128961609376,
+        329040897223215847,
+        3561233001629372379,
+        1001218422888843300
+      ],
+      retiredPropertyUids: const [
+        4184155973642274529,
+        8785945625348729241,
+        7121842560550319579,
+        5065219965612753536,
+        4181571944276929759,
+        560121976424051924,
+        7927307665217286980,
+        5008846497105979365,
+        2740250277629716057,
+        8898934310129591389,
+        1583887717524046253,
+        876536127755102342,
+        8507925181080087548,
+        1240485944357317749,
+        6381893473725467657,
+        4399786035930780212,
+        6012842134593463925,
+        5866889709495969676,
+        7152409067748527518,
+        2012658583602722140,
+<<<<<<< HEAD
+        8356077043540955942
+=======
+        8356077043540955942,
+        1882783179000984751
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -190,25 +289,30 @@ ModelDefinition getObjectBoxModel() {
     AccountsModel: EntityDefinition<AccountsModel>(
         model: _entities[0],
         toOneRelations: (AccountsModel object) => [],
-        toManyRelations: (AccountsModel object) => {
-              RelInfo<TransactionsModel>.toOneBacklink(8, object.id,
-                      (TransactionsModel srcObject) => srcObject.account):
-                  object.transactions
-            },
+        toManyRelations: (AccountsModel object) => {},
         getId: (AccountsModel object) => object.id,
         setId: (AccountsModel object, int id) {
           object.id = id;
         },
         objectToFB: (AccountsModel object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
-          fbb.startTable(8);
+          final typeOffset = fbb.writeString(object.type);
+          fbb.startTable(19);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addBool(2, object.isActive);
           fbb.addBool(3, object.isSystem);
-          fbb.addBool(4, object.isTemporary);
           fbb.addFloat64(5, object.budget);
           fbb.addInt64(6, object.createdOn?.millisecondsSinceEpoch);
+          fbb.addBool(9, object.allowReceipt);
+          fbb.addBool(10, object.allowPayment);
+          fbb.addBool(11, object.allowTransfer);
+          fbb.addFloat64(12, object.openingBalance);
+          fbb.addInt64(13, object.parent);
+          fbb.addOffset(14, typeOffset);
+          fbb.addBool(15, object.hasChild);
+          fbb.addBool(16, object.allowAlert);
+          fbb.addBool(17, object.isLocked);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -219,25 +323,31 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
           final object = AccountsModel(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              parent: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 30),
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
               isActive: const fb.BoolReader()
                   .vTableGetNullable(buffer, rootOffset, 8),
               isSystem: const fb.BoolReader()
                   .vTableGetNullable(buffer, rootOffset, 10),
-              isTemporary: const fb.BoolReader()
-                  .vTableGetNullable(buffer, rootOffset, 12),
+              type: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 32, ''),
+              hasChild: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 34, false),
+              allowAlert: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 36, false),
+              isLocked: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 38, false),
               budget: const fb.Float64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 14))
-            ..createdOn = createdOnValue == null
-                ? null
-                : DateTime.fromMillisecondsSinceEpoch(createdOnValue);
-          InternalToManyAccess.setRelInfo(
-              object.transactions,
-              store,
-              RelInfo<TransactionsModel>.toOneBacklink(8, object.id,
-                  (TransactionsModel srcObject) => srcObject.account),
-              store.box<AccountsModel>());
+                  .vTableGetNullable(buffer, rootOffset, 14),
+              allowPayment:
+                  const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 24),
+              allowReceipt: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 22),
+              allowTransfer: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 26),
+              openingBalance: const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 28),
+              createdOn: createdOnValue == null ? null : DateTime.fromMillisecondsSinceEpoch(createdOnValue));
+
           return object;
         }),
     SettingsModel: EntityDefinition<SettingsModel>(
@@ -251,10 +361,10 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (SettingsModel object, fb.Builder fbb) {
           final keyOffset = fbb.writeString(object.key);
           final valueOffset = fbb.writeString(object.value);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, keyOffset);
-          fbb.addOffset(2, valueOffset);
+          fbb.addOffset(3, valueOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -267,13 +377,13 @@ ModelDefinition getObjectBoxModel() {
               key: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
               value: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, ''));
+                  .vTableGet(buffer, rootOffset, 10, ''));
 
           return object;
         }),
     TransactionsModel: EntityDefinition<TransactionsModel>(
         model: _entities[2],
-        toOneRelations: (TransactionsModel object) => [object.account],
+        toOneRelations: (TransactionsModel object) => [],
         toManyRelations: (TransactionsModel object) => {},
         getId: (TransactionsModel object) => object.id,
         setId: (TransactionsModel object, int id) {
@@ -283,18 +393,22 @@ ModelDefinition getObjectBoxModel() {
           final descriptionOffset = object.description == null
               ? null
               : fbb.writeString(object.description!);
-          final txnModeOffset = fbb.writeString(object.txnMode);
           final txnTypeOffset = fbb.writeString(object.txnType);
-          fbb.startTable(10);
+          final narrationOffset = object.narration == null
+              ? null
+              : fbb.writeString(object.narration!);
+          final txnModeOffset = fbb.writeString(object.txnMode);
+          fbb.startTable(15);
           fbb.addInt64(0, object.id);
-          fbb.addFloat64(1, object.drAmount);
-          fbb.addFloat64(2, object.crAmount);
           fbb.addOffset(3, descriptionOffset);
-          fbb.addOffset(4, txnModeOffset);
           fbb.addInt64(5, object.txnDate?.millisecondsSinceEpoch);
           fbb.addInt64(6, object.createdOn?.millisecondsSinceEpoch);
-          fbb.addInt64(7, object.account.targetId);
           fbb.addOffset(8, txnTypeOffset);
+          fbb.addFloat64(9, object.amount);
+          fbb.addInt64(10, object.scrollNo);
+          fbb.addInt64(11, object.account);
+          fbb.addOffset(12, narrationOffset);
+          fbb.addOffset(13, txnModeOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -307,14 +421,16 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
           final object = TransactionsModel(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
-              drAmount:
-                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0),
-              crAmount:
-                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0),
-              txnMode: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, ''),
+              account:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 26, 0),
+              scrollNo:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0),
+              amount:
+                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 22, 0),
               txnType: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 20, ''),
+              txnMode: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 30, ''),
               description: const fb.StringReader(asciiOptimization: true)
                   .vTableGetNullable(buffer, rootOffset, 10),
               txnDate: txnDateValue == null
@@ -322,10 +438,37 @@ ModelDefinition getObjectBoxModel() {
                   : DateTime.fromMillisecondsSinceEpoch(txnDateValue),
               createdOn: createdOnValue == null
                   ? null
-                  : DateTime.fromMillisecondsSinceEpoch(createdOnValue));
-          object.account.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
-          object.account.attach(store);
+                  : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
+              narration: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 28));
+
+          return object;
+        }),
+    ScrollModel: EntityDefinition<ScrollModel>(
+        model: _entities[3],
+        toOneRelations: (ScrollModel object) => [],
+        toManyRelations: (ScrollModel object) => {},
+        getId: (ScrollModel object) => object.id,
+        setId: (ScrollModel object, int id) {
+          object.id = id;
+        },
+        objectToFB: (ScrollModel object, fb.Builder fbb) {
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(5, object.slno);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = ScrollModel(
+              slno: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 14))
+            ..id =
+                const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
+
           return object;
         })
   };
@@ -351,17 +494,49 @@ class AccountsModel_ {
   static final isSystem =
       QueryBooleanProperty<AccountsModel>(_entities[0].properties[3]);
 
-  /// see [AccountsModel.isTemporary]
-  static final isTemporary =
-      QueryBooleanProperty<AccountsModel>(_entities[0].properties[4]);
-
   /// see [AccountsModel.budget]
   static final budget =
-      QueryDoubleProperty<AccountsModel>(_entities[0].properties[5]);
+      QueryDoubleProperty<AccountsModel>(_entities[0].properties[4]);
 
   /// see [AccountsModel.createdOn]
   static final createdOn =
-      QueryIntegerProperty<AccountsModel>(_entities[0].properties[6]);
+      QueryIntegerProperty<AccountsModel>(_entities[0].properties[5]);
+
+  /// see [AccountsModel.allowReceipt]
+  static final allowReceipt =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[6]);
+
+  /// see [AccountsModel.allowPayment]
+  static final allowPayment =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[7]);
+
+  /// see [AccountsModel.allowTransfer]
+  static final allowTransfer =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[8]);
+
+  /// see [AccountsModel.openingBalance]
+  static final openingBalance =
+      QueryDoubleProperty<AccountsModel>(_entities[0].properties[9]);
+
+  /// see [AccountsModel.parent]
+  static final parent =
+      QueryIntegerProperty<AccountsModel>(_entities[0].properties[10]);
+
+  /// see [AccountsModel.type]
+  static final type =
+      QueryStringProperty<AccountsModel>(_entities[0].properties[11]);
+
+  /// see [AccountsModel.hasChild]
+  static final hasChild =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[12]);
+
+  /// see [AccountsModel.allowAlert]
+  static final allowAlert =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[13]);
+
+  /// see [AccountsModel.isLocked]
+  static final isLocked =
+      QueryBooleanProperty<AccountsModel>(_entities[0].properties[14]);
 }
 
 /// [SettingsModel] entity fields to define ObjectBox queries.
@@ -385,35 +560,50 @@ class TransactionsModel_ {
   static final id =
       QueryIntegerProperty<TransactionsModel>(_entities[2].properties[0]);
 
-  /// see [TransactionsModel.drAmount]
-  static final drAmount =
-      QueryDoubleProperty<TransactionsModel>(_entities[2].properties[1]);
-
-  /// see [TransactionsModel.crAmount]
-  static final crAmount =
-      QueryDoubleProperty<TransactionsModel>(_entities[2].properties[2]);
-
   /// see [TransactionsModel.description]
   static final description =
-      QueryStringProperty<TransactionsModel>(_entities[2].properties[3]);
-
-  /// see [TransactionsModel.txnMode]
-  static final txnMode =
-      QueryStringProperty<TransactionsModel>(_entities[2].properties[4]);
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[1]);
 
   /// see [TransactionsModel.txnDate]
   static final txnDate =
-      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[5]);
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[2]);
 
   /// see [TransactionsModel.createdOn]
   static final createdOn =
-      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[6]);
-
-  /// see [TransactionsModel.account]
-  static final account = QueryRelationToOne<TransactionsModel, AccountsModel>(
-      _entities[2].properties[7]);
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[3]);
 
   /// see [TransactionsModel.txnType]
   static final txnType =
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[4]);
+
+  /// see [TransactionsModel.amount]
+  static final amount =
+      QueryDoubleProperty<TransactionsModel>(_entities[2].properties[5]);
+
+  /// see [TransactionsModel.scrollNo]
+  static final scrollNo =
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[6]);
+
+  /// see [TransactionsModel.account]
+  static final account =
+      QueryIntegerProperty<TransactionsModel>(_entities[2].properties[7]);
+
+  /// see [TransactionsModel.narration]
+  static final narration =
       QueryStringProperty<TransactionsModel>(_entities[2].properties[8]);
+
+  /// see [TransactionsModel.txnMode]
+  static final txnMode =
+      QueryStringProperty<TransactionsModel>(_entities[2].properties[9]);
+}
+
+/// [ScrollModel] entity fields to define ObjectBox queries.
+class ScrollModel_ {
+  /// see [ScrollModel.id]
+  static final id =
+      QueryIntegerProperty<ScrollModel>(_entities[3].properties[0]);
+
+  /// see [ScrollModel.slno]
+  static final slno =
+      QueryIntegerProperty<ScrollModel>(_entities[3].properties[1]);
 }

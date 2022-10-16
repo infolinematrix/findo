@@ -3,11 +3,26 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const initialRoute = '/onboard';
+
+  static const initialBankAccountCreate = '/initial_bank_create';
+
   static const onboard = '/onboard';
   static const home = '/home';
-  static const accounts = '/accounts';
+
+  //--Ledgers
+  static const ledgerCreate = '/ledger_create';
+  static const ledgerList = '/ledger_list';
+
+  //--Accounts
   static const accountCreate = '/account_create';
-  static const accountTransactions = '/account_transactions';
-  static const paymentAction = '/payment_action';
-  static const transactions = '/transactions';
+  static const accountList = '/account_list';
+  static const accountStatement = '/account_statement';
+
+  //--Transations
+  static const accountSelect = '/account_select';
+  static const accountTransaction = '/account_transactions';
+
+  static const payment = '/payment';
+  static const receive = '/receipt';
+  static const transfer = '/transfer';
 }
