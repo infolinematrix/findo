@@ -3,6 +3,9 @@ part of 'app_pages.dart';
 abstract class Routes {
   Routes._();
   static const initialRoute = '/onboard';
+
+  static const initialBankAccountCreate = '/initial_bank_create';
+
   static const onboard = '/onboard';
   static const home = '/home';
 

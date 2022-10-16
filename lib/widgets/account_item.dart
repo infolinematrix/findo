@@ -43,11 +43,23 @@ class AccountItem extends StatelessWidget {
         style: listTileStyle,
       ),
       subtitle: account.type == 'ASSET'
+<<<<<<< HEAD
           ? const Text("Balance : 12,650.0")
+=======
+          ? const Text("Opening Balnce : 12,650.0")
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
           : const Text("Budget: 5000.0"),
       trailing: account.hasChild == true
           ? const Icon(IcoFontIcons.arrowRight)
           : const SizedBox.shrink(),
+<<<<<<< HEAD
+=======
+      // onTap: () => account.hasChild == true
+      //     ? Navigator.pushNamed(context, "/account_list",
+      //         arguments: {'parent': account.id, 'name': account.name})
+      //     : Navigator.pushNamed(context, "/account_statement",
+      //         arguments: {'id': account.id, 'name': account.name}),
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
     );
   }
 }

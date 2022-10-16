@@ -39,11 +39,14 @@ final createSettings = FutureProvider.autoDispose
        * Settings
        */
       for (var element in formData.entries) {
-        settingBox
-            .putAsync(SettingsModel(key: element.key, value: element.value));
+        if (element.key != 'theme') {
+          settingBox
+              .putAsync(SettingsModel(key: element.key, value: element.value));
+        }
       }
 
       /**
+<<<<<<< HEAD
        * Creating Ledgers/Groups
        */
       // List<LedgerModel> ledgers = [
@@ -98,6 +101,8 @@ final createSettings = FutureProvider.autoDispose
       // objBox!.store.awaitAsyncSubmitted();
 
       /**
+=======
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
        * Scroll
        */
       ScrollModel scroll = ScrollModel(slno: 0);

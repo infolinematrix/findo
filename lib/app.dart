@@ -18,20 +18,21 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settingExist = ref.watch(hasSettings);
+    final appThemeState = ref.watch(appThemeStateNotifier);
     return ScreenUtilInit(
         designSize: const Size(375, 812 - 44 - 34),
         minTextAdapt: false,
         splitScreenMode: true,
         builder: (context, child) {
-          double screenSize = ScreenUtil().screenWidth;
-
           return MaterialApp(
             localizationsDelegates: const [
               FormBuilderLocalizations.delegate,
             ],
             debugShowCheckedModeBanner: false,
-            theme: screenSize < 650 ? appTheme() : appThemeTablet(),
-            themeMode: ThemeMode.light,
+
+            theme:
+                AppStyles.themeData(appThemeState.isDarkModeEnabled, context),
+
             onGenerateRoute: AppPages.onGenerateRoute,
             builder: EasyLoading.init(),
             home: settingExist.when(

@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 import 'package:animate_do/animate_do.dart';
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_transaction_controller.dart';
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:finsoft2/widgets/index.dart';
+=======
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,6 +17,7 @@ class AccountTransactionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+<<<<<<< HEAD
     AccountsModel account = param['account'] as AccountsModel;
     final transactions = ref.watch(accountTractionsProvider(account.id));
 
@@ -136,3 +140,13 @@ class TransactionButton extends StatelessWidget {
     return const Text("TRANSFER");
   }
 }
+=======
+    return Scaffold(
+      appBar: AppBar(title: Text("${param['account']['name']}")),
+      body: const SafeArea(
+        child: Text("dfsds"),
+      ),
+    );
+  }
+}
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08

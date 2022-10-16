@@ -3,6 +3,10 @@ import 'package:finsoft2/screens/account/account_create_screen.dart';
 import 'package:finsoft2/screens/account/account_list_screen.dart';
 import 'package:finsoft2/screens/account/account_statement.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
+<<<<<<< HEAD
+=======
+import 'package:finsoft2/screens/settings/bank_account_create_screen.dart';
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
 import 'package:finsoft2/screens/transactions/account_select_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_create_screen.dart';
 // import 'package:finsoft2/screens/ledger/ledger_list_screen.dart';
@@ -34,9 +38,18 @@ class AppPages {
           case Routes.home:
             return const HomeScreen();
 
+<<<<<<< HEAD
           // case Routes.ledgerCreate:
           //   return const LedgerCreateScreen();
 
+=======
+          case Routes.initialBankAccountCreate:
+            return const BankAccountCreateScreen();
+
+          // case Routes.ledgerCreate:
+          //   return const LedgerCreateScreen();
+
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
           // case Routes.ledgerList:
           //   return const LedgerListScreen();
 

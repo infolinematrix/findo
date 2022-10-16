@@ -1,5 +1,8 @@
 import 'package:finsoft2/screens/account/account_controller.dart';
+<<<<<<< HEAD
 import 'package:finsoft2/theme/app_theme.dart';
+=======
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -206,7 +209,11 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'allowReceipt',
                                       initialValue: true,
                                       title: const Text("Receipt"),
+<<<<<<< HEAD
                                       decoration: checkboxDecoration,
+=======
+                                      // decoration: checkboxDecoration,
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
                                     ),
                                   ),
                                 ),
@@ -218,7 +225,11 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'allowPayment',
                                       initialValue: true,
                                       title: const Text("Payment"),
+<<<<<<< HEAD
                                       decoration: checkboxDecoration,
+=======
+                                      // decoration: checkboxDecoration,
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
                                     ),
                                   ),
                                 ),
@@ -230,7 +241,11 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'allowTransfer',
                                       initialValue: false,
                                       title: const Text("Transfer"),
+<<<<<<< HEAD
                                       decoration: checkboxDecoration,
+=======
+                                      // decoration: checkboxDecoration,
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
                                     ),
                                   ),
                                 ),
@@ -253,7 +268,11 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'isActive',
                                       initialValue: true,
                                       title: const Text("Is Active"),
+<<<<<<< HEAD
                                       decoration: checkboxDecoration,
+=======
+                                      // decoration: checkboxDecoration,
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
                                     ),
                                   ),
                                 ),
@@ -264,7 +283,11 @@ class AccountCreateScreen extends ConsumerWidget {
                                       name: 'isLocked',
                                       initialValue: false,
                                       title: const Text("Is Lock"),
+<<<<<<< HEAD
                                       decoration: checkboxDecoration,
+=======
+                                      // decoration: checkboxDecoration,
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
                                     ),
                                   ),
                                 ),

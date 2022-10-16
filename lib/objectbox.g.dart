@@ -113,7 +113,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(2, 3304669295260990249),
       name: 'SettingsModel',
-      lastPropertyId: const IdUid(3, 1882783179000984751),
+      lastPropertyId: const IdUid(4, 2586337654315384446),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -128,7 +128,7 @@ final _entities = <ModelEntity>[
             flags: 2048,
             indexId: const IdUid(2, 4547643216483423190)),
         ModelProperty(
-            id: const IdUid(3, 1882783179000984751),
+            id: const IdUid(4, 2586337654315384446),
             name: 'value',
             type: 9,
             flags: 0)
@@ -273,7 +273,12 @@ ModelDefinition getObjectBoxModel() {
         5866889709495969676,
         7152409067748527518,
         2012658583602722140,
+<<<<<<< HEAD
         8356077043540955942
+=======
+        8356077043540955942,
+        1882783179000984751
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -356,10 +361,10 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (SettingsModel object, fb.Builder fbb) {
           final keyOffset = fbb.writeString(object.key);
           final valueOffset = fbb.writeString(object.value);
-          fbb.startTable(4);
+          fbb.startTable(5);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, keyOffset);
-          fbb.addOffset(2, valueOffset);
+          fbb.addOffset(3, valueOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -372,7 +377,7 @@ ModelDefinition getObjectBoxModel() {
               key: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
               value: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, ''));
+                  .vTableGet(buffer, rootOffset, 10, ''));
 
           return object;
         }),

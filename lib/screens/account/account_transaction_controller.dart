@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/data/models/transactions_model.dart';
 import 'package:finsoft2/data/repositories/account_repository.dart';
@@ -8,6 +9,11 @@ import 'package:finsoft2/utils/functions.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:objectbox/objectbox.dart';
+=======
+import 'package:finsoft2/data/models/transactions_model.dart';
+import 'package:finsoft2/services/transaction_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
 
 final accountTractionsProvider = StateNotifierProvider.family.autoDispose<
     AccountTransactionsNotifier,
@@ -27,6 +33,7 @@ class AccountTransactionsNotifier
     final data = TransactionService.instance.getAll(accountNo);
     state = AsyncValue<List<TransactionsModel>>.data(data);
   }
+<<<<<<< HEAD
 
   //--Payment transaction
   Future<bool> addPayment(
@@ -283,4 +290,6 @@ class AccountTransactionsNotifier
   Future<bool> delete({required int scrollNo}) async {
     return true;
   }
+=======
+>>>>>>> 3e88900f7094f933b75ddadb8baf31f97d3dcf08
 }
