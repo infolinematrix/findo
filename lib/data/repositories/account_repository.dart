@@ -77,6 +77,18 @@ class AccountRepository {
     return data;
   }
 
+  listByType({required String type}) {
+    QueryBuilder<AccountsModel> builder = accountBox.query(
+        AccountsModel_.type.equals(type) & AccountsModel_.name.notEquals(''))
+      ..order(AccountsModel_.name, flags: Order.caseSensitive);
+
+    Query<AccountsModel> query = builder.build();
+    List<AccountsModel> data = query.find().toList();
+
+    query.close();
+    return data;
+  }
+
   //--Get
   Future get({required id}) async {}
 

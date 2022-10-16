@@ -2,6 +2,7 @@ import 'package:icofont_flutter/icofont_flutter.dart';
 
 final txnType = ['RECEIPT', 'PAYMENT'];
 final txnMode = ['Cash', 'Online', 'Cheque', 'Bank Transfer'];
+
 final List<Map<String, dynamic>> currencies = [
   {'code': 'rupee', 'name': 'Rupees', 'icon': IcoFontIcons.rupee},
   {'code': 'baht', 'name': 'Baht', 'icon': IcoFontIcons.baht},
@@ -32,6 +33,7 @@ final List<Map<String, dynamic>> accountType = [
   {'code': 'REVENUE', 'name': 'Revinue'},
   {'code': 'EXPENSES', 'name': 'Expenses'},
   {'code': 'ASSETS', 'name': 'Assets'},
+  {'code': 'BANK', 'name': 'Bank'},
   {'code': 'LIABILITIES', 'name': 'Liabilities'},
   {'code': 'EQUITY', 'name': 'Equity'},
 ];

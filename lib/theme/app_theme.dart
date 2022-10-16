@@ -3,50 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// ThemeData appTheme() {
-//   return ThemeData(
-//     scaffoldBackgroundColor: const Color.fromARGB(255, 237, 237, 237),
-//     // primarySwatch: Colors.yellow,
-//     unselectedWidgetColor: Colors.black,
-//     brightness: Brightness.light,
-//     // highlightColor: Colors.transparent,
-
-//     // appBarTheme: appBarTheme(),
-//     // tabBarTheme: tabTheme(),
-//     visualDensity: VisualDensity.adaptivePlatformDensity,
-//     // inputDecorationTheme: inputTheme(),
-//     checkboxTheme: CheckboxThemeData(
-//       checkColor: MaterialStateProperty.all(Colors.white),
-//       fillColor: MaterialStateProperty.all(AppColors.black2),
-//       side: const BorderSide(
-//         color: Colors.black, //your desire colour here
-//         width: 0,
-//       ),
-//     ),
-//     cardColor: Colors.white,
-//     textTheme: TextTheme(
-//       button: TextStyle(
-//         fontSize: 14.0.sp,
-//         fontWeight: FontWeight.bold,
-//         color: Colors.black,
-//       ),
-//     ),
-//   );
-// }
-
-// InputDecoration checkboxDecoration = const InputDecoration(
-//   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-//   fillColor: Colors.transparent,
-//   filled: true,
-//   isDense: true,
-//   enabledBorder: UnderlineInputBorder(
-//     borderSide: BorderSide(color: Colors.transparent, width: 0),
-//   ),
-// );
-
 InputDecorationTheme inputTheme(bool isDarkTheme) {
   return InputDecorationTheme(
-    contentPadding: EdgeInsets.all(14.0.sp),
+    // contentPadding: EdgeInsets.all(14.0.sp),
     fillColor: isDarkTheme ? Colors.grey.shade900 : Colors.grey.shade100,
     filled: true,
     // isDense: false,
@@ -66,33 +25,6 @@ InputDecorationTheme inputTheme(bool isDarkTheme) {
   );
 }
 
-// AppBarTheme appBarTheme() {
-//   return AppBarTheme(
-//     elevation: .50,
-//     color: AppColors.black2,
-//     iconTheme: const IconThemeData(color: Colors.white),
-//     titleTextStyle: TextStyle(
-//       color: Colors.white,
-//       fontSize: 16.sp,
-//       fontWeight: FontWeight.w500,
-//     ),
-//   );
-// }
-
-// TabBarTheme tabTheme() {
-//   return const TabBarTheme(
-//     labelColor: Colors.black,
-
-//     labelStyle: TextStyle(fontWeight: FontWeight.bold), // color for text
-//     indicator: UnderlineTabIndicator(
-//       borderSide: BorderSide(color: AppColors.secondaryColor),
-//     ),
-//   );
-// }
-
-//========NEW IMPLIMATION================//
-
-// Theme
 final appThemeStateNotifier = ChangeNotifierProvider((ref) => AppThemeState());
 
 class AppThemeState extends ChangeNotifier {
@@ -142,12 +74,17 @@ class AppStyles {
           colorScheme: isDarkTheme
               ? const ColorScheme.dark()
               : const ColorScheme.light()),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         elevation: 1.0,
+        color: isDarkTheme ? Colors.black : Colors.blue,
+        foregroundColor: isDarkTheme ? Colors.white : Colors.white,
       ),
       textSelectionTheme: TextSelectionThemeData(
           selectionColor: isDarkTheme ? Colors.white : Colors.black),
       inputDecorationTheme: inputTheme(isDarkTheme),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+              foregroundColor: isDarkTheme ? Colors.white : Colors.white)),
     );
   }
 }
