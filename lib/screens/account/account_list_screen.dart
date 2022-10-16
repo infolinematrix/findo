@@ -20,10 +20,10 @@ class AccountListScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(account == null ? "Parent Name" : account!['name']),
         actions: [
-          OutlinedButton(
+          IconButton(
             onPressed: () => Navigator.pushNamed(context, "/account_create",
                 arguments: account),
-            child: const Text("CREATE"),
+            icon: const Icon(Icons.add),
           ),
         ],
       ),

@@ -8,7 +8,6 @@ InputDecorationTheme inputTheme(bool isDarkTheme) {
     // contentPadding: EdgeInsets.all(14.0.sp),
     fillColor: isDarkTheme ? Colors.grey.shade900 : Colors.grey.shade100,
     filled: true,
-    // isDense: false,
     labelStyle: TextStyle(color: isDarkTheme ? Colors.white : Colors.black54),
     floatingLabelStyle: TextStyle(
         fontWeight: FontWeight.normal,
@@ -70,21 +69,26 @@ class AppStyles {
       cardColor: isDarkTheme ? const Color(0xFF151515) : Colors.white,
       canvasColor: isDarkTheme ? Colors.black : Colors.grey.shade50,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
+
+      //------------
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme
               ? const ColorScheme.dark()
               : const ColorScheme.light()),
+      //----------------
       appBarTheme: AppBarTheme(
         elevation: 1.0,
         color: isDarkTheme ? Colors.black : Colors.blue,
         foregroundColor: isDarkTheme ? Colors.white : Colors.white,
       ),
+
+      //--------------
       textSelectionTheme: TextSelectionThemeData(
           selectionColor: isDarkTheme ? Colors.white : Colors.black),
       inputDecorationTheme: inputTheme(isDarkTheme),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-              foregroundColor: isDarkTheme ? Colors.white : Colors.white)),
+      // outlinedButtonTheme: OutlinedButtonThemeData(
+      //     style: OutlinedButton.styleFrom(
+      //         foregroundColor: isDarkTheme ? Colors.white : Colors.white)),
     );
   }
 }

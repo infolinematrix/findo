@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.finsoft2"
+        applicationId "com.doriionline.findo"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
@@ -78,7 +78,8 @@ configurations {
 dependencies {
      def objectboxVersion = "3.1.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    // debugImplementation("io.objectbox:objectbox-android-objectbrowser:<version>")
+    implementation platform('com.google.firebase:firebase-bom:31.0.0')
+    // implementation 'com.google.firebase:firebase-analytics-ktx'
     debugImplementation("io.objectbox:objectbox-android-objectbrowser:$objectboxVersion")
     releaseImplementation("io.objectbox:objectbox-android:$objectboxVersion")
 }

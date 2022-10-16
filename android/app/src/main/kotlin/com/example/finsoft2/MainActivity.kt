@@ -1,4 +1,4 @@
-package com.example.finsoft2
+package com.doriionline.findo
 
 import io.flutter.embedding.android.FlutterActivity
 

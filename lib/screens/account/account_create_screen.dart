@@ -80,9 +80,9 @@ class AccountCreateScreen extends ConsumerWidget {
                         child: SizedBox(
                           height: inputHeight,
                           child: FormBuilderDropdown(
-                            style: inputTextStyle,
                             name: 'accountType',
                             initialValue: 'EXPENSES',
+                            isExpanded: true,
                             decoration: const InputDecoration(
                               labelText: 'Account Type',
                             ),
@@ -106,8 +106,8 @@ class AccountCreateScreen extends ConsumerWidget {
                         child: SizedBox(
                           height: inputHeight,
                           child: FormBuilderDropdown(
-                            style: inputTextStyle,
                             name: 'hasChild',
+                            isExpanded: true,
                             initialValue: ref.read(hasChildProvider),
                             decoration: const InputDecoration(
                               labelText: 'Has Child',

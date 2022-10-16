@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "74827752977",
+    "project_id": "findo-fa4bd",
+    "storage_bucket": "findo-fa4bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74827752977:android:98ac65a1efc3f7ff08b3b0",
+        "android_client_info": {
+          "package_name": "com.doriionline.findo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74827752977-k2m62n2pdda9pfd3ba054j6avlgb5b2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN34IR6sgv3LUcil4XwqooQqpUWmN08Co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74827752977-k2m62n2pdda9pfd3ba054j6avlgb5b2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
