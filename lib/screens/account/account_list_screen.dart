@@ -118,7 +118,10 @@ class AccountListScreen extends ConsumerWidget {
                               );
                       },
                     )
-                  : const Text("No Account created yet!");
+                  : Padding(
+                      padding: EdgeInsets.all(16.0.sp),
+                      child: const Text("No Account created yet!"),
+                    );
             },
           ),
         ),

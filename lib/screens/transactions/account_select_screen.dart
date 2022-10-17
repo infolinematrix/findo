@@ -98,11 +98,11 @@ class AccountSelectScreen extends ConsumerWidget {
                         child: index % 2 != 0
                             ? AccountItem(
                                 account: account,
-                                // color: AppColors.listColor1,
+                                color: Theme.of(context).primaryColorLight,
                               )
                             : AccountItem(
                                 account: account,
-                                // color: AppColors.listColor2,
+                                color: Theme.of(context).selectedRowColor,
                               ),
                       ),
                     );

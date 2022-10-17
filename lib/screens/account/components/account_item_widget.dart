@@ -15,14 +15,14 @@ class AccountListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
-      tileColor: color ?? Colors.white,
+      // tileColor: color ?? Colors.green,
       contentPadding: EdgeInsets.symmetric(horizontal: 8.0.w),
       leading: Container(
         width: 30.0.w,
         margin: EdgeInsets.symmetric(vertical: 4.0.sp),
         padding: EdgeInsets.all(4.0.sp),
         decoration: BoxDecoration(
-          // color: AppColors.black2,
+          color: Colors.greenAccent,
           borderRadius: BorderRadius.all(
             Radius.circular(8.sp),
           ),
