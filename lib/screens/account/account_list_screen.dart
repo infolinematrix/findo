@@ -94,12 +94,11 @@ class AccountListScreen extends ConsumerWidget {
                                       Duration(milliseconds: (index + 1) * 100),
                                   child: index % 2 != 0
                                       ? AccountListItemWidget(
-                                          account: account,
-                                          // color: AppColors.listColor1,
-                                        )
+                                          account: account, color: Colors.green)
                                       : AccountListItemWidget(
                                           account: account,
-                                          // color: AppColors.listColor2,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                 ),
                               )
@@ -109,11 +108,12 @@ class AccountListScreen extends ConsumerWidget {
                                 child: index % 2 != 0
                                     ? AccountListItemWidget(
                                         account: account,
-                                        // color: AppColors.listColor1,
+                                        color: Colors.greenAccent,
                                       )
                                     : AccountListItemWidget(
                                         account: account,
-                                        // color: AppColors.listColor2,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
                                       ),
                               );
                       },

@@ -5,7 +5,6 @@ import 'package:finsoft2/data/source/objectstore.dart';
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:objectbox/objectbox.dart';
@@ -46,12 +45,12 @@ void main() async {
       ),
     );
     // Transparent status bar
-    if (Platform.isAndroid) {
-      // SystemUiOverlayStyle systemUiOverlayStyle =
-      //     const SystemUiOverlayStyle(statusBarColor: Colors.blue);
-      // SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    }
+    // if (Platform.isAndroid) {
+    //   SystemUiOverlayStyle systemUiOverlayStyle =
+    //       const SystemUiOverlayStyle(statusBarColor: Colors.blue);
+    //   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    //   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    // }
   }, (Object error, StackTrace stack) {
     ErrorScreen(msg: error.toString());
   });
