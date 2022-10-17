@@ -48,8 +48,10 @@ class PeriodicSummary extends StatelessWidget {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blueAccent),
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                 ),
                                 UIHelper.horizontalSpaceSmall(),
                                 const Icon(IcoFontIcons.thinRight),
@@ -59,8 +61,10 @@ class PeriodicSummary extends StatelessWidget {
                               "View All",
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
-                                  .copyWith(color: Colors.black),
+                                  .bodySmall!
+                                  .copyWith(
+                                      color:
+                                          Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -78,7 +82,9 @@ class PeriodicSummary extends StatelessWidget {
                                     Text(
                                       "Income",
                                       style: const TextStyle().copyWith(
-                                          color: Colors.grey.shade500),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                     ),
                                     UIHelper.verticalSpaceExtraSmall(),
                                     Row(
@@ -87,8 +93,9 @@ class PeriodicSummary extends StatelessWidget {
                                       children: [
                                         Icon(
                                           currencySymbol(),
-                                          size: 18.0.sp,
-                                          color: Colors.grey.shade500,
+                                          size: 16.0.sp,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                         Text(
                                           formatCurrency(
@@ -125,15 +132,18 @@ class PeriodicSummary extends StatelessWidget {
                                     Text(
                                       "Expenditure",
                                       style: const TextStyle().copyWith(
-                                          color: Colors.grey.shade500),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                     ),
                                     UIHelper.verticalSpaceExtraSmall(),
                                     Row(
                                       children: [
                                         Icon(
                                           currencySymbol(),
-                                          size: 18.0.sp,
-                                          color: Colors.grey.shade500,
+                                          size: 16.0.sp,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                         Text(
                                           formatCurrency(
@@ -188,8 +198,10 @@ class PeriodicSummary extends StatelessWidget {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blueAccent),
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                 ),
                                 UIHelper.horizontalSpaceSmall(),
                                 const Icon(IcoFontIcons.thinRight),
@@ -199,8 +211,10 @@ class PeriodicSummary extends StatelessWidget {
                               "View All",
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
-                                  .copyWith(color: Colors.black),
+                                  .bodySmall!
+                                  .copyWith(
+                                    color: Theme.of(context).primaryColorLight,
+                                  ),
                             ),
                           ],
                         ),
@@ -218,7 +232,9 @@ class PeriodicSummary extends StatelessWidget {
                                     Text(
                                       "Income",
                                       style: const TextStyle().copyWith(
-                                          color: Colors.grey.shade500),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                     ),
                                     UIHelper.verticalSpaceExtraSmall(),
                                     Row(
@@ -227,8 +243,9 @@ class PeriodicSummary extends StatelessWidget {
                                       children: [
                                         Icon(
                                           currencySymbol(),
-                                          size: 18.0.sp,
-                                          color: Colors.grey.shade500,
+                                          size: 16.0.sp,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                         Text(
                                           formatCurrency(
@@ -265,15 +282,18 @@ class PeriodicSummary extends StatelessWidget {
                                     Text(
                                       "Expenditure",
                                       style: const TextStyle().copyWith(
-                                          color: Colors.grey.shade500),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                     ),
                                     UIHelper.verticalSpaceExtraSmall(),
                                     Row(
                                       children: [
                                         Icon(
                                           currencySymbol(),
-                                          size: 18.0.sp,
-                                          color: Colors.grey.shade500,
+                                          size: 16.0.sp,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                         Text(
                                           formatCurrency(
@@ -328,8 +348,10 @@ class PeriodicSummary extends StatelessWidget {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blueAccent),
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                 ),
                                 UIHelper.horizontalSpaceSmall(),
                                 const Icon(IcoFontIcons.thinRight),
@@ -339,8 +361,10 @@ class PeriodicSummary extends StatelessWidget {
                               "View All",
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
-                                  .copyWith(color: Colors.black),
+                                  .bodySmall!
+                                  .copyWith(
+                                    color: Theme.of(context).primaryColorLight,
+                                  ),
                             ),
                           ],
                         ),
@@ -358,7 +382,9 @@ class PeriodicSummary extends StatelessWidget {
                                     Text(
                                       "Income",
                                       style: const TextStyle().copyWith(
-                                          color: Colors.grey.shade500),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                     ),
                                     UIHelper.verticalSpaceExtraSmall(),
                                     Row(
@@ -367,8 +393,9 @@ class PeriodicSummary extends StatelessWidget {
                                       children: [
                                         Icon(
                                           currencySymbol(),
-                                          size: 18.0.sp,
-                                          color: Colors.grey.shade500,
+                                          size: 16.0.sp,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                         Text(
                                           formatCurrency(
@@ -405,15 +432,18 @@ class PeriodicSummary extends StatelessWidget {
                                     Text(
                                       "Expenditure",
                                       style: const TextStyle().copyWith(
-                                          color: Colors.grey.shade500),
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
                                     ),
                                     UIHelper.verticalSpaceExtraSmall(),
                                     Row(
                                       children: [
                                         Icon(
                                           currencySymbol(),
-                                          size: 18.0.sp,
-                                          color: Colors.grey.shade500,
+                                          size: 16.0.sp,
+                                          color: Theme.of(context)
+                                              .primaryColorLight,
                                         ),
                                         Text(
                                           formatCurrency(

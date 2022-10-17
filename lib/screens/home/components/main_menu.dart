@@ -43,7 +43,7 @@ class MainMenuWidget extends StatelessWidget {
                             child: Center(
                               child: Icon(
                                 Iconsax.import_1,
-                                color: Colors.white,
+                                // color: Colors.white,
                                 size: 24.sp,
                               ),
                             ),
@@ -52,7 +52,7 @@ class MainMenuWidget extends StatelessWidget {
                           Text(
                             "Receipt",
                             style: TextStyle(
-                                color: Colors.grey.shade800,
+                                // color: Colors.grey.shade800,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -82,7 +82,7 @@ class MainMenuWidget extends StatelessWidget {
                             child: Center(
                               child: Icon(
                                 Iconsax.export_1,
-                                color: Colors.white,
+                                // color: Colors.white,
                                 size: 24.sp,
                               ),
                             ),
@@ -91,7 +91,7 @@ class MainMenuWidget extends StatelessWidget {
                           Text(
                             "Payment",
                             style: TextStyle(
-                                color: Colors.grey.shade800,
+                                // color: Colors.grey.shade800,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -120,7 +120,7 @@ class MainMenuWidget extends StatelessWidget {
                             child: Center(
                               child: Icon(
                                 Iconsax.empty_wallet_change,
-                                color: Colors.white,
+                                // color: Colors.white,
                                 size: 24.sp,
                               ),
                             ),
@@ -129,7 +129,7 @@ class MainMenuWidget extends StatelessWidget {
                           Text(
                             "Transfer",
                             style: TextStyle(
-                                color: Colors.grey.shade800,
+                                // color: Colors.grey.shade800,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -156,7 +156,7 @@ class MainMenuWidget extends StatelessWidget {
                             child: Center(
                               child: Icon(
                                 Iconsax.message_question,
-                                color: Colors.white,
+                                // color: Colors.white,
                                 size: 24.sp,
                               ),
                             ),
@@ -165,7 +165,7 @@ class MainMenuWidget extends StatelessWidget {
                           Text(
                             "Help",
                             style: TextStyle(
-                                color: Colors.grey.shade800,
+                                // color: Colors.grey.shade800,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold),
                           ),

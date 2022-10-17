@@ -7,8 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import 'components/account_item_widget.dart';
-
 class AccountListScreen extends ConsumerWidget {
   const AccountListScreen({Key? key, this.account}) : super(key: key);
   final Map<String, dynamic>? account;
@@ -55,8 +53,10 @@ class AccountListScreen extends ConsumerWidget {
                                   motion: const ScrollMotion(),
                                   children: [
                                     SlidableAction(
-                                      backgroundColor: const Color(0xFFFE4A49),
-                                      foregroundColor: Colors.white,
+                                      backgroundColor:
+                                          Theme.of(context).primaryColorLight,
+                                      foregroundColor:
+                                          Theme.of(context).primaryColorDark,
                                       icon: Icons.delete,
                                       label: 'Delete',
                                       onPressed: (context) async {
@@ -77,8 +77,10 @@ class AccountListScreen extends ConsumerWidget {
                                       },
                                     ),
                                     SlidableAction(
-                                      backgroundColor: const Color(0xFF21B7CA),
-                                      foregroundColor: Colors.white,
+                                      backgroundColor:
+                                          Theme.of(context).primaryColorLight,
+                                      foregroundColor:
+                                          Theme.of(context).primaryColorDark,
                                       icon: Icons.edit,
                                       label: 'Update',
                                       onPressed: (context) {
@@ -93,12 +95,12 @@ class AccountListScreen extends ConsumerWidget {
                                   duration:
                                       Duration(milliseconds: (index + 1) * 100),
                                   child: index % 2 != 0
-                                      ? AccountListItemWidget(
-                                          account: account, color: Colors.green)
-                                      : AccountListItemWidget(
+                                      ? AccountItem(
                                           account: account,
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
+                                          color: Theme.of(context).primaryColor)
+                                      : AccountItem(
+                                          account: account,
+                                          color: Theme.of(context).primaryColor,
                                         ),
                                 ),
                               )
@@ -106,14 +108,13 @@ class AccountListScreen extends ConsumerWidget {
                                 duration:
                                     Duration(milliseconds: (index + 1) * 100),
                                 child: index % 2 != 0
-                                    ? AccountListItemWidget(
+                                    ? AccountItem(
                                         account: account,
-                                        color: Colors.greenAccent,
+                                        color: Theme.of(context).primaryColor,
                                       )
-                                    : AccountListItemWidget(
+                                    : AccountItem(
                                         account: account,
-                                        color:
-                                            Theme.of(context).primaryColorLight,
+                                        color: Theme.of(context).primaryColor,
                                       ),
                               );
                       },

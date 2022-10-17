@@ -65,8 +65,9 @@ class AppThemeState extends ChangeNotifier {
 class AppStyles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.blueGrey,
+      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.red,
       primaryColor: isDarkTheme ? Colors.black : Colors.white,
+
       backgroundColor: isDarkTheme ? Colors.black : const Color(0xffF1F5FB),
 
       secondaryHeaderColor:
@@ -76,13 +77,13 @@ class AppStyles {
       hintColor:
           isDarkTheme ? const Color(0xff280C0B) : const Color(0xffEECED3),
       highlightColor: isDarkTheme
-          ? const Color(0xff372901)
+          ? const Color.fromARGB(255, 56, 54, 47)
           : const Color.fromARGB(255, 0, 98, 255),
       hoverColor:
           isDarkTheme ? const Color(0xff3A3A3B) : const Color(0xff4285F4),
       focusColor:
           isDarkTheme ? const Color(0xff0B2512) : const Color(0xffA8DAB5),
-      disabledColor: Colors.grey,
+      disabledColor: isDarkTheme ? const Color(0xFF151515) : Colors.grey,
       cardColor: isDarkTheme ? const Color(0xFF151515) : Colors.white,
       canvasColor: isDarkTheme ? Colors.black : Colors.grey.shade100,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,

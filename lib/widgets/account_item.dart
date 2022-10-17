@@ -22,7 +22,7 @@ class AccountItem extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 4.0.sp),
         padding: EdgeInsets.all(4.0.sp),
         decoration: BoxDecoration(
-          color: Theme.of(context).secondaryHeaderColor,
+          color: Theme.of(context).highlightColor,
           borderRadius: BorderRadius.all(
             Radius.circular(8.sp),
           ),
@@ -31,26 +31,29 @@ class AccountItem extends StatelessWidget {
           child: Text(
             account.name[0],
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).primaryColor),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ),
       ),
       title: Text(
         account.name,
-        style: listTileStyle,
+        style: listTileStyle.copyWith(),
       ),
-      subtitle: account.type == 'ASSET'
+      subtitle: account.hasChild == false && account.type == 'ASSET'
           ? const Text("Opening Balnce : 12,650.0")
           : const Text("Budget: 5000.0"),
       trailing: account.hasChild == true
-          ? const Icon(IcoFontIcons.arrowRight)
+          ? Icon(
+              IcoFontIcons.arrowRight,
+              color: Theme.of(context).primaryColorLight,
+            )
           : const SizedBox.shrink(),
-      // onTap: () => account.hasChild == true
-      //     ? Navigator.pushNamed(context, "/account_list",
-      //         arguments: {'parent': account.id, 'name': account.name})
-      //     : Navigator.pushNamed(context, "/account_statement",
-      //         arguments: {'id': account.id, 'name': account.name}),
+      onTap: () => account.hasChild == true
+          ? Navigator.pushNamed(context, "/account_list",
+              arguments: {'parent': account.id, 'name': account.name})
+          : Navigator.pushNamed(context, "/account_statement",
+              arguments: {'id': account.id, 'name': account.name}),
     );
   }
 }

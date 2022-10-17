@@ -20,38 +20,6 @@ class AccountSelectScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text("Select Account"),
       ),
-      // bottomSheet: false == false
-      //     ? Row(
-      //         children: [
-      //           Expanded(
-      //             child: Container(
-      //               color: Colors.lightBlue.shade100,
-      //               child: TextButton(
-      //                   onPressed: () => Navigator.pushNamed(
-      //                       context, "/payment",
-      //                       arguments: account),
-      //                   child: const Text(
-      //                     "PAYMENT",
-      //                     style: TextStyle(color: Colors.black),
-      //                   )),
-      //             ),
-      //           ),
-      //           Expanded(
-      //             child: Container(
-      //               color: Colors.lightGreen.shade100,
-      //               child: TextButton(
-      //                   onPressed: () => Navigator.pushNamed(
-      //                       context, "/receipt",
-      //                       arguments: account),
-      //                   child: const Text(
-      //                     "RECEIPT",
-      //                     style: TextStyle(color: Colors.black),
-      //                   )),
-      //             ),
-      //           ),
-      //         ],
-      //       )
-      //     : const SizedBox.shrink(),
       body: SafeArea(
           child: accounts.when(
         error: (error, stackTrace) => Text(error.toString()),
@@ -102,7 +70,7 @@ class AccountSelectScreen extends ConsumerWidget {
                               )
                             : AccountItem(
                                 account: account,
-                                color: Theme.of(context).selectedRowColor,
+                                // color: Theme.of(context).primaryColorLight,
                               ),
                       ),
                     );

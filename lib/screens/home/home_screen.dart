@@ -75,8 +75,8 @@ class _HomePageState extends ConsumerState<HomeScreen> {
         child: Container(
           padding: const EdgeInsets.only(top: 20),
           child: ListTileTheme(
-            textColor: Colors.white,
-            iconColor: Colors.white,
+            // textColor: Colors.white,
+            // iconColor: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -88,8 +88,8 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                     top: 24.0.sp,
                   ),
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade800,
+                  decoration: const BoxDecoration(
+                    // color: Colors.grey.shade800,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -168,7 +168,6 @@ class _HomePageState extends ConsumerState<HomeScreen> {
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.grey.shade100,
         body: homeData.when(
           error: (error, stackTrace) => ErrorScreen(msg: error.toString()),
           loading: () => const Center(
@@ -186,7 +185,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                     stretch: true,
                     toolbarHeight: 80.sp,
                     leading: IconButton(
-                      color: Colors.black,
+                      // color: Colors.black,
                       onPressed: _handleMenuButtonPressed,
                       icon: ValueListenableBuilder<AdvancedDrawerValue>(
                         valueListenable: _advancedDrawerController,
@@ -195,7 +194,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                             duration: const Duration(milliseconds: 250),
                             child: Icon(
                               value.visible ? IcoFontIcons.close : Iconsax.menu,
-                              color: Colors.white,
+                              // color: Colors.white,
                               key: ValueKey<bool>(value.visible),
                             ),
                           );
@@ -204,12 +203,17 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                     ),
                     actions: [
                       IconButton(
-                        icon: const Icon(Iconsax.notification,
-                            color: Colors.white),
+                        icon: const Icon(
+                          Iconsax.notification,
+                          // color: Colors.white,
+                        ),
                         onPressed: () {},
                       ),
                       IconButton(
-                        icon: const Icon(Iconsax.more, color: Colors.white),
+                        icon: const Icon(
+                          Iconsax.more,
+                          // color: Colors.white,
+                        ),
                         onPressed: () {},
                       ),
                     ],
@@ -228,7 +232,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                           Text(
                             getSetting(key: 'name').value.toString(),
                             style: TextStyle(
-                              color: Colors.white,
+                              // color: Colors.white,
                               fontSize: 18.0.sp,
                               fontWeight: FontWeight.bold,
                             ),
@@ -240,7 +244,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                             width: 30.0.sp,
                             height: 4.0.sp,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              // color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -260,14 +264,14 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                             Text(
                               data.thisDay['title'],
                               style: TextStyle(
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   fontSize: 11.sp,
                                   fontWeight: FontWeight.bold),
                             ),
                             UIHelper.verticalSpaceSmall(),
                             Container(
                               decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 1, 139, 252),
+                                color: Theme.of(context).disabledColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               padding: EdgeInsets.symmetric(
@@ -283,7 +287,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                         Text(
                                           "Income",
                                           style: const TextStyle().copyWith(
-                                              color: Colors.white54,
+                                              // color: Colors.white54,
                                               fontSize: 10.sp),
                                         ),
                                         UIHelper.verticalSpaceExtraSmall(),
@@ -292,7 +296,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                             Icon(
                                               currencySymbol(),
                                               size: 14.0.sp,
-                                              color: Colors.white30,
+                                              // color: Colors.white30,
                                             ),
                                             Text(
                                               data.thisDay['income'].toString(),
@@ -300,7 +304,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                      color: Colors.white,
+                                                      // color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold),
                                             ),
@@ -313,7 +317,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                     fit: FlexFit.tight,
                                     child: VerticalDivider(
                                       thickness: 1.8.sp,
-                                      color: Colors.white,
+                                      // color: Colors.white,
                                       // width: 10,
                                     ),
                                   ),
@@ -325,7 +329,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                         Text(
                                           "Expenditure",
                                           style: const TextStyle().copyWith(
-                                              color: Colors.white54,
+                                              // color: Colors.white54,
                                               fontSize: 10.sp),
                                         ),
                                         UIHelper.verticalSpaceExtraSmall(),
@@ -334,7 +338,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                             Icon(
                                               currencySymbol(),
                                               size: 14.0.sp,
-                                              color: Colors.white30,
+                                              // color: Colors.white30,
                                             ),
                                             Text(
                                               data.thisDay['expenditure']
@@ -343,7 +347,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                      color: Colors.white,
+                                                      // color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold),
                                             ),
@@ -360,7 +364,6 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                               width: 30.0.sp,
                               height: 3.0.sp,
                               decoration: BoxDecoration(
-                                color: Colors.white24,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
