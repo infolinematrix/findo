@@ -1,6 +1,5 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/theme/constants.dart';
-import 'package:finsoft2/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
@@ -23,7 +22,7 @@ class AccountListItemWidget extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 4.0.sp),
         padding: EdgeInsets.all(4.0.sp),
         decoration: BoxDecoration(
-          color: AppColors.black2,
+          // color: AppColors.black2,
           borderRadius: BorderRadius.all(
             Radius.circular(8.sp),
           ),

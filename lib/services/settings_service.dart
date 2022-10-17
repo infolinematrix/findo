@@ -50,11 +50,120 @@ final createSettings = FutureProvider.autoDispose
        */
       ScrollModel scroll = ScrollModel(slno: 0);
       scrollBox.put(scroll);
-      objBox!.store.awaitAsyncSubmitted();
 
       /**
-       * Final returns
+       * Inital Accounts
        */
+      List<AccountsModel> accounts = [
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Bank Accounts",
+            parent: 0,
+            type: 'BANK',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: true),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Household Expenses",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Personal Expenses",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Travelling & Conveyance",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Health & Medical",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Entertainment Expenses",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Restaurant & Refreshment",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+        AccountsModel(
+            createdOn: DateTime.now().toLocal(),
+            hasChild: true,
+            name: "Utility Expenses",
+            parent: 0,
+            type: 'EXPENSES',
+            allowAlert: false,
+            allowPayment: false,
+            allowReceipt: false,
+            allowTransfer: false,
+            isActive: true,
+            isLocked: false,
+            isSystem: false),
+      ];
+
+      accountBox.putMany(accounts);
+
+      objBox!.store.awaitAsyncSubmitted();
       done = true;
     });
   } catch (e) {

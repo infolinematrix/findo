@@ -12,11 +12,11 @@ class FormButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45.h,
+      height: 40.h,
       child: ElevatedButton(
         onPressed: () => onTap(),
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all<double>(0.0),
+          elevation: MaterialStateProperty.all<double>(1.0),
           textStyle: MaterialStateProperty.resolveWith((states) {
             return TextStyle(
               fontSize: 14.sp,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/styles.dart';
 import '../utils/index.dart';
 
 class Loading extends StatelessWidget {
@@ -26,8 +25,8 @@ class Loading extends StatelessWidget {
                     const Text("Loading.."),
                     UIHelper.verticalSpaceSmall(),
                     const LinearProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ),
+                        // color: AppColors.primaryColor,
+                        ),
                   ],
                 ),
               ),

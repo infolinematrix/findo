@@ -26,6 +26,8 @@ class AccountsModel {
   bool? allowTransfer;
   double? openingBalance;
 
+  String description;
+
   @Property(type: PropertyType.date)
   DateTime? createdOn;
 
@@ -45,5 +47,6 @@ class AccountsModel {
     this.allowTransfer = false,
     this.openingBalance = 0.00,
     required this.createdOn,
+    this.description = '',
   });
 }

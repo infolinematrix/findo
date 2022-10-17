@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_controller.dart';
-import 'package:finsoft2/theme/styles.dart';
 import 'package:finsoft2/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -98,9 +97,13 @@ class AccountSelectScreen extends ConsumerWidget {
                         duration: Duration(milliseconds: (index + 1) * 100),
                         child: index % 2 != 0
                             ? AccountItem(
-                                account: account, color: AppColors.listColor1)
+                                account: account,
+                                // color: AppColors.listColor1,
+                              )
                             : AccountItem(
-                                account: account, color: AppColors.listColor2),
+                                account: account,
+                                // color: AppColors.listColor2,
+                              ),
                       ),
                     );
                   },

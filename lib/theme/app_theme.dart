@@ -3,6 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+InputDecoration checkBoxDecoration() {
+  return const InputDecoration(
+    contentPadding: EdgeInsets.symmetric(horizontal: 0),
+    filled: false,
+    // fillColor: Colors.transparent,
+    border: InputBorder.none,
+    focusedBorder: InputBorder.none,
+    enabledBorder: InputBorder.none,
+    errorBorder: InputBorder.none,
+    disabledBorder: InputBorder.none,
+  );
+}
+
 InputDecorationTheme inputTheme(bool isDarkTheme) {
   return InputDecorationTheme(
     // contentPadding: EdgeInsets.all(14.0.sp),
@@ -52,9 +65,10 @@ class AppThemeState extends ChangeNotifier {
 class AppStyles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.blue,
+      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.blueGrey,
       primaryColor: isDarkTheme ? Colors.black : Colors.white,
       backgroundColor: isDarkTheme ? Colors.black : const Color(0xffF1F5FB),
+
       indicatorColor:
           isDarkTheme ? const Color(0xff0E1D36) : const Color(0xffCBDCF8),
       hintColor:
@@ -67,7 +81,7 @@ class AppStyles {
           isDarkTheme ? const Color(0xff0B2512) : const Color(0xffA8DAB5),
       disabledColor: Colors.grey,
       cardColor: isDarkTheme ? const Color(0xFF151515) : Colors.white,
-      canvasColor: isDarkTheme ? Colors.black : Colors.grey.shade50,
+      canvasColor: isDarkTheme ? Colors.black : Colors.grey.shade100,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
 
       //------------
@@ -86,9 +100,11 @@ class AppStyles {
       textSelectionTheme: TextSelectionThemeData(
           selectionColor: isDarkTheme ? Colors.white : Colors.black),
       inputDecorationTheme: inputTheme(isDarkTheme),
-      // outlinedButtonTheme: OutlinedButtonThemeData(
-      //     style: OutlinedButton.styleFrom(
-      //         foregroundColor: isDarkTheme ? Colors.white : Colors.white)),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+            foregroundColor: isDarkTheme ? Colors.white : Colors.white),
+      ),
     );
   }
 }

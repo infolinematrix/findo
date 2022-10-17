@@ -8,6 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+import '../../widgets/index.dart';
+
 class BankAccountCreateScreen extends ConsumerWidget {
   const BankAccountCreateScreen({super.key});
 
@@ -43,6 +45,7 @@ class BankAccountCreateScreen extends ConsumerWidget {
               child: FormBuilder(
                 key: formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(
                       height: inputHeight,
@@ -105,6 +108,29 @@ class BankAccountCreateScreen extends ConsumerWidget {
                         ),
                       ],
                     ),
+                    UIHelper.verticalSpaceExtraLarge(),
+                    FormButton(
+                        text: const Text("SUBMIT"),
+                        onTap: () async {
+                          if (formKey.currentState?.saveAndValidate() ??
+                              false) {
+                            await ref
+                                .read(initailBankAccountsProvider.notifier)
+                                .create(formKey.currentState?.value
+                                    as Map<String, dynamic>)
+                                .then((value) {
+                              if (value == true) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, "/home", (route) => false);
+                              } else {
+                                showToast(msg: 'Something went wrong!');
+                              }
+                            });
+                          } else {
+                            debugPrint(formKey.currentState?.value.toString());
+                            showToast(msg: 'validation failed');
+                          }
+                        }),
                   ],
                 ),
               ),

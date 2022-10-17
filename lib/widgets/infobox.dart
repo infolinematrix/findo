@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/styles.dart';
-
 class InfoBox extends StatelessWidget {
   final Widget text;
   final Color? color;
@@ -11,7 +9,7 @@ class InfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: color ?? AppColors.lightGrey,
+      // color: color ?? AppColors.lightGrey,
       padding: EdgeInsets.all(16.0.sp),
       child: text,
     );

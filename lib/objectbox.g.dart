@@ -25,7 +25,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 8080568095172796682),
       name: 'AccountsModel',
-      lastPropertyId: const IdUid(18, 204342999415530558),
+      lastPropertyId: const IdUid(19, 1165211752446481084),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -106,6 +106,11 @@ final _entities = <ModelEntity>[
             id: const IdUid(18, 204342999415530558),
             name: 'isLocked',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(19, 1165211752446481084),
+            name: 'description',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -293,7 +298,8 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (AccountsModel object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final typeOffset = fbb.writeString(object.type);
-          fbb.startTable(19);
+          final descriptionOffset = fbb.writeString(object.description);
+          fbb.startTable(20);
           fbb.addInt64(0, object.id);
           fbb.addOffset(1, nameOffset);
           fbb.addBool(2, object.isActive);
@@ -309,6 +315,7 @@ ModelDefinition getObjectBoxModel() {
           fbb.addBool(15, object.hasChild);
           fbb.addBool(16, object.allowAlert);
           fbb.addBool(17, object.isLocked);
+          fbb.addOffset(18, descriptionOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -342,7 +349,8 @@ ModelDefinition getObjectBoxModel() {
               allowReceipt: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 22),
               allowTransfer: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 26),
               openingBalance: const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 28),
-              createdOn: createdOnValue == null ? null : DateTime.fromMillisecondsSinceEpoch(createdOnValue));
+              createdOn: createdOnValue == null ? null : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
+              description: const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 40, ''));
 
           return object;
         }),
@@ -533,6 +541,10 @@ class AccountsModel_ {
   /// see [AccountsModel.isLocked]
   static final isLocked =
       QueryBooleanProperty<AccountsModel>(_entities[0].properties[14]);
+
+  /// see [AccountsModel.description]
+  static final description =
+      QueryStringProperty<AccountsModel>(_entities[0].properties[15]);
 }
 
 /// [SettingsModel] entity fields to define ObjectBox queries.

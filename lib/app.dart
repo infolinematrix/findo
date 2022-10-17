@@ -1,8 +1,9 @@
 import 'package:finsoft2/screens/error_screen.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
 import 'package:finsoft2/screens/onboard/onboard_screen.dart';
+import 'package:finsoft2/screens/settings/bank_account_create_screen.dart';
+import 'package:finsoft2/screens/settings/settings_controller.dart';
 import 'package:finsoft2/screens/settings/settings_screen.dart';
-import 'package:finsoft2/services/settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +18,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settingExist = ref.watch(hasSettings);
+    final intApp = ref.watch(inttAppProvider);
     final appThemeState = ref.watch(appThemeStateNotifier);
     return ScreenUtilInit(
         designSize: const Size(375, 812 - 44 - 34),
@@ -35,15 +36,19 @@ class App extends ConsumerWidget {
 
             onGenerateRoute: AppPages.onGenerateRoute,
             builder: EasyLoading.init(),
-            home: settingExist.when(
+            home: intApp.when(
               loading: () => const OnBoardScreen(),
               error: (err, stack) => ErrorScreen(msg: err.toString()),
               data: (data) {
-                if (data == true) {
-                  return const HomeScreen();
-                  // return const OnBoardScreen();
+                if (data.settings.isNotEmpty) {
+                  if (data.bankAccounts.isNotEmpty) {
+                    return const HomeScreen();
+                  } else {
+                    return const BankAccountCreateScreen();
+                  }
+                } else {
+                  return const SettingsScreen();
                 }
-                return const SettingsScreen();
               },
             ),
             // home: const HomeScreen(),

@@ -1,7 +1,6 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
 import 'package:finsoft2/services/settings_service.dart';
-import 'package:finsoft2/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -234,7 +233,7 @@ class ReceiptScreen extends ConsumerWidget {
                                   )
                                 : const InfoBox(
                                     text: Text("Please add a Bank account"),
-                                    color: AppColors.darkOrage,
+                                    // color: AppColors.darkOrage,
                                   ),
                           ],
                         )

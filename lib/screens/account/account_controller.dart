@@ -70,30 +70,33 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
     }
   }
 
-  //--GET
-  Future get({required int id}) async {
+  //--DELETE
+  Future<bool> delete() async {
     try {
-      final data = accountBox.get(id);
-      return data;
+      final response = await AccountRepository().delete(id: account);
+      getAccounts(account);
+      return response;
     } catch (e) {
       return false;
     }
   }
 
-  //--DELETE
-  Future<bool> delete({required int id}) async {
-    try {
-      return true;
-    } catch (e) {
-      return false;
-    }
+  Future getAccount() async {
+    final response = await AccountRepository().get(id: account);
+
+    return response;
   }
 
   //--UPDATE
   Future<bool> update(
-      {required int id, required Map<String, dynamic> formData}) async {
+      {required int accountId,
+      required int parentId,
+      required Map<String, dynamic> formData}) async {
     try {
-      return true;
+      final response =
+          await AccountRepository().update(id: account, formData: formData);
+
+      return response;
     } catch (e) {
       return false;
     }
@@ -113,5 +116,3 @@ class OperationalAccountsNotifier
     state = AsyncValue<List<AccountsModel>>.data(data);
   }
 }
-
-

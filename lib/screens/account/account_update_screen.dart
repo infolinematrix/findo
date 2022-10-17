@@ -1,64 +1,42 @@
+import 'package:finsoft2/constants/constants.dart';
+import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_controller.dart';
+import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/app_theme.dart';
+import 'package:finsoft2/theme/constants.dart';
+import 'package:finsoft2/utils/index.dart';
+import 'package:finsoft2/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../../constants/constants.dart';
-import '../../services/settings_service.dart';
-import '../../theme/constants.dart';
-import '../../utils/index.dart';
-import '../../widgets/index.dart';
-
-class AccountCreateScreen extends ConsumerWidget {
-  const AccountCreateScreen({Key? key, required this.account})
-      : super(key: key);
-  final Map<String, dynamic> account;
+class AccountUpdateScreen extends ConsumerWidget {
+  const AccountUpdateScreen({super.key, required this.account});
+  final AccountsModel account;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormBuilderState>();
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Create")),
+      appBar: AppBar(title: Text(account.name)),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: FormBuilder(
-            key: formKey,
-            child: Card(
-              child: Container(
-                padding: EdgeInsets.all(16.0.sp),
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(16.0.sp),
+              child: FormBuilder(
+                key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(
                       height: inputHeight,
                       child: FormBuilderTextField(
-                        name: 'group',
-                        style: inputTextStyle,
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.max(70),
-                        ]),
-                        decoration: const InputDecoration(
-                          labelText: 'Parent Account',
-                        ),
-                        enabled: false,
-                        initialValue:
-                            account['parent'] == 0 ? "Root" : account['name'],
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        textCapitalization: TextCapitalization.words,
-                      ),
-                    ),
-                    UIHelper.verticalSpaceSmall(),
-                    SizedBox(
-                      height: inputHeight,
-                      child: FormBuilderTextField(
                         name: 'name',
                         style: inputTextStyle,
+                        initialValue: account.name,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(),
                         ]),
@@ -87,6 +65,7 @@ class AccountCreateScreen extends ConsumerWidget {
                               name: 'accountType',
                               initialValue: 'EXPENSES',
                               isExpanded: true,
+                              enabled: false,
                               decoration: const InputDecoration(
                                 labelText: 'Account Type',
                               ),
@@ -107,90 +86,99 @@ class AccountCreateScreen extends ConsumerWidget {
                         ),
                         UIHelper.horizontalSpaceSmall(),
                         Expanded(
-                          child: SizedBox(
-                            height: inputHeight,
-                            child: FormBuilderDropdown(
-                              name: 'hasChild',
-                              isExpanded: true,
-                              initialValue: ref.read(hasChildProvider),
-                              decoration: const InputDecoration(
-                                labelText: 'Has Child',
-                              ),
-                              validator: FormBuilderValidators.compose(
-                                  [FormBuilderValidators.required()]),
-                              items: yesNo
-                                  .map((yn) => DropdownMenuItem<bool>(
-                                        alignment:
-                                            AlignmentDirectional.centerStart,
-                                        value: yn['key'] as bool,
-                                        child: Text(yn['value'].toString()),
-                                      ))
-                                  .toList(),
-                              onChanged: (val) {
-                                ref.read(hasChildProvider.state).state =
-                                    val as bool;
-                              },
-                              // valueTransformer: (val) => val?.toString(),
+                            child: SizedBox(
+                          height: inputHeight,
+                          child: FormBuilderDropdown(
+                            name: 'hasChild',
+                            isExpanded: true,
+                            enabled: false,
+                            initialValue: account.hasChild,
+                            decoration: const InputDecoration(
+                              labelText: 'Has Child',
                             ),
+                            validator: FormBuilderValidators.compose(
+                                [FormBuilderValidators.required()]),
+                            items: yesNo
+                                .map((yn) => DropdownMenuItem<bool>(
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
+                                      value: yn['key'] as bool,
+                                      child: Text(yn['value'].toString()),
+                                    ))
+                                .toList(),
                           ),
-                        ),
+                        )),
                       ],
                     ),
                     UIHelper.verticalSpaceSmall(),
-                    ref.watch(hasChildProvider) == false
+                    account.hasChild == false
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: inputHeight,
-                                      child: FormBuilderTextField(
-                                        name: 'budget',
-                                        style: inputTextStyle,
-                                        decoration: InputDecoration(
-                                          labelText: 'Monthly Budget',
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.always,
-                                          suffixIcon: Icon(
-                                            currencySymbol(),
-                                            size: 16.0.sp,
+                                  account.type != 'BANK'
+                                      ? Expanded(
+                                          child: SizedBox(
+                                            height: inputHeight,
+                                            child: FormBuilderTextField(
+                                              name: 'budget',
+                                              style: inputTextStyle,
+                                              decoration: InputDecoration(
+                                                labelText: 'Monthly Budget',
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior
+                                                        .always,
+                                                suffixIcon: Icon(
+                                                  currencySymbol(),
+                                                  size: 16.0.sp,
+                                                ),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              textCapitalization:
+                                                  TextCapitalization.words,
+                                            ),
                                           ),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textInputAction: TextInputAction.next,
-                                        textCapitalization:
-                                            TextCapitalization.words,
-                                      ),
-                                    ),
-                                  ),
-                                  UIHelper.horizontalSpaceSmall(),
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: inputHeight,
-                                      child: FormBuilderTextField(
-                                        name: 'openingBalance',
-                                        style: inputTextStyle,
-                                        decoration: InputDecoration(
-                                          labelText: 'Opening Balance',
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.always,
-                                          suffixIcon: Icon(
-                                            currencySymbol(),
-                                            size: 16.0.sp,
+                                        )
+                                      : const SizedBox.shrink(),
+                                  account.type == 'BANK' &&
+                                          account.type == 'ASSETS'
+                                      ? UIHelper.horizontalSpaceSmall()
+                                      : const SizedBox.shrink(),
+                                  account.type == 'BANK' ||
+                                          account.type == 'ASSETS'
+                                      ? Expanded(
+                                          child: SizedBox(
+                                            height: inputHeight,
+                                            child: FormBuilderTextField(
+                                              name: 'openingBalance',
+                                              style: inputTextStyle,
+                                              decoration: InputDecoration(
+                                                labelText: 'Opening Balance',
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior
+                                                        .always,
+                                                suffixIcon: Icon(
+                                                  currencySymbol(),
+                                                  size: 16.0.sp,
+                                                ),
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              textCapitalization:
+                                                  TextCapitalization.words,
+                                            ),
                                           ),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textInputAction: TextInputAction.next,
-                                        textCapitalization:
-                                            TextCapitalization.words,
-                                      ),
-                                    ),
-                                  ),
+                                        )
+                                      : const SizedBox.shrink(),
                                 ],
                               ),
-                              // UIHelper.verticalSpaceSmall(),
+                              UIHelper.verticalSpaceSmall(),
                               Text(
                                 "Leave blank if you have unlimited budget",
                                 style: Theme.of(context).textTheme.bodySmall,
@@ -200,7 +188,6 @@ class AccountCreateScreen extends ConsumerWidget {
                                 "Allow Transaction mode",
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
-                              UIHelper.verticalSpaceSmall(),
                               Row(
                                 children: [
                                   Expanded(
@@ -240,16 +227,11 @@ class AccountCreateScreen extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-
-                              Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 0.0.w),
-                                child: Text(
-                                  "Settings",
-                                  style: Theme.of(context).textTheme.bodyText1,
-                                ),
+                              // UIHelper.verticalSpaceMedium(),
+                              Text(
+                                "Settings",
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
-                              UIHelper.verticalSpaceSmall(),
                               Row(
                                 children: [
                                   Expanded(
@@ -275,9 +257,7 @@ class AccountCreateScreen extends ConsumerWidget {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: SizedBox(height: inputHeight),
-                                  ),
+                                  const Expanded(child: SizedBox.shrink())
                                 ],
                               ),
                             ],
@@ -289,18 +269,19 @@ class AccountCreateScreen extends ConsumerWidget {
                         onTap: () async {
                           if (formKey.currentState?.saveAndValidate() ??
                               false) {
-                            final data = {
-                              'parent': account['parent'],
-                              ...formKey.currentState!.value
-                            };
-
                             await ref
-                                .read(
-                                    accountProvider(account['parent']).notifier)
-                                .create(formData: data)
+                                .read(accountProvider(account.id).notifier)
+                                .update(
+                                    accountId: account.id,
+                                    parentId: account.parent!,
+                                    formData: formKey.currentState!.value)
                                 .then((value) {
                               if (value == true) {
-                                showToast(msg: 'Account Created successfully!');
+                                ref
+                                    .read(accountProvider(account.parent!)
+                                        .notifier)
+                                    .getAccounts(account.parent!);
+                                showToast(msg: 'Account Updated successfully!');
                                 Navigator.pop(context);
                               } else {
                                 showToast(msg: 'Invalid! may be duplicate');

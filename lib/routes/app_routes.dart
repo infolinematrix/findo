@@ -15,6 +15,7 @@ abstract class Routes {
 
   //--Accounts
   static const accountCreate = '/account_create';
+  static const accountUpdate = '/account_update';
   static const accountList = '/account_list';
   static const accountStatement = '/account_statement';
 

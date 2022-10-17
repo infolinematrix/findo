@@ -47,9 +47,10 @@ void main() async {
     );
     // Transparent status bar
     if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          const SystemUiOverlayStyle(statusBarColor: Colors.black);
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+      // SystemUiOverlayStyle systemUiOverlayStyle =
+      //     const SystemUiOverlayStyle(statusBarColor: Colors.blue);
+      // SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     }
   }, (Object error, StackTrace stack) {
     ErrorScreen(msg: error.toString());

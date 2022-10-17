@@ -1,9 +1,11 @@
 import 'package:finsoft2/data/models/accounts_model.dart';
+import 'package:finsoft2/data/models/transactions_model.dart';
 import 'package:finsoft2/data/source/objectstore.dart';
 import 'package:finsoft2/objectbox.g.dart';
 
 class AccountRepository {
   final accountBox = objBox!.store.box<AccountsModel>();
+  final transactionBox = objBox!.store.box<TransactionsModel>();
 
   //--List
   list({required int parent}) {
@@ -90,14 +92,69 @@ class AccountRepository {
   }
 
   //--Get
-  Future get({required id}) async {}
+  Future get({required id}) async {
+    final account = accountBox.get(id);
+
+    return account!;
+  }
 
   //--Create
   Future create() async {}
 
   //--Update
-  Future update({required id, required Map<String, dynamic> formData}) async {}
+  Future update({required id, required Map<String, dynamic> formData}) async {
+    final account = accountBox.get(id);
+    account!.name = formData['name'].toString().trim();
+
+    accountBox.putAsync(account);
+
+    return true;
+  }
 
   //--Delete
-  Future delete({required id}) async {}
+
+  Future<bool> delete({required id}) async {
+    /**
+       * Account can't delete
+       * 1) accout is System
+       * 2) account is Inactive
+       * 3) account has transactions
+       * 4) account is locked
+       * 5) account has Child account
+       */
+
+    bool childAccountExist = true;
+    bool hasTransactions = true;
+
+    final account = accountBox.get(id);
+
+    //--Has child Account
+    QueryBuilder<AccountsModel> childBuilder =
+        accountBox.query(AccountsModel_.parent.equals(account!.id));
+    Query<AccountsModel> childQuery = childBuilder.build();
+    List<AccountsModel> chidData = childQuery.find().toList();
+    childQuery.close();
+
+    if (chidData.isEmpty) {
+      childAccountExist = false;
+    }
+
+    QueryBuilder<TransactionsModel> builder =
+        transactionBox.query(TransactionsModel_.account.equals(account.id));
+    Query<TransactionsModel> query = builder.build();
+    List<TransactionsModel> data = query.find().toList();
+    query.close();
+    if (data.isEmpty) hasTransactions = false;
+
+    if (childAccountExist == false &&
+        hasTransactions == false &&
+        account.isSystem == false &&
+        account.isLocked == false &&
+        account.isActive == true) {
+      accountBox.remove(account.id);
+      return true;
+    }
+
+    return false;
+  }
 }

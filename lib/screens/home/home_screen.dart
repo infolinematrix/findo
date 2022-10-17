@@ -10,7 +10,6 @@ import 'package:icofont_flutter/icofont_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../services/settings_service.dart';
-import '../../theme/styles.dart';
 import '../../utils/index.dart';
 import '../../widgets/index.dart';
 import '../error_screen.dart';
@@ -193,7 +192,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                     pinned: true,
                     stretch: true,
                     toolbarHeight: 80.sp,
-                    backgroundColor: AppColors.primaryColor,
+                    // backgroundColor: AppColors.primaryColor,
                     leading: IconButton(
                       color: Colors.black,
                       onPressed: _handleMenuButtonPressed,
@@ -1010,7 +1009,7 @@ class MainMenuWidget extends StatelessWidget {
                             width: 60.sp,
                             height: 60.sp,
                             decoration: BoxDecoration(
-                              color: AppColors.primaryColor,
+                              // color: AppColors.primaryColor,
                               borderRadius: BorderRadius.circular(20.sp),
                             ),
                             child: Center(

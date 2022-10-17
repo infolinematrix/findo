@@ -2,7 +2,6 @@ import 'package:finsoft2/constants/constants.dart';
 import 'package:finsoft2/screens/transactions/transation_controller.dart';
 import 'package:finsoft2/services/settings_service.dart';
 import 'package:finsoft2/theme/constants.dart';
-import 'package:finsoft2/theme/styles.dart';
 import 'package:finsoft2/utils/index.dart';
 import 'package:finsoft2/widgets/index.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +116,7 @@ class _TransferScreenState extends ConsumerState<TransferScreen> {
                           )
                         : const InfoBox(
                             text: Text("Please add a Bank account"),
-                            color: AppColors.darkOrage,
+                            // color: AppColors.darkOrage,
                           ),
                   ),
                   UIHelper.verticalSpaceSmall(),
