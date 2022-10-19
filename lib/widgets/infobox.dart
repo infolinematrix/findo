@@ -10,7 +10,7 @@ class InfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: color ?? Colors.white,
+      color: color ?? Theme.of(context).primaryColorLight,
       padding: EdgeInsets.all(16.0.sp),
       child: text,
     );

@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:finsoft2/data/models/accounts_model.dart';
 import 'package:finsoft2/screens/account/account_controller.dart';
+import 'package:finsoft2/theme/constants.dart';
 import 'package:finsoft2/utils/index.dart';
 import 'package:finsoft2/widgets/index.dart';
 import 'package:flutter/material.dart';
@@ -77,37 +78,56 @@ class AccountSelectScreen extends ConsumerWidget {
                   itemBuilder: (BuildContext context, int index) {
                     AccountsModel account = data[index];
 
-                    final accountModelMap = account;
-
-                    return InkWell(
-                      onTap: () {
-                        switch (txnType) {
-                          case "RECEIPT":
-                            Navigator.pushNamed(
-                                context, "/account_transactions", arguments: {
-                              'txnType': 'RECEIPT',
-                              'account': accountModelMap
-                            });
-                            break;
-                          default:
-                            Navigator.pushNamed(
-                                context, "/account_transactions", arguments: {
-                              'txnType': 'PAYMENT',
-                              'account': accountModelMap
-                            });
-                        }
-                      },
-                      child: FadeInDown(
-                        duration: Duration(milliseconds: (index + 1) * 100),
-                        child: index % 2 != 0
-                            ? AccountItem(
-                                account: account,
-                                color: Theme.of(context).primaryColor,
-                              )
-                            : AccountItem(
-                                account: account,
-                                color: Theme.of(context).primaryColor,
-                              ),
+                    return FadeInDown(
+                      duration: Duration(milliseconds: (index + 1) * 100),
+                      child: ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                        leading: Container(
+                          width: 30.0.w,
+                          margin: EdgeInsets.symmetric(vertical: 4.0.sp),
+                          padding: EdgeInsets.all(4.0.sp),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColorLight,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(8.sp),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              account.name[0],
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          Theme.of(context).primaryColorDark),
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          account.name,
+                          style: listTileStyle.copyWith(),
+                        ),
+                        subtitle: const Text("Budget: 5000.0"),
+                        onTap: () {
+                          switch (txnType) {
+                            case "RECEIPT":
+                              Navigator.pushNamed(
+                                  context, "/account_transactions", arguments: {
+                                'txnType': 'RECEIPT',
+                                'account': account
+                              });
+                              break;
+                            default:
+                              Navigator.pushNamed(
+                                  context, "/account_transactions", arguments: {
+                                'txnType': 'PAYMENT',
+                                'account': account
+                              });
+                          }
+                        },
                       ),
                     );
                   },
