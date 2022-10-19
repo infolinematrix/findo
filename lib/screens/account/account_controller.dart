@@ -43,7 +43,7 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
         isSystem: false,
         parent: int.parse(formData['parent'].toString()).toInt(),
         hasChild: formData['hasChild'],
-        type: formData['accountType'],
+        type: formData['parentAccountType'],
         createdOn: convertDateToLocal(DateTime.now().toString()),
         allowPayment: formData['allowPayment'] ?? false,
         allowReceipt: formData['allowReceipt'] ?? false,
@@ -55,9 +55,6 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
             ? double.parse(formData['openingBalance'].toString()).toDouble()
             : 0.0,
       );
-
-      // final ledger = ledgerBox.get(formData['ledgerId']);
-      // data.ledger.target = ledger;
 
       accountBox.put(data);
       objBox!.store.awaitAsyncSubmitted();
