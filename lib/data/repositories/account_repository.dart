@@ -7,6 +7,21 @@ class AccountRepository {
   final accountBox = objBox!.store.box<AccountsModel>();
   final transactionBox = objBox!.store.box<TransactionsModel>();
 
+  //** GROUPS **//
+  Future<List<AccountsModel>> allGroups() async {
+    QueryBuilder<AccountsModel> builder = accountBox.query(
+        AccountsModel_.isActive.equals(true) &
+            AccountsModel_.name.notEquals('') &
+            AccountsModel_.parent.equals(0))
+      ..order(AccountsModel_.name, flags: Order.caseSensitive);
+
+    Query<AccountsModel> query = builder.build();
+    List<AccountsModel> data = query.find().toList();
+
+    query.close();
+    return data;
+  }
+
   //--List
   list({required int parent}) {
     QueryBuilder<AccountsModel> builder = accountBox.query(
@@ -29,6 +44,8 @@ class AccountRepository {
         QueryBuilder<AccountsModel> builder = accountBox.query(
             AccountsModel_.isActive.equals(true) &
                 AccountsModel_.name.notEquals('') &
+                AccountsModel_.parent.notEquals(0) &
+                AccountsModel_.hasChild.equals(false) &
                 AccountsModel_.allowReceipt.equals(true))
           ..order(AccountsModel_.name, flags: Order.caseSensitive);
 
@@ -42,6 +59,8 @@ class AccountRepository {
         QueryBuilder<AccountsModel> builder = accountBox.query(
             AccountsModel_.isActive.equals(true) &
                 AccountsModel_.name.notEquals('') &
+                AccountsModel_.parent.notEquals(0) &
+                AccountsModel_.hasChild.equals(false) &
                 AccountsModel_.allowTransfer.equals(true))
           ..order(AccountsModel_.name, flags: Order.caseSensitive);
 
@@ -55,6 +74,8 @@ class AccountRepository {
         QueryBuilder<AccountsModel> builder = accountBox.query(
             AccountsModel_.isActive.equals(true) &
                 AccountsModel_.name.notEquals('') &
+                AccountsModel_.parent.notEquals(0) &
+                AccountsModel_.hasChild.equals(false) &
                 AccountsModel_.allowPayment.equals(true))
           ..order(AccountsModel_.name, flags: Order.caseSensitive);
 
@@ -97,9 +118,6 @@ class AccountRepository {
 
     return account!;
   }
-
-  //--Create
-  Future create() async {}
 
   //--Update
   Future update({required id, required Map<String, dynamic> formData}) async {

@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final accountBox = objBox!.store.box<AccountsModel>();
 
-final hasChildProvider = StateProvider<bool>((ref) => false);
+final hasChildProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 final accountProvider = StateNotifierProvider.autoDispose
     .family<AccountState, AsyncValue<List<AccountsModel>>, int>((ref, account) {
@@ -35,20 +35,22 @@ class AccountState extends StateNotifier<AsyncValue<List<AccountsModel>>> {
   }
 
   //--CREATE
-  Future<bool> create({required Map<String, dynamic> formData}) async {
+  Future<bool> create(
+      {required AccountsModel parent,
+      required Map<String, dynamic> formData}) async {
     try {
       final data = AccountsModel(
         name: formData['name'].toString().trim(),
         isActive: formData['isActive'] ?? true,
-        isSystem: false,
-        parent: int.parse(formData['parent'].toString()).toInt(),
-        hasChild: formData['hasChild'],
-        type: formData['parentAccountType'],
+        parent: parent.id,
+        description: formData['description'].toString().trim(),
+        hasChild: formData['hasChild'] ?? false,
+        type: parent.type.toString().trim(),
         createdOn: convertDateToLocal(DateTime.now().toString()),
-        allowPayment: formData['allowPayment'] ?? false,
-        allowReceipt: formData['allowReceipt'] ?? false,
-        allowTransfer: formData['allowTransfer'] ?? false,
-        budget: formData['budget'] != null
+        allowPayment: parent.allowPayment,
+        allowReceipt: parent.allowReceipt,
+        allowTransfer: parent.allowTransfer,
+        budget: parent.type == 'EXPENSES'
             ? double.parse(formData['budget'].toString()).toDouble()
             : 0.0,
         openingBalance: formData['openingBalance'] != null

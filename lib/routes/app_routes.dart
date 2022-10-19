@@ -9,9 +9,9 @@ abstract class Routes {
   static const onboard = '/onboard';
   static const home = '/home';
 
-  //--Ledgers
-  static const ledgerCreate = '/ledger_create';
-  static const ledgerList = '/ledger_list';
+  //--Group
+  static const groupCreate = '/group_create';
+  static const groupList = '/group_list';
 
   //--Accounts
   static const accountCreate = '/account_create';

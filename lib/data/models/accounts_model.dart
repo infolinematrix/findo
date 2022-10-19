@@ -5,7 +5,7 @@ class AccountsModel {
   int id;
 
   @Index()
-  int? parent;
+  int parent;
 
   @Unique()
   String name;
@@ -15,10 +15,10 @@ class AccountsModel {
   bool isLocked;
 
   @Index()
-  bool? isActive;
+  bool isActive;
 
   @Index()
-  bool? isSystem;
+  bool isSystem;
 
   double? budget;
   bool? allowReceipt;
@@ -35,18 +35,18 @@ class AccountsModel {
     this.id = 0,
     required this.parent,
     required this.name,
+    required this.type,
+    required this.createdOn,
+    this.description = '',
     this.isActive = true,
     this.isSystem = false,
-    required this.type,
-    required this.hasChild,
+    this.hasChild = false,
     this.allowAlert = false,
     this.isLocked = false,
     this.budget = 0.00,
-    this.allowPayment = true,
-    this.allowReceipt = true,
+    this.allowPayment = false,
+    this.allowReceipt = false,
     this.allowTransfer = false,
     this.openingBalance = 0.00,
-    required this.createdOn,
-    this.description = '',
   });
 }

@@ -386,9 +386,8 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OutlinedButton(
-                            onPressed: () => Navigator.pushNamed(
-                                context, "/account_list",
-                                arguments: {'parent': 0, 'name': "Root"}),
+                            onPressed: () =>
+                                Navigator.pushNamed(context, "/group_list"),
                             child: const Text("Accounts")),
                       ],
                     ),

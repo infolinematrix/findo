@@ -65,7 +65,7 @@ class AppThemeState extends ChangeNotifier {
 class AppStyles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.red,
+      primarySwatch: isDarkTheme ? Colors.blueGrey : Colors.blue,
       primaryColor: isDarkTheme ? Colors.black : Colors.white,
 
       backgroundColor: isDarkTheme ? Colors.black : const Color(0xffF1F5FB),
@@ -75,7 +75,7 @@ class AppStyles {
       indicatorColor:
           isDarkTheme ? const Color(0xff0E1D36) : const Color(0xffCBDCF8),
       hintColor:
-          isDarkTheme ? const Color(0xff280C0B) : const Color(0xffEECED3),
+          isDarkTheme ? const Color(0xff280C0B) : const Color(0xff3A3A3B),
       highlightColor: isDarkTheme
           ? const Color.fromARGB(255, 56, 54, 47)
           : const Color.fromARGB(255, 0, 98, 255),
@@ -95,11 +95,15 @@ class AppStyles {
               : const ColorScheme.light()),
       //----------------
       appBarTheme: AppBarTheme(
-        elevation: 1.0,
-        color:
-            isDarkTheme ? Colors.black : const Color.fromARGB(255, 1, 134, 243),
-        foregroundColor: isDarkTheme ? Colors.white : Colors.white,
-      ),
+          elevation: 1.0,
+          color: isDarkTheme
+              ? Colors.black
+              : const Color.fromARGB(255, 1, 134, 243),
+          foregroundColor: isDarkTheme ? Colors.white : Colors.white,
+          titleTextStyle: TextStyle(
+              fontSize: 16.0.sp,
+              fontWeight: FontWeight.w500,
+              letterSpacing: .50)),
 
       //--------------
       textSelectionTheme: TextSelectionThemeData(

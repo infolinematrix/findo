@@ -3,6 +3,8 @@ import 'package:finsoft2/screens/account/account_create_screen.dart';
 import 'package:finsoft2/screens/account/account_list_screen.dart';
 import 'package:finsoft2/screens/account/account_statement.dart';
 import 'package:finsoft2/screens/account/account_update_screen.dart';
+import 'package:finsoft2/screens/account/groups_create_screen.dart';
+import 'package:finsoft2/screens/account/groups_screen.dart';
 import 'package:finsoft2/screens/home/home_screen.dart';
 import 'package:finsoft2/screens/settings/bank_account_create_screen.dart';
 import 'package:finsoft2/screens/transactions/account_select_screen.dart';
@@ -39,15 +41,17 @@ class AppPages {
           case Routes.initialBankAccountCreate:
             return const BankAccountCreateScreen();
 
-          // case Routes.ledgerCreate:
-          //   return const LedgerCreateScreen();
+          case Routes.groupCreate:
+            return const AccountGroupCreateScreen();
 
-          // case Routes.ledgerList:
-          //   return const LedgerListScreen();
+          case Routes.groupList:
+            return const AccountGroupsScreen();
+
+          //--ACCOUNT
 
           case Routes.accountCreate:
             return AccountCreateScreen(
-                account: settings.arguments as Map<String, dynamic>);
+                parent: settings.arguments as AccountsModel);
 
           case Routes.accountUpdate:
             return AccountUpdateScreen(
@@ -55,7 +59,7 @@ class AppPages {
 
           case Routes.accountList:
             return AccountListScreen(
-                account: settings.arguments as Map<String, dynamic>);
+                parent: settings.arguments as AccountsModel);
 
           case Routes.accountStatement:
             return AccountStatementScreen(

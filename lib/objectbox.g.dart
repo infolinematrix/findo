@@ -326,31 +326,31 @@ ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
           final object = AccountsModel(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
-              parent: const fb.Int64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 30),
+              parent:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 30, 0),
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
-              isActive: const fb.BoolReader()
-                  .vTableGetNullable(buffer, rootOffset, 8),
-              isSystem: const fb.BoolReader()
-                  .vTableGetNullable(buffer, rootOffset, 10),
               type: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 32, ''),
+              createdOn: createdOnValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
+              description: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 40, ''),
+              isActive:
+                  const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false),
+              isSystem: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 10, false),
               hasChild: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 34, false),
               allowAlert: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 36, false),
-              isLocked: const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 38, false),
-              budget: const fb.Float64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 14),
-              allowPayment:
-                  const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 24),
+              isLocked: const fb.BoolReader().vTableGet(buffer, rootOffset, 38, false),
+              budget: const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 14),
+              allowPayment: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 24),
               allowReceipt: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 22),
               allowTransfer: const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 26),
-              openingBalance: const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 28),
-              createdOn: createdOnValue == null ? null : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
-              description: const fb.StringReader(asciiOptimization: true).vTableGet(buffer, rootOffset, 40, ''));
+              openingBalance: const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 28));
 
           return object;
         }),

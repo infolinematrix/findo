@@ -10,7 +10,7 @@ class AccountTransactionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: Text("${param['account']['name']}")),
+      appBar: AppBar(title: Text("$param['account'].name")),
       body: const SafeArea(
         child: Text("dfsds"),
       ),
