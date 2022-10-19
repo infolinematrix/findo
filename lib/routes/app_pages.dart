@@ -1,20 +1,20 @@
-import 'package:finsoft2/data/models/accounts_model.dart';
-import 'package:finsoft2/screens/account/account_create_screen.dart';
-import 'package:finsoft2/screens/account/account_list_screen.dart';
-import 'package:finsoft2/screens/account/account_statement.dart';
-import 'package:finsoft2/screens/account/account_update_screen.dart';
-import 'package:finsoft2/screens/account/groups_create_screen.dart';
-import 'package:finsoft2/screens/account/groups_screen.dart';
-import 'package:finsoft2/screens/home/home_screen.dart';
-import 'package:finsoft2/screens/settings/bank_account_create_screen.dart';
-import 'package:finsoft2/screens/transactions/account_select_screen.dart';
-// import 'package:finsoft2/screens/ledger/ledger_create_screen.dart';
-// import 'package:finsoft2/screens/ledger/ledger_list_screen.dart';
+import 'package:findo/data/models/accounts_model.dart';
+import 'package:findo/screens/account/account_create_screen.dart';
+import 'package:findo/screens/account/account_list_screen.dart';
+import 'package:findo/screens/account/account_statement.dart';
+import 'package:findo/screens/account/account_update_screen.dart';
+import 'package:findo/screens/account/groups_create_screen.dart';
+import 'package:findo/screens/account/groups_screen.dart';
+import 'package:findo/screens/home/home_screen.dart';
+import 'package:findo/screens/settings/bank_account_create_screen.dart';
+import 'package:findo/screens/transactions/account_select_screen.dart';
+// import 'package:findo/screens/ledger/ledger_create_screen.dart';
+// import 'package:findo/screens/ledger/ledger_list_screen.dart';
 
-import 'package:finsoft2/screens/transactions/account_transactions_screen.dart';
-import 'package:finsoft2/screens/transactions/payment_screen.dart';
-import 'package:finsoft2/screens/transactions/receive_screen.dart';
-import 'package:finsoft2/screens/transactions/transfer_screen.dart';
+import 'package:findo/screens/transactions/account_transactions_screen.dart';
+import 'package:findo/screens/transactions/payment_screen.dart';
+import 'package:findo/screens/transactions/receive_screen.dart';
+import 'package:findo/screens/transactions/transfer_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../screens/onboard/onboard_screen.dart';

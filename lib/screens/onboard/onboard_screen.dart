@@ -1,5 +1,5 @@
-import 'package:finsoft2/services/auth_server.dart';
-import 'package:finsoft2/utils/index.dart';
+import 'package:findo/services/auth_server.dart';
+import 'package:findo/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

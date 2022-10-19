@@ -1,8 +1,8 @@
-import 'package:finsoft2/constants/constants.dart';
-import 'package:finsoft2/theme/app_theme.dart';
-import 'package:finsoft2/utils/index.dart';
-import 'package:finsoft2/widgets/form_button.dart';
-import 'package:finsoft2/widgets/loader.dart';
+import 'package:findo/constants/constants.dart';
+import 'package:findo/theme/app_theme.dart';
+import 'package:findo/utils/index.dart';
+import 'package:findo/widgets/form_button.dart';
+import 'package:findo/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

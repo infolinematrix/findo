@@ -1,6 +1,6 @@
-import 'package:finsoft2/screens/error_screen.dart';
-import 'package:finsoft2/widgets/index.dart';
-import 'package:finsoft2/widgets/no_data_screen.dart';
+import 'package:findo/screens/error_screen.dart';
+import 'package:findo/widgets/index.dart';
+import 'package:findo/widgets/no_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

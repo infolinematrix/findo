@@ -1,4 +1,4 @@
-import 'package:finsoft2/objectbox.g.dart';
+import 'package:findo/objectbox.g.dart';
 
 import '../data/models/accounts_model.dart';
 import '../data/models/transactions_model.dart';

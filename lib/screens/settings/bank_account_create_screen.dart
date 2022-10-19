@@ -1,7 +1,7 @@
-import 'package:finsoft2/screens/settings/settings_controller.dart';
-import 'package:finsoft2/services/settings_service.dart';
-import 'package:finsoft2/theme/constants.dart';
-import 'package:finsoft2/utils/index.dart';
+import 'package:findo/screens/settings/settings_controller.dart';
+import 'package:findo/services/settings_service.dart';
+import 'package:findo/theme/constants.dart';
+import 'package:findo/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

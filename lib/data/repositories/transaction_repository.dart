@@ -1,7 +1,7 @@
-import 'package:finsoft2/data/models/accounts_model.dart';
-import 'package:finsoft2/data/models/scroll_model.dart';
-import 'package:finsoft2/data/models/transactions_model.dart';
-import 'package:finsoft2/data/source/objectstore.dart';
+import 'package:findo/data/models/accounts_model.dart';
+import 'package:findo/data/models/scroll_model.dart';
+import 'package:findo/data/models/transactions_model.dart';
+import 'package:findo/data/source/objectstore.dart';
 
 import '../../objectbox.g.dart';
 

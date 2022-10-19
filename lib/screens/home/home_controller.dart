@@ -1,6 +1,6 @@
-import 'package:finsoft2/data/models/transactions_model.dart';
-import 'package:finsoft2/services/transaction_service.dart';
-import 'package:finsoft2/utils/functions.dart';
+import 'package:findo/data/models/transactions_model.dart';
+import 'package:findo/services/transaction_service.dart';
+import 'package:findo/utils/functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class InitDataModel {

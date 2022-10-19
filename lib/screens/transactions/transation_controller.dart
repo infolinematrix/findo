@@ -1,8 +1,8 @@
-import 'package:finsoft2/data/models/transactions_model.dart';
-import 'package:finsoft2/data/repositories/account_repository.dart';
-import 'package:finsoft2/data/repositories/transaction_repository.dart';
-import 'package:finsoft2/objectbox.g.dart';
-import 'package:finsoft2/utils/functions.dart';
+import 'package:findo/data/models/transactions_model.dart';
+import 'package:findo/data/repositories/account_repository.dart';
+import 'package:findo/data/repositories/transaction_repository.dart';
+import 'package:findo/objectbox.g.dart';
+import 'package:findo/utils/functions.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

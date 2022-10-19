@@ -1,7 +1,7 @@
-import 'package:finsoft2/screens/home/home_controller.dart';
-import 'package:finsoft2/services/settings_service.dart';
-import 'package:finsoft2/utils/functions.dart';
-import 'package:finsoft2/utils/index.dart';
+import 'package:findo/screens/home/home_controller.dart';
+import 'package:findo/services/settings_service.dart';
+import 'package:findo/utils/functions.dart';
+import 'package:findo/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';

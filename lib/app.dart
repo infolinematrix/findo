@@ -1,9 +1,9 @@
-import 'package:finsoft2/screens/error_screen.dart';
-import 'package:finsoft2/screens/home/home_screen.dart';
-import 'package:finsoft2/screens/onboard/onboard_screen.dart';
-import 'package:finsoft2/screens/settings/bank_account_create_screen.dart';
-import 'package:finsoft2/screens/settings/settings_controller.dart';
-import 'package:finsoft2/screens/settings/settings_screen.dart';
+import 'package:findo/screens/error_screen.dart';
+import 'package:findo/screens/home/home_screen.dart';
+import 'package:findo/screens/onboard/onboard_screen.dart';
+import 'package:findo/screens/settings/bank_account_create_screen.dart';
+import 'package:findo/screens/settings/settings_controller.dart';
+import 'package:findo/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

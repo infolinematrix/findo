@@ -1,7 +1,7 @@
-import 'package:finsoft2/data/models/accounts_model.dart';
-import 'package:finsoft2/screens/account/account_group_controller.dart';
-import 'package:finsoft2/screens/error_screen.dart';
-import 'package:finsoft2/widgets/no_data_screen.dart';
+import 'package:findo/data/models/accounts_model.dart';
+import 'package:findo/screens/account/account_group_controller.dart';
+import 'package:findo/screens/error_screen.dart';
+import 'package:findo/widgets/no_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax/iconsax.dart';

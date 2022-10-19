@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:finsoft2/data/source/objectstore.dart';
-import 'package:finsoft2/screens/error_screen.dart';
+import 'package:findo/data/source/objectstore.dart';
+import 'package:findo/screens/error_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

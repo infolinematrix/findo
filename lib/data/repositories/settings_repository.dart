@@ -1,5 +1,5 @@
-import 'package:finsoft2/data/models/settings_model.dart';
-import 'package:finsoft2/data/source/objectstore.dart';
+import 'package:findo/data/models/settings_model.dart';
+import 'package:findo/data/source/objectstore.dart';
 import 'package:objectbox/objectbox.dart';
 
 class SettingsRepository {

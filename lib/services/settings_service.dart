@@ -1,7 +1,7 @@
-import 'package:finsoft2/data/models/scroll_model.dart';
-import 'package:finsoft2/data/source/objectstore.dart';
-import 'package:finsoft2/objectbox.g.dart';
-import 'package:finsoft2/screens/error_screen.dart';
+import 'package:findo/data/models/scroll_model.dart';
+import 'package:findo/data/source/objectstore.dart';
+import 'package:findo/objectbox.g.dart';
+import 'package:findo/screens/error_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants/constants.dart';

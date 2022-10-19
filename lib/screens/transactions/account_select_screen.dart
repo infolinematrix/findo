@@ -1,9 +1,9 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:finsoft2/data/models/accounts_model.dart';
-import 'package:finsoft2/screens/account/account_controller.dart';
-import 'package:finsoft2/theme/constants.dart';
-import 'package:finsoft2/utils/index.dart';
-import 'package:finsoft2/widgets/index.dart';
+import 'package:findo/data/models/accounts_model.dart';
+import 'package:findo/screens/account/account_controller.dart';
+import 'package:findo/theme/constants.dart';
+import 'package:findo/utils/index.dart';
+import 'package:findo/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

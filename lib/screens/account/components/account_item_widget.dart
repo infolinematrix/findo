@@ -1,5 +1,5 @@
-import 'package:finsoft2/data/models/accounts_model.dart';
-import 'package:finsoft2/theme/constants.dart';
+import 'package:findo/data/models/accounts_model.dart';
+import 'package:findo/theme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';

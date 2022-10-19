@@ -1,4 +1,4 @@
-import 'package:finsoft2/data/models/transactions_model.dart';
+import 'package:findo/data/models/transactions_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

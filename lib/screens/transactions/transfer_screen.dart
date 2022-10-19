@@ -1,9 +1,9 @@
-import 'package:finsoft2/constants/constants.dart';
-import 'package:finsoft2/screens/transactions/transation_controller.dart';
-import 'package:finsoft2/services/settings_service.dart';
-import 'package:finsoft2/theme/constants.dart';
-import 'package:finsoft2/utils/index.dart';
-import 'package:finsoft2/widgets/index.dart';
+import 'package:findo/constants/constants.dart';
+import 'package:findo/screens/transactions/transation_controller.dart';
+import 'package:findo/services/settings_service.dart';
+import 'package:findo/theme/constants.dart';
+import 'package:findo/utils/index.dart';
+import 'package:findo/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';

@@ -1,9 +1,9 @@
-import 'package:finsoft2/constants/constants.dart';
-import 'package:finsoft2/data/models/accounts_model.dart';
-import 'package:finsoft2/screens/account/account_controller.dart';
-import 'package:finsoft2/services/settings_service.dart';
-import 'package:finsoft2/theme/app_theme.dart';
-import 'package:finsoft2/theme/constants.dart';
+import 'package:findo/constants/constants.dart';
+import 'package:findo/data/models/accounts_model.dart';
+import 'package:findo/screens/account/account_controller.dart';
+import 'package:findo/services/settings_service.dart';
+import 'package:findo/theme/app_theme.dart';
+import 'package:findo/theme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
