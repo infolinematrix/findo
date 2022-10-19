@@ -102,7 +102,7 @@ class TransactionWidget extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                    "${txn.txnType == 'DR' ? '-' : '+'} ${formatCurrency(txn.amount)}",
+                    "${txn.txnType == 'DR' ? '-' : '+'} ${formatCurrency(txn.amountDr)}",
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1!

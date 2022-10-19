@@ -101,10 +101,6 @@ class PaymentScreen extends ConsumerWidget {
                                     initialValue: account.budget.toString(),
                                     enabled: false,
                                     style: inputTextStyle,
-                                    validator: FormBuilderValidators.compose([
-                                      FormBuilderValidators.required(),
-                                      FormBuilderValidators.max(70),
-                                    ]),
                                     decoration: const InputDecoration(
                                       labelText: 'Budget',
                                     ),
@@ -220,7 +216,6 @@ class PaymentScreen extends ConsumerWidget {
                                           floatingLabelBehavior:
                                               FloatingLabelBehavior.always,
                                         ),
-                                        style: inputTextStyle,
                                         initialValue: data[0].id,
                                         validator:
                                             FormBuilderValidators.compose([
@@ -239,7 +234,6 @@ class PaymentScreen extends ConsumerWidget {
                                     )
                                   : const InfoBox(
                                       text: Text("Please add a Bank account"),
-                                      // color: AppColors.darkOrage,
                                     ),
                             ],
                           )

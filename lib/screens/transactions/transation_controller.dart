@@ -12,7 +12,7 @@ import '../../data/source/objectstore.dart';
 //--Load Bank accounts
 final banksProvider = FutureProvider.autoDispose((ref) async {
   final List<AccountsModel> banks =
-      await AccountRepository().listByLedger(ledgerId: 2);
+      await AccountRepository().listByParent(parentId: 1);
 
   return banks;
 });
@@ -57,7 +57,6 @@ class TransactionsState
       required Map<String, dynamic> formData}) async {
     try {
       var scrollNo = await TransactionRepository().getScroll();
-
       var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
 
       objBox!.store.runInTransaction(TxMode.write, () {
@@ -66,58 +65,39 @@ class TransactionsState
           AccountsModel? bank =
               AccountRepository().accountBox.get(formData['bank_account']);
 
-          //--DEBIT
-          final dataDr = TransactionsModel(
+          //--BANK
+          final data = TransactionsModel(
+            txnDate: txnDateTime,
             account: account.id,
-            description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
-            createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "DR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: "To, ${bank!.name}",
+            accountName: account.name.toString().trim(),
+            narration: "By, ${bank!.name}",
+            amountDr: double.parse(formData['amount'].toString()).toDouble(),
+            amountCr: 0.0,
+            txnMode: formData['txnMode'].toString().trim(),
+            modeAccount: bank.id,
+            txnType: "PAYMENT",
             scrollNo: scrollNo + 1,
-          );
-          objBox!.store.box<TransactionsModel>().putAsync(dataDr);
-
-          //--CREDIT
-          final dataCr = TransactionsModel(
-            account: formData['bank_account'],
             description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
             createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "CR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: 'By ${formData['account_to']}',
-            scrollNo: scrollNo + 1,
           );
-          objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+          objBox!.store.box<TransactionsModel>().putAsync(data);
         } else {
-          //--DEBIT
-          final dataDr = TransactionsModel(
-            txnMode: "PAYMENT",
+          //--CASH
+          final data = TransactionsModel(
+            txnDate: txnDateTime,
             account: account.id,
-            description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
-            createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "DR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: "To Cash",
+            accountName: account.name.toString().trim(),
+            narration: "By, Cash",
+            amountDr: double.parse(formData['amount'].toString()).toDouble(),
+            amountCr: 0.0,
+            txnMode: formData['txnMode'].toString().trim(),
+            modeAccount: 0,
+            txnType: "PAYMENT",
             scrollNo: scrollNo + 1,
-          );
-          objBox!.store.box<TransactionsModel>().putAsync(dataDr);
-
-          //--CREDIT
-          final dataCr = TransactionsModel(
-            account: 1, //--Cash Account
             description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
             createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "CR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: 'By ${formData['to_account']}',
-            scrollNo: scrollNo + 1,
           );
-          objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+          objBox!.store.box<TransactionsModel>().putAsync(data);
         }
       });
 
@@ -135,172 +115,172 @@ class TransactionsState
   }
 
   //--Payment transaction
-  Future<bool> addReceipt({required Map<String, dynamic> formData}) async {
-    try {
-      var scrollNo = await TransactionRepository().getScroll();
-      var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
+  // Future<bool> addReceipt({required Map<String, dynamic> formData}) async {
+  //   try {
+  //     var scrollNo = await TransactionRepository().getScroll();
+  //     var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
 
-      objBox!.store.runInTransaction(TxMode.write, () {
-        if (formData['txnMode'] == 'BANK') {
-          //--Get Bank account
-          AccountsModel? bank =
-              AccountRepository().accountBox.get(formData['bank_account']);
+  //     objBox!.store.runInTransaction(TxMode.write, () {
+  //       if (formData['txnMode'] == 'BANK') {
+  //         //--Get Bank account
+  //         AccountsModel? bank =
+  //             AccountRepository().accountBox.get(formData['bank_account']);
 
-          //--CREDIT
-          final dataDr = TransactionsModel(
-            account: account,
-            description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
-            createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "CR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: "By ${bank!.name}",
-            scrollNo: scrollNo + 1,
-          );
-          objBox!.store.box<TransactionsModel>().putAsync(dataDr);
+  //         //--CREDIT
+  //         final dataDr = TransactionsModel(
+  //           account: account,
+  //           description: formData['description'].toString().trim(),
+  //           txnDate: txnDateTime,
+  //           createdOn: DateTime.now().toUtc().toLocal(),
+  //           txnType: "CR",
+  //           amount: double.parse(formData['amount'].toString()).toDouble(),
+  //           narration: "By ${bank!.name}",
+  //           scrollNo: scrollNo + 1,
+  //         );
+  //         objBox!.store.box<TransactionsModel>().putAsync(dataDr);
 
-          //--DEBIT
-          final dataCr = TransactionsModel(
-            account: formData['bank_account'],
-            description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
-            createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "DR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: 'To ${formData['account_to']}',
-            scrollNo: scrollNo + 1,
-          );
-          objBox!.store.box<TransactionsModel>().putAsync(dataCr);
-        } else {
-          //--CREDIT
-          final dataDr = TransactionsModel(
-            txnMode: "RECEIPT",
-            account: account,
-            description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
-            createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "CR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: "By Cash",
-            scrollNo: scrollNo + 1,
-          );
-          objBox!.store.box<TransactionsModel>().putAsync(dataDr);
+  //         //--DEBIT
+  //         final dataCr = TransactionsModel(
+  //           account: formData['bank_account'],
+  //           description: formData['description'].toString().trim(),
+  //           txnDate: txnDateTime,
+  //           createdOn: DateTime.now().toUtc().toLocal(),
+  //           txnType: "DR",
+  //           amount: double.parse(formData['amount'].toString()).toDouble(),
+  //           narration: 'To ${formData['account_to']}',
+  //           scrollNo: scrollNo + 1,
+  //         );
+  //         objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+  //       } else {
+  //         //--CREDIT
+  //         final dataDr = TransactionsModel(
+  //           txnMode: "RECEIPT",
+  //           account: account,
+  //           description: formData['description'].toString().trim(),
+  //           txnDate: txnDateTime,
+  //           createdOn: DateTime.now().toUtc().toLocal(),
+  //           txnType: "CR",
+  //           amount: double.parse(formData['amount'].toString()).toDouble(),
+  //           narration: "By Cash",
+  //           scrollNo: scrollNo + 1,
+  //         );
+  //         objBox!.store.box<TransactionsModel>().putAsync(dataDr);
 
-          //--DEBIT
-          final dataCr = TransactionsModel(
-            account: 1, //--Cash Account
-            description: formData['description'].toString().trim(),
-            txnDate: txnDateTime,
-            createdOn: DateTime.now().toUtc().toLocal(),
-            txnType: "DR",
-            amount: double.parse(formData['amount'].toString()).toDouble(),
-            narration: 'To ${formData['to_account']}',
-            scrollNo: scrollNo + 1,
-          );
-          objBox!.store.box<TransactionsModel>().putAsync(dataCr);
-        }
-      });
+  //         //--DEBIT
+  //         final dataCr = TransactionsModel(
+  //           account: 1, //--Cash Account
+  //           description: formData['description'].toString().trim(),
+  //           txnDate: txnDateTime,
+  //           createdOn: DateTime.now().toUtc().toLocal(),
+  //           txnType: "DR",
+  //           amount: double.parse(formData['amount'].toString()).toDouble(),
+  //           narration: 'To ${formData['to_account']}',
+  //           scrollNo: scrollNo + 1,
+  //         );
+  //         objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+  //       }
+  //     });
 
-      //--UPDATE SCROLL NO
-      await TransactionRepository().updateScroll();
+  //     //--UPDATE SCROLL NO
+  //     await TransactionRepository().updateScroll();
 
-      objBox!.store.awaitAsyncSubmitted();
-      getAll(account);
-      EasyLoading.dismiss();
-      return true;
-    } catch (e) {
-      EasyLoading.dismiss();
-      return false;
-    }
-  }
+  //     objBox!.store.awaitAsyncSubmitted();
+  //     getAll(account);
+  //     EasyLoading.dismiss();
+  //     return true;
+  //   } catch (e) {
+  //     EasyLoading.dismiss();
+  //     return false;
+  //   }
+  // }
 
   //--Transfer Transaction
-  Future<bool> addTransfer({required Map<String, dynamic> formData}) async {
-    var scrollNo = await TransactionRepository().getScroll();
-    var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
-    try {
-      //--Cash Deposit to Bank --
-      if (formData['txnType'] == 1) {
-        /**
-         * DEBIT
-         */
-        final dataDr = TransactionsModel(
-          txnMode: "TRANSFER",
-          account:
-              int.parse(formData['bank'].toString()).toInt(), //--Bank Account
-          description: formData['description'].toString().trim(),
-          txnDate: txnDateTime,
-          createdOn: txnDateTime,
-          txnType: "DR",
-          amount: double.parse(formData['amount'].toString()).toDouble(),
-          narration: 'By Cash',
-          scrollNo: scrollNo + 1,
-        );
-        objBox!.store.box<TransactionsModel>().putAsync(dataDr);
+  // Future<bool> addTransfer({required Map<String, dynamic> formData}) async {
+  //   var scrollNo = await TransactionRepository().getScroll();
+  //   var txnDateTime = convertDateToLocal(formData['txnDate'].toString());
+  //   try {
+  //     //--Cash Deposit to Bank --
+  //     if (formData['txnType'] == 1) {
+  //       /**
+  //        * DEBIT
+  //        */
+  //       final dataDr = TransactionsModel(
+  //         txnMode: "TRANSFER",
+  //         account:
+  //             int.parse(formData['bank'].toString()).toInt(), //--Bank Account
+  //         description: formData['description'].toString().trim(),
+  //         txnDate: txnDateTime,
+  //         createdOn: txnDateTime,
+  //         txnType: "DR",
+  //         amount: double.parse(formData['amount'].toString()).toDouble(),
+  //         narration: 'By Cash',
+  //         scrollNo: scrollNo + 1,
+  //       );
+  //       objBox!.store.box<TransactionsModel>().putAsync(dataDr);
 
-        /**
-       * CREDIT
-       */
-        final dataCr = TransactionsModel(
-          txnMode: "TRANSFER",
-          account: 1, //--Cash Account
-          description: formData['description'].toString().trim(),
-          txnDate: txnDateTime,
-          createdOn: DateTime.now().toUtc().toLocal(),
-          txnType: "CR",
-          amount: double.parse(formData['amount'].toString()).toDouble(),
-          narration: "To Bank",
-          scrollNo: scrollNo + 1,
-        );
-        objBox!.store.box<TransactionsModel>().putAsync(dataCr);
-      } else {
-        /**
-         * DEBIT
-         */
-        final dataDr = TransactionsModel(
-          txnMode: "TRANSFER",
-          account: 1, //--Cash Account
-          description: formData['description'].toString().trim(),
-          txnDate: txnDateTime,
-          createdOn: DateTime.now().toUtc().toLocal(),
-          txnType: "DR",
-          amount: double.parse(formData['amount'].toString()).toDouble(),
-          narration: "By ${formData['bank']}",
-          scrollNo: scrollNo + 1,
-        );
-        objBox!.store.box<TransactionsModel>().putAsync(dataDr);
+  //       /**
+  //      * CREDIT
+  //      */
+  //       final dataCr = TransactionsModel(
+  //         txnMode: "TRANSFER",
+  //         account: 1, //--Cash Account
+  //         description: formData['description'].toString().trim(),
+  //         txnDate: txnDateTime,
+  //         createdOn: DateTime.now().toUtc().toLocal(),
+  //         txnType: "CR",
+  //         amount: double.parse(formData['amount'].toString()).toDouble(),
+  //         narration: "To Bank",
+  //         scrollNo: scrollNo + 1,
+  //       );
+  //       objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+  //     } else {
+  //       /**
+  //        * DEBIT
+  //        */
+  //       final dataDr = TransactionsModel(
+  //         txnMode: "TRANSFER",
+  //         account: 1, //--Cash Account
+  //         description: formData['description'].toString().trim(),
+  //         txnDate: txnDateTime,
+  //         createdOn: DateTime.now().toUtc().toLocal(),
+  //         txnType: "DR",
+  //         amount: double.parse(formData['amount'].toString()).toDouble(),
+  //         narration: "By ${formData['bank']}",
+  //         scrollNo: scrollNo + 1,
+  //       );
+  //       objBox!.store.box<TransactionsModel>().putAsync(dataDr);
 
-        /**
-       * CREDIT
-       */
-        final dataCr = TransactionsModel(
-          txnMode: "TRANSFER",
-          account:
-              int.parse(formData['bank'].toString()).toInt(), //--Bank Account
-          description: formData['description'].toString().trim(),
-          txnDate: txnDateTime,
-          createdOn: DateTime.now().toUtc().toLocal(),
-          txnType: "CR",
-          amount: double.parse(formData['amount'].toString()).toDouble(),
-          narration: 'To Cash',
-          scrollNo: scrollNo + 1,
-        );
-        objBox!.store.box<TransactionsModel>().putAsync(dataCr);
-      }
+  //       /**
+  //      * CREDIT
+  //      */
+  //       final dataCr = TransactionsModel(
+  //         txnMode: "TRANSFER",
+  //         account:
+  //             int.parse(formData['bank'].toString()).toInt(), //--Bank Account
+  //         description: formData['description'].toString().trim(),
+  //         txnDate: txnDateTime,
+  //         createdOn: DateTime.now().toUtc().toLocal(),
+  //         txnType: "CR",
+  //         amount: double.parse(formData['amount'].toString()).toDouble(),
+  //         narration: 'To Cash',
+  //         scrollNo: scrollNo + 1,
+  //       );
+  //       objBox!.store.box<TransactionsModel>().putAsync(dataCr);
+  //     }
 
-      //--UPDATE SCROLL NO
-      await TransactionRepository().updateScroll();
+  //     //--UPDATE SCROLL NO
+  //     await TransactionRepository().updateScroll();
 
-      objBox!.store.awaitAsyncSubmitted();
+  //     objBox!.store.awaitAsyncSubmitted();
 
-      getAll(account);
-      EasyLoading.dismiss();
-      return true;
-    } catch (e) {
-      EasyLoading.dismiss();
-      return false;
-    }
-  }
+  //     getAll(account);
+  //     EasyLoading.dismiss();
+  //     return true;
+  //   } catch (e) {
+  //     EasyLoading.dismiss();
+  //     return false;
+  //   }
+  // }
 
   //--Delete Transaction
   Future<bool> delete({required int scrollNo}) async {

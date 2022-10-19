@@ -147,7 +147,7 @@
     },
     {
       "id": "4:2021859411146122159",
-      "lastPropertyId": "10:539624457340876105",
+      "lastPropertyId": "15:1415484022925277710",
       "name": "TransactionsModel",
       "properties": [
         {
@@ -155,16 +155,6 @@
           "name": "id",
           "type": 6,
           "flags": 1
-        },
-        {
-          "id": "2:462709407694624262",
-          "name": "amount",
-          "type": 8
-        },
-        {
-          "id": "3:6991079606123816341",
-          "name": "description",
-          "type": 9
         },
         {
           "id": "4:4008672021936518681",
@@ -210,20 +200,50 @@
           "id": "10:539624457340876105",
           "name": "createdOn",
           "type": 10
+        },
+        {
+          "id": "11:1453011378710841305",
+          "name": "accountName",
+          "type": 9
+        },
+        {
+          "id": "12:5867081049909335929",
+          "name": "amountDr",
+          "type": 8
+        },
+        {
+          "id": "13:5428501721021440540",
+          "name": "amountCr",
+          "type": 8
+        },
+        {
+          "id": "14:4381018400706287857",
+          "name": "modeAccount",
+          "type": 6,
+          "flags": 8,
+          "indexId": "11:5207053875011128922"
+        },
+        {
+          "id": "15:1415484022925277710",
+          "name": "description",
+          "type": 9
         }
       ],
       "relations": []
     }
   ],
   "lastEntityId": "4:2021859411146122159",
-  "lastIndexId": "10:3010482349508948640",
+  "lastIndexId": "11:5207053875011128922",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    462709407694624262,
+    6991079606123816341
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

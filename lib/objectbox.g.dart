@@ -162,7 +162,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(4, 2021859411146122159),
       name: 'TransactionsModel',
-      lastPropertyId: const IdUid(10, 539624457340876105),
+      lastPropertyId: const IdUid(15, 1415484022925277710),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -170,16 +170,6 @@ final _entities = <ModelEntity>[
             name: 'id',
             type: 6,
             flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 462709407694624262),
-            name: 'amount',
-            type: 8,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 6991079606123816341),
-            name: 'description',
-            type: 9,
-            flags: 0),
         ModelProperty(
             id: const IdUid(4, 4008672021936518681),
             name: 'scrollNo',
@@ -219,6 +209,32 @@ final _entities = <ModelEntity>[
             id: const IdUid(10, 539624457340876105),
             name: 'createdOn',
             type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 1453011378710841305),
+            name: 'accountName',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 5867081049909335929),
+            name: 'amountDr',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(13, 5428501721021440540),
+            name: 'amountCr',
+            type: 8,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(14, 4381018400706287857),
+            name: 'modeAccount',
+            type: 6,
+            flags: 8,
+            indexId: const IdUid(11, 5207053875011128922)),
+        ModelProperty(
+            id: const IdUid(15, 1415484022925277710),
+            name: 'description',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -246,12 +262,12 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(4, 2021859411146122159),
-      lastIndexId: const IdUid(10, 3010482349508948640),
+      lastIndexId: const IdUid(11, 5207053875011128922),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [462709407694624262, 6991079606123816341],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -392,18 +408,19 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (TransactionsModel object, fb.Builder fbb) {
-          final descriptionOffset = object.description == null
-              ? null
-              : fbb.writeString(object.description!);
           final txnTypeOffset = fbb.writeString(object.txnType);
           final txnModeOffset = fbb.writeString(object.txnMode);
           final narrationOffset = object.narration == null
               ? null
               : fbb.writeString(object.narration!);
-          fbb.startTable(11);
+          final accountNameOffset = object.accountName == null
+              ? null
+              : fbb.writeString(object.accountName!);
+          final descriptionOffset = object.description == null
+              ? null
+              : fbb.writeString(object.description!);
+          fbb.startTable(16);
           fbb.addInt64(0, object.id);
-          fbb.addFloat64(1, object.amount);
-          fbb.addOffset(2, descriptionOffset);
           fbb.addInt64(3, object.scrollNo);
           fbb.addOffset(4, txnTypeOffset);
           fbb.addOffset(5, txnModeOffset);
@@ -411,6 +428,11 @@ ModelDefinition getObjectBoxModel() {
           fbb.addInt64(7, object.account);
           fbb.addOffset(8, narrationOffset);
           fbb.addInt64(9, object.createdOn?.millisecondsSinceEpoch);
+          fbb.addOffset(10, accountNameOffset);
+          fbb.addFloat64(11, object.amountDr);
+          fbb.addFloat64(12, object.amountCr);
+          fbb.addInt64(13, object.modeAccount);
+          fbb.addOffset(14, descriptionOffset);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -425,24 +447,27 @@ ModelDefinition getObjectBoxModel() {
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
               account:
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0),
-              scrollNo:
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0),
-              amount:
-                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0),
-              txnType: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, ''),
+              accountName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 24),
+              narration: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 20),
+              amountDr:
+                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 26, 0),
+              amountCr:
+                  const fb.Float64Reader().vTableGet(buffer, rootOffset, 28, 0),
               txnMode: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 14, ''),
-              description: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 8),
+              modeAccount:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 30, 0),
+              txnType: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, ''),
+              scrollNo:
+                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0),
               txnDate: txnDateValue == null
                   ? null
                   : DateTime.fromMillisecondsSinceEpoch(txnDateValue),
-              createdOn: createdOnValue == null
-                  ? null
-                  : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
-              narration: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 20));
+              createdOn: createdOnValue == null ? null : DateTime.fromMillisecondsSinceEpoch(createdOnValue),
+              description: const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 32));
 
           return object;
         })
@@ -550,39 +575,51 @@ class TransactionsModel_ {
   static final id =
       QueryIntegerProperty<TransactionsModel>(_entities[3].properties[0]);
 
-  /// see [TransactionsModel.amount]
-  static final amount =
-      QueryDoubleProperty<TransactionsModel>(_entities[3].properties[1]);
-
-  /// see [TransactionsModel.description]
-  static final description =
-      QueryStringProperty<TransactionsModel>(_entities[3].properties[2]);
-
   /// see [TransactionsModel.scrollNo]
   static final scrollNo =
-      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[3]);
+      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[1]);
 
   /// see [TransactionsModel.txnType]
   static final txnType =
-      QueryStringProperty<TransactionsModel>(_entities[3].properties[4]);
+      QueryStringProperty<TransactionsModel>(_entities[3].properties[2]);
 
   /// see [TransactionsModel.txnMode]
   static final txnMode =
-      QueryStringProperty<TransactionsModel>(_entities[3].properties[5]);
+      QueryStringProperty<TransactionsModel>(_entities[3].properties[3]);
 
   /// see [TransactionsModel.txnDate]
   static final txnDate =
-      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[6]);
+      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[4]);
 
   /// see [TransactionsModel.account]
   static final account =
-      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[7]);
+      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[5]);
 
   /// see [TransactionsModel.narration]
   static final narration =
-      QueryStringProperty<TransactionsModel>(_entities[3].properties[8]);
+      QueryStringProperty<TransactionsModel>(_entities[3].properties[6]);
 
   /// see [TransactionsModel.createdOn]
   static final createdOn =
-      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[9]);
+      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[7]);
+
+  /// see [TransactionsModel.accountName]
+  static final accountName =
+      QueryStringProperty<TransactionsModel>(_entities[3].properties[8]);
+
+  /// see [TransactionsModel.amountDr]
+  static final amountDr =
+      QueryDoubleProperty<TransactionsModel>(_entities[3].properties[9]);
+
+  /// see [TransactionsModel.amountCr]
+  static final amountCr =
+      QueryDoubleProperty<TransactionsModel>(_entities[3].properties[10]);
+
+  /// see [TransactionsModel.modeAccount]
+  static final modeAccount =
+      QueryIntegerProperty<TransactionsModel>(_entities[3].properties[11]);
+
+  /// see [TransactionsModel.description]
+  static final description =
+      QueryStringProperty<TransactionsModel>(_entities[3].properties[12]);
 }

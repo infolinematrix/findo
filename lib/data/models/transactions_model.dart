@@ -4,40 +4,48 @@ import 'package:objectbox/objectbox.dart';
 class TransactionsModel {
   int id;
 
-  double amount;
+  @Index()
+  int account;
+  String? accountName;
+
+  String? narration;
   String? description;
 
-  @Index()
-  int scrollNo;
-
-  @Index()
-  String txnType;
+  double amountDr;
+  double amountCr;
 
   @Index()
   String txnMode;
 
   @Index()
-  @Property(type: PropertyType.date)
-  DateTime? txnDate;
+  int modeAccount;
 
   @Index()
-  int account;
+  String txnType;
 
-  String? narration;
+  @Index()
+  int scrollNo;
+
+  @Index()
+  @Property(type: PropertyType.date)
+  DateTime? txnDate;
 
   @Property(type: PropertyType.date)
   DateTime? createdOn = DateTime.now().toLocal();
 
   TransactionsModel({
     this.id = 0,
-    this.account = 0,
-    this.scrollNo = 0,
-    this.amount = 0.00,
-    this.txnType = 'DR',
-    this.txnMode = 'PAYMENT',
-    this.description,
-    this.txnDate,
-    this.createdOn,
-    this.narration,
+    required this.account,
+    this.accountName = '',
+    this.narration = '',
+    this.amountDr = 0.00,
+    this.amountCr = 0.00,
+    this.txnMode = 'CASH',
+    required this.modeAccount,
+    this.txnType = 'PAYMENT',
+    required this.scrollNo,
+    required this.txnDate,
+    required this.createdOn,
+    this.description = '',
   });
 }
