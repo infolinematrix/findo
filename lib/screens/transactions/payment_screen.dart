@@ -34,271 +34,282 @@ class PaymentScreen extends ConsumerWidget {
           child: CircularProgressIndicator(),
         ),
         data: (data) {
-          return FormBuilder(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(
-                    height: inputHeight,
-                    child: FormBuilderTextField(
-                      name: 'to_account',
-                      initialValue: account.name,
-                      enabled: false,
-                      style: inputTextStyle,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                        FormBuilderValidators.max(70),
-                      ]),
-                      decoration: const InputDecoration(
-                        labelText: 'Payment to',
+          return Card(
+            child: FormBuilder(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: inputHeight,
+                      child: FormBuilderTextField(
+                        name: 'to_account',
+                        initialValue: account.name,
+                        enabled: false,
+                        style: inputTextStyle,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                          FormBuilderValidators.max(70),
+                        ]),
+                        decoration: const InputDecoration(
+                          labelText: 'Payment to',
+                        ),
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        textCapitalization: TextCapitalization.words,
                       ),
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.words,
                     ),
-                  ),
-                  UIHelper.verticalSpaceSmall(),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: SizedBox(
-                          height: inputHeight,
-                          child: FormBuilderDateTimePicker(
-                            name: 'txnDate',
-                            initialEntryMode: DatePickerEntryMode.calendarOnly,
-                            initialValue: DateTime.now().toUtc(),
-                            inputType: InputType.date,
-                            style: inputTextStyle,
-                            format: DateFormat(
-                              getSetting(key: 'dateFormat').value.toString(),
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'Date',
-                              suffixIcon: IconButton(
-                                icon: const Icon(IcoFontIcons.calendar),
-                                onPressed: () {},
+                    UIHelper.verticalSpaceSmall(),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderDateTimePicker(
+                              name: 'txnDate',
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendarOnly,
+                              initialValue: DateTime.now().toUtc(),
+                              inputType: InputType.date,
+                              style: inputTextStyle,
+                              format: DateFormat(
+                                getSetting(key: 'dateFormat').value.toString(),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      UIHelper.horizontalSpaceSmall(),
-                      Expanded(
-                        flex: 6,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: SizedBox(
-                                height: inputHeight,
-                                child: FormBuilderTextField(
-                                  name: 'budget_limit',
-                                  initialValue: "5,000.00",
-                                  enabled: false,
-                                  style: inputTextStyle,
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(),
-                                    FormBuilderValidators.max(70),
-                                  ]),
-                                  decoration: const InputDecoration(
-                                    labelText: 'Budget',
-                                  ),
-                                  keyboardType: TextInputType.name,
-                                  textInputAction: TextInputAction.next,
-                                  textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                labelText: 'Date',
+                                suffixIcon: IconButton(
+                                  icon: const Icon(IcoFontIcons.calendar),
+                                  onPressed: () {},
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: SizedBox(
-                                height: inputHeight,
-                                child: FormBuilderTextField(
-                                  name: 'budget_expenses',
-                                  initialValue: "99,45,000.00",
-                                  enabled: false,
-                                  style: inputTextStyle,
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(),
-                                    FormBuilderValidators.max(70),
-                                  ]),
-                                  decoration: const InputDecoration(
-                                    labelText: 'This month',
-                                  ),
-                                  keyboardType: TextInputType.name,
-                                  textInputAction: TextInputAction.next,
-                                  textCapitalization: TextCapitalization.words,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  UIHelper.verticalSpaceSmall(),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: SizedBox(
-                          height: inputHeight,
-                          child: FormBuilderTextField(
-                            name: 'amount',
-                            style: inputTextStyle,
-                            initialValue: "125",
-                            decoration: InputDecoration(
-                              labelText: 'Amount',
-                              errorStyle: const TextStyle(
-                                  color: Colors.transparent,
-                                  fontSize: 0,
-                                  height: 0),
-                              errorBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(currencySymbol()),
-                                onPressed: () {},
-                              ),
-                            ),
-                            validator: FormBuilderValidators.compose(
-                                [FormBuilderValidators.required()]),
-                            keyboardType: TextInputType.number,
-                            textInputAction: TextInputAction.next,
                           ),
                         ),
-                      ),
-                      UIHelper.horizontalSpaceSmall(),
-                      Expanded(
-                        flex: 6,
-                        child: SizedBox(
-                          height: inputHeight,
-                          child: FormBuilderDropdown<String>(
-                            name: 'txnMode',
-                            decoration: const InputDecoration(
-                              labelText: 'Mode',
-                            ),
-                            style: inputTextStyle,
-                            initialValue: ref.watch(txnModeProvider),
-                            validator: FormBuilderValidators.compose(
-                                [FormBuilderValidators.required()]),
-                            items: ['CASH', 'BANK']
-                                .map((item) => DropdownMenuItem(
-                                      alignment:
-                                          AlignmentDirectional.centerStart,
-                                      value: item,
-                                      child: Text(item),
-                                    ))
-                                .toList(),
-                            onChanged: (val) {
-                              ref.read(txnModeProvider.state).state = val!;
-                            },
-                            valueTransformer: (val) => val?.toString(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  ref.watch(txnModeProvider) == 'BANK'
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            UIHelper.verticalSpaceSmall(),
-                            data.isNotEmpty
-                                ? SizedBox(
-                                    height: inputHeight,
-                                    child: FormBuilderDropdown<int>(
-                                      name: 'bank_account',
-                                      decoration: const InputDecoration(
-                                        labelText: 'From Bank',
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.always,
-                                      ),
-                                      style: inputTextStyle,
-                                      initialValue: data[0].id,
-                                      validator: FormBuilderValidators.compose(
-                                          [FormBuilderValidators.required()]),
-                                      items: data
-                                          .map((item) => DropdownMenuItem(
-                                                alignment: AlignmentDirectional
-                                                    .centerStart,
-                                                value: item.id,
-                                                child: Text(item.name),
-                                              ))
-                                          .toList(),
+                        UIHelper.horizontalSpaceSmall(),
+                        Expanded(
+                          flex: 6,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  height: inputHeight,
+                                  child: FormBuilderTextField(
+                                    name: 'budget_limit',
+                                    initialValue: account.budget.toString(),
+                                    enabled: false,
+                                    style: inputTextStyle,
+                                    validator: FormBuilderValidators.compose([
+                                      FormBuilderValidators.required(),
+                                      FormBuilderValidators.max(70),
+                                    ]),
+                                    decoration: const InputDecoration(
+                                      labelText: 'Budget',
                                     ),
-                                  )
-                                : const InfoBox(
-                                    text: Text("Please add a Bank account"),
-                                    // color: AppColors.darkOrage,
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                    textCapitalization:
+                                        TextCapitalization.words,
                                   ),
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-                  UIHelper.verticalSpaceSmall(),
-                  SizedBox(
-                    height: inputHeight,
-                    child: FormBuilderTextField(
-                      name: 'description',
-                      initialValue: "Paid in Cash",
-                      style: inputTextStyle,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(),
-                      ]),
-                      decoration: const InputDecoration(
-                        labelText: 'Description',
-                        errorStyle: TextStyle(
-                            color: Colors.transparent, fontSize: 0, height: 0),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red),
+                                ),
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  height: inputHeight,
+                                  child: FormBuilderTextField(
+                                    name: 'budget_expenses',
+                                    initialValue: "5,000.00",
+                                    enabled: false,
+                                    style: inputTextStyle,
+                                    validator: FormBuilderValidators.compose([
+                                      FormBuilderValidators.required(),
+                                      FormBuilderValidators.max(70),
+                                    ]),
+                                    decoration: const InputDecoration(
+                                      labelText: 'This month',
+                                    ),
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                    textCapitalization:
+                                        TextCapitalization.words,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.words,
+                      ],
                     ),
-                  ),
-                  UIHelper.verticalSpaceLarge(),
-                  FormButton(
-                    text: const Text("SUBMIT"),
-                    onTap: data.isNotEmpty
-                        ? () async {
-                            EasyLoading.showProgress(0.3, status: 'Saving...');
-                            if (formKey.currentState?.saveAndValidate() ??
-                                false) {
-                              await ref
-                                  .read(
-                                      transactionProvider(account.id).notifier)
-                                  .addPayment(
-                                      formData: formKey.currentState!.value)
-                                  .then((value) {
-                                if (value == true) {
-                                  EasyLoading.showSuccess(
-                                      'Transaction Success!');
+                    UIHelper.verticalSpaceSmall(),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderTextField(
+                              name: 'amount',
+                              style: inputTextStyle,
+                              initialValue: "125",
+                              decoration: InputDecoration(
+                                labelText: 'Amount',
+                                // errorStyle: const TextStyle(
+                                //     color: Colors.transparent,
+                                //     fontSize: 0,
+                                //     height: 0),
+                                // errorBorder: const OutlineInputBorder(
+                                //   borderSide: BorderSide(color: Colors.red),
+                                // ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(currencySymbol()),
+                                  onPressed: () {},
+                                ),
+                              ),
+                              validator: FormBuilderValidators.compose(
+                                  [FormBuilderValidators.required()]),
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                            ),
+                          ),
+                        ),
+                        UIHelper.horizontalSpaceSmall(),
+                        Expanded(
+                          flex: 6,
+                          child: SizedBox(
+                            height: inputHeight,
+                            child: FormBuilderDropdown<String>(
+                              name: 'txnMode',
+                              decoration: const InputDecoration(
+                                labelText: 'Mode',
+                              ),
+                              initialValue: ref.watch(txnModeProvider),
+                              validator: FormBuilderValidators.compose(
+                                  [FormBuilderValidators.required()]),
+                              items: ['CASH', 'BANK']
+                                  .map((item) => DropdownMenuItem(
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
+                                        value: item,
+                                        child: Text(item),
+                                      ))
+                                  .toList(),
+                              onChanged: (val) {
+                                ref.read(txnModeProvider.state).state = val!;
+                              },
+                              valueTransformer: (val) => val?.toString(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    ref.watch(txnModeProvider) == 'BANK'
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              UIHelper.verticalSpaceSmall(),
+                              data.isNotEmpty
+                                  ? SizedBox(
+                                      height: inputHeight,
+                                      child: FormBuilderDropdown<int>(
+                                        name: 'bank_account',
+                                        decoration: const InputDecoration(
+                                          labelText: 'From Bank',
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.always,
+                                        ),
+                                        style: inputTextStyle,
+                                        initialValue: data[0].id,
+                                        validator:
+                                            FormBuilderValidators.compose([
+                                          FormBuilderValidators.required()
+                                        ]),
+                                        items: data
+                                            .map((item) => DropdownMenuItem(
+                                                  alignment:
+                                                      AlignmentDirectional
+                                                          .centerStart,
+                                                  value: item.id,
+                                                  child: Text(item.name),
+                                                ))
+                                            .toList(),
+                                      ),
+                                    )
+                                  : const InfoBox(
+                                      text: Text("Please add a Bank account"),
+                                      // color: AppColors.darkOrage,
+                                    ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
+                    UIHelper.verticalSpaceSmall(),
+                    SizedBox(
+                      height: inputHeight,
+                      child: FormBuilderTextField(
+                        name: 'description',
+                        initialValue: "Paid ",
+                        style: inputTextStyle,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(),
+                        ]),
+                        decoration: const InputDecoration(
+                          labelText: 'Description',
+                          errorStyle: TextStyle(
+                              color: Colors.transparent,
+                              fontSize: 0,
+                              height: 0),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red),
+                          ),
+                        ),
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        textCapitalization: TextCapitalization.words,
+                      ),
+                    ),
+                    UIHelper.verticalSpaceLarge(),
+                    FormButton(
+                      text: const Text("SUBMIT"),
+                      onTap: data.isNotEmpty
+                          ? () async {
+                              EasyLoading.showProgress(0.3,
+                                  status: 'Saving...');
+                              if (formKey.currentState?.saveAndValidate() ??
+                                  false) {
+                                await ref
+                                    .read(transactionProvider(account.id)
+                                        .notifier)
+                                    .addPayment(
+                                        account: account,
+                                        formData: formKey.currentState!.value)
+                                    .then((value) {
+                                  if (value == true) {
+                                    EasyLoading.showSuccess(
+                                        'Transaction Success!');
 
-                                  //--Call Home page Data loader
-                                  ref
-                                      .read(homeDataProvider.notifier)
-                                      .loadData();
+                                    //--Call Home page Data loader
+                                    ref
+                                        .read(homeDataProvider.notifier)
+                                        .loadData();
 
-                                  Navigator.pop(context);
-                                } else {
-                                  EasyLoading.showError('Transaction Failed');
-                                }
-                              });
-                            } else {
-                              debugPrint(
-                                  formKey.currentState?.value.toString());
-                              // showToast(msg: 'validation failed');
-                              EasyLoading.showError('Failed with Error');
+                                    Navigator.pop(context);
+                                  } else {
+                                    EasyLoading.showError('Transaction Failed');
+                                  }
+                                });
+                              } else {
+                                debugPrint(
+                                    formKey.currentState?.value.toString());
+                                // showToast(msg: 'validation failed');
+                                EasyLoading.showError('Failed with Error');
+                              }
                             }
-                          }
-                        : () => null,
-                  ),
-                ],
+                          : () => null,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

@@ -52,7 +52,9 @@ class TransactionsState
   }
 
   //--Payment transaction
-  Future<bool> addPayment({required Map<String, dynamic> formData}) async {
+  Future<bool> addPayment(
+      {required AccountsModel account,
+      required Map<String, dynamic> formData}) async {
     try {
       var scrollNo = await TransactionRepository().getScroll();
 
@@ -66,7 +68,7 @@ class TransactionsState
 
           //--DEBIT
           final dataDr = TransactionsModel(
-            account: account,
+            account: account.id,
             description: formData['description'].toString().trim(),
             txnDate: txnDateTime,
             createdOn: DateTime.now().toUtc().toLocal(),
@@ -93,7 +95,7 @@ class TransactionsState
           //--DEBIT
           final dataDr = TransactionsModel(
             txnMode: "PAYMENT",
-            account: account,
+            account: account.id,
             description: formData['description'].toString().trim(),
             txnDate: txnDateTime,
             createdOn: DateTime.now().toUtc().toLocal(),

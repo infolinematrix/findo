@@ -19,7 +19,7 @@ InputDecoration checkBoxDecoration() {
 InputDecorationTheme inputTheme(bool isDarkTheme) {
   return InputDecorationTheme(
     // contentPadding: EdgeInsets.all(14.0.sp),
-    fillColor: isDarkTheme ? Colors.grey.shade900 : Colors.grey.shade100,
+    fillColor: isDarkTheme ? Colors.grey.shade900 : Colors.grey.shade200,
     filled: true,
     labelStyle: TextStyle(color: isDarkTheme ? Colors.white : Colors.black54),
     floatingLabelStyle: TextStyle(
@@ -108,6 +108,8 @@ class AppStyles {
       //--------------
       textSelectionTheme: TextSelectionThemeData(
           selectionColor: isDarkTheme ? Colors.white : Colors.black),
+
+      //--TextInput
       inputDecorationTheme: inputTheme(isDarkTheme),
 
       outlinedButtonTheme: OutlinedButtonThemeData(

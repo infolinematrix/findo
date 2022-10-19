@@ -71,7 +71,7 @@ class AppPages {
 
           case Routes.accountTransaction:
             return AccountTransactionScreen(
-                param: settings.arguments as Map<String, dynamic>);
+                account: settings.arguments as AccountsModel);
 
           case Routes.payment:
             return PaymentScreen(account: settings.arguments as AccountsModel);

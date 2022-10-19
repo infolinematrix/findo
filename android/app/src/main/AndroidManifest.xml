@@ -2,7 +2,7 @@
     package="com.doriionline.findo">
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
    <application
-        android:label="finsoft2"
+        android:label="Findo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

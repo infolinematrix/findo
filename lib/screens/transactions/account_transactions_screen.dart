@@ -5,15 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AccountTransactionScreen extends ConsumerWidget {
-  const AccountTransactionScreen({Key? key, required this.param})
+  const AccountTransactionScreen({Key? key, required this.account})
       : super(key: key);
 
-  final Map<String, dynamic> param;
+  final AccountsModel account;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AccountsModel account = param['account'];
-
     return Scaffold(
       appBar: AppBar(title: Text(account.name)),
       bottomSheet: Container(
@@ -22,7 +20,7 @@ class AccountTransactionScreen extends ConsumerWidget {
         child: FormButtonRounded(
             text: const Text("Make Payment"),
             onTap: () {
-              Navigator.pushNamed(context, "/payment");
+              Navigator.pushNamed(context, "/payment", arguments: account);
             }),
       ),
       body: SafeArea(

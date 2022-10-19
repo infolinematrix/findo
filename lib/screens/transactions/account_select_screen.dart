@@ -122,10 +122,8 @@ class AccountSelectScreen extends ConsumerWidget {
                               break;
                             default:
                               Navigator.pushNamed(
-                                  context, "/account_transactions", arguments: {
-                                'txnType': 'PAYMENT',
-                                'account': account
-                              });
+                                  context, "/account_transactions",
+                                  arguments: account);
                           }
                         },
                       ),
