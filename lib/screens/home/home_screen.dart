@@ -401,7 +401,7 @@ class _HomePageState extends ConsumerState<HomeScreen> {
                           onPressed: () => Navigator.pushNamed(
                               context, "/account_select",
                               arguments: "RECEIPT"),
-                          child: const Text("Receit"),
+                          child: const Text("Receipt"),
                         ),
                         OutlinedButton(
                           onPressed: () => Navigator.pushNamed(

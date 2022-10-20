@@ -7,24 +7,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'transation_controller.dart';
 
 class AccountTransactionScreen extends ConsumerWidget {
-  const AccountTransactionScreen({Key? key, required this.account})
+  const AccountTransactionScreen({Key? key, required this.param})
       : super(key: key);
 
-  final AccountsModel account;
+  final Map<String, dynamic> param;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AccountsModel account = param['account'];
     final transactions = ref.watch(transactionProvider(account.id));
     return Scaffold(
       appBar: AppBar(title: Text(account.name)),
       bottomSheet: Container(
         width: double.infinity,
-        padding: EdgeInsets.only(left: 16.0.w, right: 16.0.w, bottom: 8.0.h),
-        child: FormButtonRounded(
-            text: const Text("Make Payment"),
-            onTap: () {
-              Navigator.pushNamed(context, "/payment", arguments: account);
-            }),
+        padding: EdgeInsets.only(
+            left: 16.0.w, right: 16.0.w, bottom: 8.0.h, top: 8.0.h),
+        child: param['txnType'] == 'PAYMENT'
+            ? FormButtonRounded(
+                text: const Text("MAKE PAYMENT"),
+                onTap: () {
+                  Navigator.pushNamed(context, "/payment", arguments: account);
+                })
+            : FormButtonRounded(
+                text: const Text("RECEIPT"),
+                onTap: () {
+                  Navigator.pushNamed(context, "/receipt", arguments: account);
+                }),
       ),
       body: SafeArea(
         child: Column(

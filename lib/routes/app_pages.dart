@@ -13,6 +13,7 @@ import 'package:findo/screens/transactions/account_select_screen.dart';
 
 import 'package:findo/screens/transactions/account_transactions_screen.dart';
 import 'package:findo/screens/transactions/payment_screen.dart';
+import 'package:findo/screens/transactions/receive_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../screens/onboard/onboard_screen.dart';
@@ -69,13 +70,13 @@ class AppPages {
 
           case Routes.accountTransaction:
             return AccountTransactionScreen(
-                account: settings.arguments as AccountsModel);
+                param: settings.arguments as Map<String, dynamic>);
 
           case Routes.payment:
             return PaymentScreen(account: settings.arguments as AccountsModel);
 
-          // case Routes.receive:
-          //   return ReceiptScreen(account: settings.arguments as AccountsModel);
+          case Routes.receive:
+            return ReceiptScreen(account: settings.arguments as AccountsModel);
 
           // case Routes.transfer:
           //   return const TransferScreen();

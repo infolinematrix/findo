@@ -4,6 +4,7 @@ import 'package:findo/screens/error_screen.dart';
 import 'package:findo/widgets/no_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AccountGroupsScreen extends ConsumerWidget {
@@ -14,7 +15,7 @@ class AccountGroupsScreen extends ConsumerWidget {
     final groups = ref.watch(accountGroupsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Groups"),
+        title: const Text("Account Groups"),
         actions: [
           IconButton(
             icon: const Icon(
@@ -45,6 +46,28 @@ class AccountGroupsScreen extends ConsumerWidget {
                 AccountsModel group = data[index];
                 return Card(
                   child: ListTile(
+                    dense: true,
+                    leading: SizedBox.square(
+                      dimension: 40.0.sp,
+                      child: Container(
+                        padding: EdgeInsets.all(4.0.sp),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).dividerColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8.sp),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            group.name[0],
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                      ),
+                    ),
                     title: Text(
                       group.name,
                       style: Theme.of(context)

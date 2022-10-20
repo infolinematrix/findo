@@ -283,7 +283,6 @@ class PaymentScreen extends ConsumerWidget {
                                     EasyLoading.showSuccess(
                                         'Transaction Success!');
 
-                                    //--Call Home page Data loader
                                     ref
                                         .read(homeDataProvider.notifier)
                                         .loadData();
@@ -296,7 +295,7 @@ class PaymentScreen extends ConsumerWidget {
                               } else {
                                 debugPrint(
                                     formKey.currentState?.value.toString());
-                                // showToast(msg: 'validation failed');
+
                                 EasyLoading.showError('Failed with Error');
                               }
                             }

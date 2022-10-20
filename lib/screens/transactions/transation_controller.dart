@@ -45,9 +45,9 @@ class TransactionsState
   }
 
   //--Recent 100 entries
-  getAll(account) async {
+  getAll(accountId) async {
     final data =
-        await TransactionRepository().accountTransactions(accointId: account);
+        await TransactionRepository().accountTransactions(accointId: accountId);
     state = AsyncValue<List<TransactionsModel>>.data(data);
   }
 
@@ -105,7 +105,7 @@ class TransactionsState
       await TransactionRepository().updateScroll();
 
       objBox!.store.awaitAsyncSubmitted();
-      getAll(account);
+      getAll(account.id);
 
       EasyLoading.dismiss();
       return true;

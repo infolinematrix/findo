@@ -112,19 +112,19 @@ class AccountSelectScreen extends ConsumerWidget {
                         ),
                         subtitle: const Text("Budget: 5000.0"),
                         onTap: () {
-                          switch (txnType) {
-                            case "RECEIPT":
-                              Navigator.pushNamed(
-                                  context, "/account_transactions", arguments: {
-                                'txnType': 'RECEIPT',
+                          // switch (txnType) {
+                          //   case "RECEIPT":
+
+                          //     break;
+                          //   default:
+                          //     Navigator.pushNamed(
+                          //         context, "/account_transactions",
+                          //         arguments: account);
+                          Navigator.pushNamed(context, "/account_transactions",
+                              arguments: {
+                                'txnType': txnType.toUpperCase().trim(),
                                 'account': account
                               });
-                              break;
-                            default:
-                              Navigator.pushNamed(
-                                  context, "/account_transactions",
-                                  arguments: account);
-                          }
                         },
                       ),
                     );
